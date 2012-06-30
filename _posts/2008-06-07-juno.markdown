@@ -1,0 +1,20 @@
+--- 
+tags: []
+
+date: 2008-06-07 22:53:45 +01:00
+author_login: maxmanders
+status: publish
+author_url: http://maxmanders.co.uk
+wordpress_url: http://maxmanders.co.uk/?p=96
+author: maxmanders
+wordpress_id: 96
+published: true
+layout: post
+categories: 
+- Film
+title: Juno
+comments: []
+
+author_email: max@maxmanders.co.uk
+---
+I've just finished watching <a title="Juno on Wikipedia" href="http://en.wikipedia.org/wiki/Juno_%28film%29" target="_blank">Juno</a> and I can say it is a fantastic film.&nbsp; Well written, well performed, and a great sound track.&nbsp; Well worth a watch!

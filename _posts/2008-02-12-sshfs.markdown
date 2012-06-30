@@ -1,0 +1,37 @@
+--- 
+tags: []
+
+date: 2008-02-12 19:36:45 +00:00
+author_login: maxmanders
+status: publish
+author_url: http://maxmanders.co.uk
+wordpress_url: http://maxmanders.co.uk/linux/sshfs/
+author: maxmanders
+wordpress_id: 85
+published: true
+layout: post
+categories: 
+- General
+- Linux
+title: sshfs
+comments: []
+
+author_email: max@maxmanders.co.uk
+---
+If you don't want the trouble of configuring NFS or Samba, then sshfs is a good option.  sshfs (ssh File System) makes use of Fuse (File System in Userspace) to allow you to locally mount a directory that you have remote access to using ssh.  To install sshfs in Ubuntu use:
+
+<code>sudo apt-get install sshfs
+</code>
+Once this is done, you will need to add yourself to the new group (fuse) that has been created:
+
+<code>sudo adduser <user> fuse</code>
+
+Create a local directory in which to mount your remote directory and make sure it is owned by you:
+<code>
+mkdir [-p] /path/to/directory
+chown <user>.<group> /path/to/directory
+</code>
+Now you can mount your remote directory as follows:
+<code>
+sshfs <user>@<remote_host>:/path/to/directory/ /path/to/directory
+</code>

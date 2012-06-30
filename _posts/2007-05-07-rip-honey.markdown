@@ -1,0 +1,24 @@
+--- 
+tags: []
+
+date: 2007-05-07 17:35:19 +01:00
+author_login: maxmanders
+status: publish
+author_url: http://maxmanders.co.uk
+wordpress_url: http://maxmanders.co.uk/blog/general/rip-honey/
+author: maxmanders
+wordpress_id: 44
+published: true
+layout: post
+categories: 
+- General
+title: R.I.P. Honey
+comments: []
+
+author_email: max@maxmanders.co.uk
+---
+It is with great sadness today that I say goodbye to our dog Honey.  She lived a long and full life but ultimately her age and the poor health that accompanies a dog of her years got the better of her; this afternoon she was put to sleep.?  I hope that she and Flint are together again in the doggy afterlife.
+
+<img src="/media/honey.jpg" title="Honey" alt="Honey" border="0" hspace="10" vspace="10" />
+
+In Loving Memory of Honey and Flint.

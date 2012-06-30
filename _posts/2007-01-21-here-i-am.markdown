@@ -1,0 +1,23 @@
+--- 
+tags: []
+
+date: 2007-01-21 20:14:22 +00:00
+author_login: maxmanders
+status: publish
+author_url: http://maxmanders.co.uk
+wordpress_url: http://maxmanders.co.uk/blog/uncategorized/here-i-am/
+author: maxmanders
+wordpress_id: 8
+published: true
+layout: post
+categories: 
+- General
+title: Here I am!
+comments: []
+
+excerpt: Well, I've finally got around to getting something up on my domain.  There will be more to come as projects develop, but for now I have at least managed to get Wordpress installed and configured.  I had a go with a number of engines
+author_email: max@maxmanders.co.uk
+---
+Well, I've finally got around to getting something up on my domain.  There will be more to come as projects develop, but for now I have at least managed to get Wordpress installed and configured.  I had a go with a number of engines<!--more--> like <a title="Moveable Type" target="_blank" href="http://www.movabletype.org/">Moveble Type</a>, <a title="Expression Engine" target="_blank" href="http://www.pmachine.com/">Expression Engine</a>, <a title="Text Pattern" target="_blank" href="http://www.textpattern.com/">Text Pattern</a> and <a title="Wordpress" target="_blank" href="http://www.wordpress.org">Wordpress</a>.  I decided that Wordpress offered all the features I needed without much fuss, and was pretty straight forward to install.
+
+Hopefully there will be more to come in the next week or so, but in the mean time why not feed yourself and subscribe to my RSS feed, or have a look at the About page.

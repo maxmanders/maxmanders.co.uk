@@ -1,0 +1,35 @@
+--- 
+tags: []
+
+date: 2012-03-13 00:09:49 +00:00
+author_login: maxmanders
+status: publish
+author_url: http://maxmanders.co.uk
+wordpress_url: http://maxmanders.co.uk/?p=508
+author: maxmanders
+wordpress_id: 508
+published: true
+layout: post
+categories: 
+- Web Development
+title: Whisky Web 2012
+comments: []
+
+excerpt: Scotland has a thriving and diverse tech community, reflected in such events and organisations as&nbsp;<a title="Tech Meetup" href="http://techmeetup.co.uk/">Tech Meetup</a>; various&nbsp;<a title="ScotLUG" href="http://www.scotlug.org.uk/">Linux User Groups</a>; the annual&nbsp;<a title="Highland Fling" href="http://thehighlandfling.com/">Highland Fling</a>&nbsp;web conference;&nbsp;<a title="Culture Hack Scotland" href="http://www.welcometosync.com/hack/">Culture Hack Scotland</a>;&nbsp;<a title="Turing Festival" href="http://www.turingfestival.com/">The Turing Festival</a>&nbsp;and the&nbsp;<a title="Edinburgh International Science Festival" href="http://www.sciencefestival.co.uk/">Edinburgh International Science Festival</a>&nbsp;to name but a few. &nbsp;I have been fortunate enough to attend previous Highland Flings, and I know others in the web industry who have had fun and positive experiences at other tech events hosted in Scotland.
+author_email: max@maxmanders.co.uk
+---
+Scotland has a thriving and diverse tech community, reflected in such events and organisations as&nbsp;<a title="Tech Meetup" href="http://techmeetup.co.uk/">Tech Meetup</a>; various&nbsp;<a title="ScotLUG" href="http://www.scotlug.org.uk/">Linux User Groups</a>; the annual&nbsp;<a title="Highland Fling" href="http://thehighlandfling.com/">Highland Fling</a>&nbsp;web conference;&nbsp;<a title="Culture Hack Scotland" href="http://www.welcometosync.com/hack/">Culture Hack Scotland</a>;&nbsp;<a title="Turing Festival" href="http://www.turingfestival.com/">The Turing Festival</a>&nbsp;and the&nbsp;<a title="Edinburgh International Science Festival" href="http://www.sciencefestival.co.uk/">Edinburgh International Science Festival</a>&nbsp;to name but a few. &nbsp;I have been fortunate enough to attend previous Highland Flings, and I know others in the web industry who have had fun and positive experiences at other tech events hosted in Scotland.<!--more-->
+
+2012 should have been the year that&nbsp;<a title="Open Source Scotland 2012" href="http://open-source-scotland.com/">Open Source Scotland</a>&nbsp;was added to that list, but unfortunately events conspired against its organiser, Kevinjohn Gallagher, to prematurely put a stop to OSS2012. &nbsp;Kevinjohn&nbsp;<a title="Open Source Scotland 2012 - Cancelled" href="http://kevinjohngallagher.com/2012/01/open-source-scotland-2012-cancelled/">recounts</a>&nbsp;in his own blog, the&nbsp;<a href="http://kevinjohngallagher.com/2012/01/enough-is-enough/">reasons</a>&nbsp;that&nbsp;<a href="http://kevinjohngallagher.com/2012/01/wordpress-has-left-the-building/">necessitated</a>&nbsp;the cancellation.
+
+A few weeks after hearing that OSS2012 had been cancelled, I overheard&nbsp;<a href="http://juokaz.com">Juozas "Joe"&nbsp;Kaziuk?nas</a>&nbsp;and&nbsp;<a href="http://mgdm.net">Michael Maclean</a>&nbsp;discussing an idea on Twitter, &nbsp;to organise an alternative web conference. &nbsp;I knew that I wanted to help in any way I could to make their plan a success. &nbsp;Shortly after,&nbsp;<a href="http://arandomurl.com">Dale Harvey</a>&nbsp;and&nbsp;<a href="https://twitter.com/dr4goonis">Paul Dragoonis</a>&nbsp;were on board. &nbsp;With the help of collaborative tools such as HackPad and Trello, and more traditional email and&nbsp;<a href="http://groups.google.com/group/scotland-tech-conference">Google Groups</a>&nbsp;we quickly agreed on a fitting name for the conference, and launched a web site to promote it. &nbsp;Whisky Web was born.
+
+Our goal is to organise an affordable, fun, language- and platform-agnostic conference that is focused on the Web. &nbsp;With just a month left until the big day, we've still got a lot of work to do, but all concerned are confident that we will succeed in organising an awesome conference to put Edinburgh, and indeed Scotland, firmly on the tech conference map.
+
+We've been fortunate enough to receive generous sponsorship from such big names as Engine Yard / Orchestra and Ibuildings, not to mention a master-class in whisky courtesy of&nbsp;<a href="http://twitter.com/WhiskyCraig">@WhiskyCraig</a>&nbsp;from&nbsp;Bruichladdich. &nbsp;We would of course gladly accept further sponsorship; despite our goal of minimising costs there are necessarily going to be certain unavoidable costs that must be met. &nbsp;Whisky Web is formally sponsored/organised by Joe's company,&nbsp;<a href="http://webspecies.co.uk/">Web Species</a>. &nbsp;More&nbsp;details, including our list of speakers, can be found on the&nbsp;<a href="http://whiskyweb.co.uk">Whisky Web site</a>.
+
+The event spans two days in Scotland's capital on the 13th and 14th of April. &nbsp;The first day will see a two-track schedule of speakers presenting at&nbsp;<a title="The Hub, Edinburgh" href="http://www.thehub-edinburgh.co.uk/">The Hub</a>. &nbsp;We'll end the day with the aforementioned introduction to Scotch whisky, and I'm sure there will be more partying in to the night. &nbsp;Day two will involve a hackathon event at Edinbrugh's exclusive Our Dynamic Earth exhibition and conference centre at the other end of the historic Royal Mile. &nbsp;The precise details and schedule for the second day are still being discussed, but it will definitely involve socialising with like-minded people and hacking some code on a few open source projects.
+
+We are very pleased with the progress made thus far, and look forward to providing all of our delegates with a conference experience they won't forget. &nbsp;However, I'd be remiss were I not to point out that from inception to execution Whisky Web will have been organised in&nbsp;just four short months. &nbsp;Should the conference be as successful as we hope then we fully expect to offer a bigger and better Whisky Web in future years.
+
+So, if you haven't bought a ticket yet and want to see what Edinburgh and the Scottish web community has to offer, don't hesitate; act now and <a href="http://whiskyweb.eventbrite.co.uk/">get your ticket </a>while they're still available, at the attractive price of just &pound;50!
