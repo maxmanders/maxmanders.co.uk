@@ -59,7 +59,7 @@
 
 <p>The phone has an internal web server that lets the user customise a number of options.&#160; The one I&#8217;m interested in is &#8216;Action URI&#8217;.&#160; When a call comes through to my phone, I can enter a URI that my phone will request.&#160; I can send arbitrary parameters in the query string, e.g. a message or the phone number of the caller.&#160; My solution involves a PHP script that the phone can request, a simple Perl socket server sitting listening on my laptop, and a simpel Perl Tk script that will open a window to alert me to the call.</p>
 
-<p>The PHP script that my phone requests is quite simple: <pre style='border: solid 3px red; background-color: pink' class='markdown-html-error'>REXML could not parse this XML/HTML: 
+<p>The PHP script that my phone requests is quite simple: <pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
 &lt;pre class=&quot;brush:perl&quot;&gt;
 // Hostname of machine
 $host = &apos;somehost&apos;;
@@ -68,7 +68,7 @@ $port = &apos;7890&apos;;
 $timeout = 30;
 $message = $_GET[&apos;message&apos;];</pre></p>
 
-<p>$socket = fsockopen($host, $port, $errnum, $errstr, $timeout); if (!is_resource($socket)) { exit(&#8220;Cannot connect: &#8221; . $errnum . &#8221; &#8221; . $errstr); } else { fputs($socket, $message); } fclose($socket); &lt;/pre&gt; This script is called from my phone and connects to the socket server listening on my laptop. The code for the corresponding socket server follows: <pre style='border: solid 3px red; background-color: pink' class='markdown-html-error'>REXML could not parse this XML/HTML: 
+<p>$socket = fsockopen($host, $port, $errnum, $errstr, $timeout); if (!is_resource($socket)) { exit(&#8220;Cannot connect: &#8221; . $errnum . &#8221; &#8221; . $errstr); } else { fputs($socket, $message); } fclose($socket); &lt;/pre&gt; This script is called from my phone and connects to the socket server listening on my laptop. The code for the corresponding socket server follows: <pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
 &lt;pre class=&quot;brush:perl&quot;&gt;
 use strict;
 use IO::Socket;
@@ -78,7 +78,7 @@ use Net::hostent;</pre></p>
 
 <p>my $serverSocket = IO::Socket::INET-&gt;new( Proto =&gt; &#8216;tcp&#8217;, LocalHost =&gt; $IP, LocalPort =&gt; $PORT, Listen =&gt; SOMAXCONN, Reuse =&gt; 1, ) or die(&#8220;Cannot create socket: $!\n&#8221;);</p>
 
-<p>while (my $clientSocket = $serverSocket-&gt;accept()) { $clientSocket-&gt;autoflush(1); while (&lt;$clientSocket&gt;) { <code>/path/to/tk/script/showMessage.pl &quot;$_&quot;</code>; } close($clientSocket); } &lt;/pre&gt; This Perl script listens in the background for incoming connections and passes any data it receives to a Perl TK script that displays this data in the form of a simple window on display 0:0. Here&#8217;s the code for th Perl Tk srcript: <pre style='border: solid 3px red; background-color: pink' class='markdown-html-error'>REXML could not parse this XML/HTML: 
+<p>while (my $clientSocket = $serverSocket-&gt;accept()) { $clientSocket-&gt;autoflush(1); while (&lt;$clientSocket&gt;) { <code>/path/to/tk/script/showMessage.pl &quot;$_&quot;</code>; } close($clientSocket); } &lt;/pre&gt; This Perl script listens in the background for incoming connections and passes any data it receives to a Perl TK script that displays this data in the form of a simple window on display 0:0. Here&#8217;s the code for th Perl Tk srcript: <pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
 &lt;pre class=&quot;brush:perl&quot;&gt;
 use strict;
 use Tk;

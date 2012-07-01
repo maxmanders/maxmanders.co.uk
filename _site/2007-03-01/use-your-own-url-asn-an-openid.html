@@ -67,7 +67,7 @@ The link tags are used for OpenID 1.x server discovery, and the meta tag for Ope
 <p>This process is called delegation. You use your own domain name as your OpenID, but add some extra markup to the head element of your homepage that tells the relying party that you are delegating the responsibility of authentication to another server. The markup you need is: <pre lang='html4strict'>
 <link rel='openid.server' href='http://www.myopenid.com/server' />
 <link rel='openid.delegate' href='http://username.myopenid.com/' />
-<meta http-equiv='X-XRDS-Location' content='http://yoururl.myopenid.com/xrds' /></pre> This will tell the relying party, that it should instead visit <em>username.myopenid.com</em>. You will then authenticate to this delegate server. Once successful, by implication of having authenticated to the delegate server, you have also proved that you own the domain from which you were directed.</p>
+<meta content='http://yoururl.myopenid.com/xrds' http-equiv='X-XRDS-Location' /></pre> This will tell the relying party, that it should instead visit <em>username.myopenid.com</em>. You will then authenticate to this delegate server. Once successful, by implication of having authenticated to the delegate server, you have also proved that you own the domain from which you were directed.</p>
 
 <p>The link tags are used for OpenID 1.x server discovery, and the meta tag for OpenID 2.x server discover. In order to be as compatible with OpenID consumers as possible, you should use both link and meta elements.</p></p>
   </div>
