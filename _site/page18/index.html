@@ -71,7 +71,7 @@
 <p>This process is called delegation. You use your own domain name as your OpenID, but add some extra markup to the head element of your homepage that tells the relying party that you are delegating the responsibility of authentication to another server. The markup you need is: <pre lang='html4strict'>
 
 
-<meta http-equiv='X-XRDS-Location' content='http://yoururl.myopenid.com/xrds' /></pre> This will tell the relying party, that it should instead visit <em>username.myopenid.com</em>. You will then authenticate to this delegate server. Once successful, by implication of having authenticated to the delegate server, you have also proved that you own the domain from which you were directed.</p>
+<meta content='http://yoururl.myopenid.com/xrds' http-equiv='X-XRDS-Location' /></pre> This will tell the relying party, that it should instead visit <em>username.myopenid.com</em>. You will then authenticate to this delegate server. Once successful, by implication of having authenticated to the delegate server, you have also proved that you own the domain from which you were directed.</p>
 
 <p>The link tags are used for OpenID 1.x server discovery, and the meta tag for OpenID 2.x server discover. In order to be as compatible with OpenID consumers as possible, you should use both link and meta elements.</p></p>
     <a href="/2007/03/01/use-your-own-url-asn-an-openid.html" class="more">Continue reading &raquo;</a>
@@ -83,7 +83,7 @@
   <h3 class="post-title"><a href="/2007/02/28/refresh-edinburgh.html" title="Refresh Edinburgh">Refresh Edinburgh</a></h3>
   <span class="post-date"><abbr class="published-on">February 28, 2007</abbr></span>
   <div class="post-content">
-    <p><p>Coming up in April is the inaugural <a href='http://thehighlandfling.com/2007' title='The Highland Fling'>Highland Fling conference</a>. A meet up of web developers and designers aimed at getting the Scottish interweb community involved with some of the big names in web development. There are a number of speakers including <a href='http://adactio.com' title='Adactio'>Jeremy Keith</a>. The day after the conference, Friday 06 April is <a href='http://refreshedinburgh.org/' title='Refresh Edinburgh'>Refresh Edinburgh</a>. A more informal gathering where developers can discuss the state of the web with like-minded people. I will be there, and I hope as many other developers in Scotland as possible, who like me don&#8217;t often have a chance to meet and greet at conference-type-events, will be there too. See you there!</p></p>
+    <p><p>Coming up in April is the inaugural <a title='The Highland Fling' href='http://thehighlandfling.com/2007'>Highland Fling conference</a>. A meet up of web developers and designers aimed at getting the Scottish interweb community involved with some of the big names in web development. There are a number of speakers including <a title='Adactio' href='http://adactio.com'>Jeremy Keith</a>. The day after the conference, Friday 06 April is <a title='Refresh Edinburgh' href='http://refreshedinburgh.org/'>Refresh Edinburgh</a>. A more informal gathering where developers can discuss the state of the web with like-minded people. I will be there, and I hope as many other developers in Scotland as possible, who like me don&#8217;t often have a chance to meet and greet at conference-type-events, will be there too. See you there!</p></p>
     <a href="/2007/02/28/refresh-edinburgh.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
