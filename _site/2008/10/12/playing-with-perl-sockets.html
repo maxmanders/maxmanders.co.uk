@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+        
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+
+<title>Playing With Perl Sockets - Max Manders</title>
+        
+<meta charset="UTF-8" />
+<meta name="description" content="At work, I have a Snom 360 IP phone that is hooked up to our internal Asterisk PBX.&#160; If I&#8217;m listening to music with my headphones in, I&#8217;m not always aware that my phone is ringing - some Perl and PHP hacking later, I&#8217;ve got a crude (and work-in-progress) solution." />
+<meta name="keywords" content="" />
+<meta name="author" content="Max Manders" />
+        
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- Mobile Specific Metas
+================================================== -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="/styles/stylesheets/base.css">
+<link rel="stylesheet" href= "/styles/style.css">
+<link rel="stylesheet" href="/styles/stylesheets/layout.css">
+<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+
+<!-- Favicons
+================================================== -->
+<link rel="shortcut icon" href="/favicon.ico" />
+
+</head>
+
+<body class="home blog">
+
+<div class="container">
+
+<div class="header">    
+  <div class="seven columns"> 
+    <div class="logo">
+      <a href="/">
+        <h1 class="remove-bottom">Max Manders</h1>
+        <h5>thoughts of a web developer</h5>
+      </a>
+    </div>
+  </div> 
+</div>
+
+<div class="content">
+  <div class="column">
+    <div class="main">
+      <article class="post">
+  <h3 class="post-title"><a href="/2008/10/12/playing-with-perl-sockets.html" title="Playing With Perl Sockets">Playing With Perl Sockets</a></h3>
+  <span class="post-date"><abbr class="published-on">October 12, 2008</abbr></span>
+  <div class="post-content">
+    <p><p>At work, I have a <a href='http://www.snom.com/en/products/snom-360-voip-phone/'>Snom 360</a> IP phone that is hooked up to our internal <a href='http://www.asterisk.org/'>Asterisk</a> PBX.&#160; If I&#8217;m listening to music with my headphones in, I&#8217;m not always aware that my phone is ringing - some Perl and PHP hacking later, I&#8217;ve got a crude (and work-in-progress) solution.<!--more--></p>
+
+<p>The phone has an internal web server that lets the user customise a number of options.&#160; The one I&#8217;m interested in is &#8216;Action URI&#8217;.&#160; When a call comes through to my phone, I can enter a URI that my phone will request.&#160; I can send arbitrary parameters in the query string, e.g. a message or the phone number of the caller.&#160; My solution involves a PHP script that the phone can request, a simple Perl socket server sitting listening on my laptop, and a simpel Perl Tk script that will open a window to alert me to the call.</p>
+
+<p>The PHP script that my phone requests is quite simple: <pre style='border: solid 3px red; background-color: pink' class='markdown-html-error'>REXML could not parse this XML/HTML: 
+&lt;pre class=&quot;brush:perl&quot;&gt;
+// Hostname of machine
+$host = &apos;somehost&apos;;
+// Port to connect to
+$port = &apos;7890&apos;;
+$timeout = 30;
+$message = $_GET[&apos;message&apos;];</pre></p>
+
+<p>$socket = fsockopen($host, $port, $errnum, $errstr, $timeout); if (!is_resource($socket)) { exit(&#8220;Cannot connect: &#8221; . $errnum . &#8221; &#8221; . $errstr); } else { fputs($socket, $message); } fclose($socket); &lt;/pre&gt; This script is called from my phone and connects to the socket server listening on my laptop. The code for the corresponding socket server follows: <pre style='border: solid 3px red; background-color: pink' class='markdown-html-error'>REXML could not parse this XML/HTML: 
+&lt;pre class=&quot;brush:perl&quot;&gt;
+use strict;
+use IO::Socket;
+use Net::hostent;</pre></p>
+
+<p>my $PORT = 7890; my $IP = &#8216;192.168.0.1&#8217;;</p>
+
+<p>my $serverSocket = IO::Socket::INET-&gt;new( Proto =&gt; &#8216;tcp&#8217;, LocalHost =&gt; $IP, LocalPort =&gt; $PORT, Listen =&gt; SOMAXCONN, Reuse =&gt; 1, ) or die(&#8220;Cannot create socket: $!\n&#8221;);</p>
+
+<p>while (my $clientSocket = $serverSocket-&gt;accept()) { $clientSocket-&gt;autoflush(1); while (&lt;$clientSocket&gt;) { <code>/path/to/tk/script/showMessage.pl &quot;$_&quot;</code>; } close($clientSocket); } &lt;/pre&gt; This Perl script listens in the background for incoming connections and passes any data it receives to a Perl TK script that displays this data in the form of a simple window on display 0:0. Here&#8217;s the code for th Perl Tk srcript: <pre style='border: solid 3px red; background-color: pink' class='markdown-html-error'>REXML could not parse this XML/HTML: 
+&lt;pre class=&quot;brush:perl&quot;&gt;
+use strict;
+use Tk;
+use Tk::Font;</pre></p>
+
+<p>my $message = $ARGV<span>0</span>;</p>
+
+<p>my $mainWindow = MainWindow-&gt;new(); $mainWindow-&gt;minsize(qw(500 200)); $mainWindow-&gt;title(&#8220;Incoming Call&#8221;); $mainWindow-&gt;configure(-background =&gt; &#8216;white&#8217;);</p>
+
+<p>my $font = $mainWindow-&gt;Font( -family =&gt; &#8216;Arial&#8217;, -size =&gt; &#8216;24&#8217;, );</p>
+
+<p>my $acceptButton = $mainWindow-&gt;Button( -text =&gt; $message, -background =&gt; &#8216;red&#8217;, -command =&gt; \&#38;exit, -foreground =&gt; &#8216;white&#8217;, -font =&gt; $font, );</p>
+
+<p>$acceptButton-&gt;pack( -side =&gt; &#8216;bottom&#8217;, -expand =&gt; 1, -fill =&gt; &#8216;both&#8217; );</p>
+
+<p>$mainWindow-&gt;withdraw(); $mainWindow-&gt;update(); my $winXPos = int(($mainWindow-&gt;screenwidth - $mainWindow-&gt;width) / 2); my $winYPos = int(($mainWindow-&gt;screenheight - $mainWindow-&gt;height) / 2); $mainWindow-&gt;geometry(&#8220;+$winXPos+$winYPos&#8221;); $mainWindow-&gt;deiconify();</p>
+
+<p>MainLoop(); &lt;/pre&gt; There&#8217;s no doubt about it, this combination of scripts is crude, insecure, and really more of a proof of concept. Nonetheless, it serves my purposes and hopefully can tidy it up as time allows.</p></p>
+  </div>
+</article>
+
+<div id="comments">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'maxmanders';
+    var disqus_identifier = '/2008/10/12/playing-with-perl-sockets';
+    var disqus_url = 'http://maxmanders.co.uk//2008/10/12/playing-with-perl-sockets.html';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+</div>
+
+
+
+      <div class="nav-below"> 
+        
+          <div class="nav-previous"></div>
+        
+        
+          <div class="nav-next"></div>
+        
+      </div>
+    </div>
+  </div>
+<!-- nav -->
+</div>
+
+<div class="clear"></div>
+<div class="footer">
+  <div class="column">
+    <div class="row">
+      <div class="eight columns alpha">
+      <h4>About Me</h4>
+      <p><a href="/about.html">I'm</a> an Edinburgh based PHP developer with a passion for <a href="http://en.wikipedia.org/wiki/Open_source">open source software</a> and <a href="http://en.wikipedia.org/wiki/Open_data">open-data</a>, currently working for <a href="http://maglabs.net" rel="co-worker met">Maglabs</a>. Living with my wife <a href="http://twitter.com/mrsjmanders" rel="met spouse">Jo</a> and our two cats, Ziggy and Maggie.</p>
+      <p><a href="/about.html">Continue reading</a></p>
+      <h4>Contact</h4>
+      <p>If you want to get in touch, you can send an email to my-first-name [at] this site.</p>
+      </div>
+      <div class="eight columns omega">
+        <div class="row">
+          <div class="four columns alpha">
+            <ul>
+              <li>
+                <img alt="Pinboard" src="/images/link.png" />
+                <a href="http://www.pinboard.in/u:maxmanders/" title="maxmanders on Pinboard">Pinboard</a>
+              </li>
+              <li>
+                <img alt="Flickr" src="/images/picture.png" />
+                <a href="http://www.flickr.com/photos/maxmanders" title="maxmanders on Flickr">Flickr</a>
+              </li>
+              <li>
+                <img alt="Last.FM" src="/images/song.png" />
+                <a href="http://www.last.fm/user/mmanders" title="mmanders on Last.FM">Last.FM</a>
+              </li>
+              <li>
+                <img alt="Twitter" src="/images/message.png" />
+                <a href="http://www.twitter.com/maxmanders" title="maxmanders on Twitter">Twitter</a>
+              </li>
+              <li>
+                <img alt="Github" src="/images/github.png" />
+                <a href="http://www.github.com/maxmanders" title="maxmanders on Github">Github</a>
+              </li>
+              <li>
+                <img alt="RSS" src="/images/maxmanders.png" />
+                <a href="http://maxmanders.co.uk/feed/rss2" title="maxmanders.co.uk RSS">RSS</a>
+              </li>
+            </ul>
+          </div>
+          <div class="four columns omega">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column alpha" id="license">
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons Licence" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+        <span>&nbsp; This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try{
+  var pageTracker = _gat._getTracker("UA-1652642-1");
+  pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>

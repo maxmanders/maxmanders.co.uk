@@ -53,19 +53,19 @@
     <div class="main">
       
   <article class="post">
-  <h3 class="post-title"><a href="/2007-08-21/scrubs-musical.html" title="Scrubs Musical">Scrubs Musical</a></h3>
+  <h3 class="post-title"><a href="/2007/08/21/scrubs-musical.html" title="Scrubs Musical">Scrubs Musical</a></h3>
   <span class="post-date"><abbr class="published-on">August 21, 2007</abbr></span>
   <div class="post-content">
     <p><p>Every time I see this clip it makes me laugh out loud, so thought I&#8217;d share the laughs.</p>
 
 <p><span>youtube lL4L4Uv5rf0</span></p></p>
-    <a href="/2007-08-21/scrubs-musical.html" class="more">Continue reading &raquo;</a>
+    <a href="/2007/08/21/scrubs-musical.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
 
 
   <article class="post">
-  <h3 class="post-title"><a href="/2007-08-21/pasta-with-tomato-and-basil-sauce.html" title="Pasta with Tomato and Basil Sauce">Pasta with Tomato and Basil Sauce</a></h3>
+  <h3 class="post-title"><a href="/2007/08/21/pasta-with-tomato-and-basil-sauce.html" title="Pasta with Tomato and Basil Sauce">Pasta with Tomato and Basil Sauce</a></h3>
   <span class="post-date"><abbr class="published-on">August 21, 2007</abbr></span>
   <div class="post-content">
     <p>
@@ -91,13 +91,13 @@ Drain the cooked pasta.
 Serve the sauce on top of the piping hot pasta and grate a generous amount of paramesan on top.
 Season with salt and pepper, and enjoy.
 </ol></p>
-    <a href="/2007-08-21/pasta-with-tomato-and-basil-sauce.html" class="more">Continue reading &raquo;</a>
+    <a href="/2007/08/21/pasta-with-tomato-and-basil-sauce.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
 
 
   <article class="post">
-  <h3 class="post-title"><a href="/2007-08-16/java-this-and-that.html" title="Java - this and that">Java - this and that</a></h3>
+  <h3 class="post-title"><a href="/2007/08/16/java-this-and-that.html" title="Java - this and that">Java - this and that</a></h3>
   <span class="post-date"><abbr class="published-on">August 16, 2007</abbr></span>
   <div class="post-content">
     <p><p>My work has recently taken a departure from the usual web development as I&#8217;ve been &#8220;borrowed&#8221; by the other development team to help out with a Java project. Now, my Java is reasonable sound but yesterday I came across a curious situation involving passing about the current object.</p>
@@ -105,34 +105,34 @@ Season with salt and pepper, and enjoy.
 <p>In common with a lot of languages, the current object is represented by the &#8216;this&#8217; keyword. I wanted to pass &#8216;this&#8217; to a static method of another class. Of course, I can&#8217;t refer to the object as &#8216;this&#8217; in the static method context as that would be ambiguous insofar as it could refer to the class with the static method I&#8217;m working with. This pattern is often used with callbacks where for example you might want to register a class with a particular listener objcet. To avoid confusion, I named the actual parameter in the static method <pre lang='Java'>that</pre> I assumed that I would reference the fields and methods of the object using <pre lang='Java'>that.someMethod()</pre> rather than <pre lang='Java'>this.someMethod()</pre> This is where the fun begins. Let&#8217;s call the original object <pre lang='Java'>SomeObject theObject</pre> and I want to call the static method <pre lang='Java'>SomeClass.doStaticMethod(SomeObject that)</pre> I would call that method, from within theObject, using <pre lang='Java'>SomeClass.doStaticMethod(this)</pre> When in theObject, I have access to private fields and methods since private fields and methods are within scope. I assumed the same would be true when I passed &#8220;theObject&#8221; as &#8220;this&#8221; to &#8220;SomeClass.doStaticMethod(SomeObject that)&#8221;. However, when I actually try to access private fields such as &#8220;that.privateField&#8221;, it would appear that I no longer have access. I could create appropriate accessor methods, but that would defeat the idea of encapsulation.</p>
 
 <p>Does anyone have any ideas? Am I missing some fundamental (and so obvious I missed it) rule of scope or object passing?</p></p>
-    <a href="/2007-08-16/java-this-and-that.html" class="more">Continue reading &raquo;</a>
+    <a href="/2007/08/16/java-this-and-that.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
 
 
   <article class="post">
-  <h3 class="post-title"><a href="/2007-08-15/symfony-woes.html" title="Symfony Woes">Symfony Woes</a></h3>
+  <h3 class="post-title"><a href="/2007/08/15/symfony-woes.html" title="Symfony Woes">Symfony Woes</a></h3>
   <span class="post-date"><abbr class="published-on">August 15, 2007</abbr></span>
   <div class="post-content">
     <p><p>I&#8217;ve finally found time to start investigating some other PHP frameworks, and after some brief research I decided to start off with <a href='http://www.symfony-project.com'>Symfony</a>. All is going well and so far I&#8217;m impressed with what Symfony can do compared with CakePHP&#8230; with a few exceptions.</p>
 
 <p>I initially tried following the My First Project tutorial, but hit problems pretty quickly. It would seem that there was a problem with the PHP SQLite extension. The phpinfo() function verified that SQLite was indeed installed, but I couldn&#8217;t get any further on that trail. After reading a number of forum posts on the issue, it became apparent I should recompile Apache and PHP. I&#8217;m still not that confident with Linux to do that so I left it at that.</p>
 
-<p>Then I followed the Askeet tutorial with more success as this tutorial uses MySQL rather than SQLite. However, I can&#8217;t get the URL rewriting to work as it should. I&#8217;ve checked my Apache configuration, the .htacces file and still no luck. If I load http://<pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
+<p>Then I followed the Askeet tutorial with more success as this tutorial uses MySQL rather than SQLite. However, I can&#8217;t get the URL rewriting to work as it should. I&#8217;ve checked my Apache configuration, the .htacces file and still no luck. If I load http://<pre style='border: solid 3px red; background-color: pink' class='markdown-html-error'>REXML could not parse this XML/HTML: 
 &lt;project&gt;/question I get a 404 error.  If I load http://&lt;project&gt;/index.php/question or http://&lt;project&gt;/frontend_dev.php/question all is well.  I&apos;ll press on with this tutorial until I hit a road block, but this is really bugging me.  Again, a few forum posts suggest recompiling Apache and PHP.  However, the extensions that should be included in the new build are already present according to phpinfo().</pre></p>
 
 <p>I&#8217;m currently running Fedora 7 which installs Apache and PHP in its own odd way. Perhaps I should start from scratch by removing Apache and PHP with yum and compiling both from source. Although as I said I&#8217;m kind of reluctant to do that. If anyone has any ideas - let me know!</p></p>
-    <a href="/2007-08-15/symfony-woes.html" class="more">Continue reading &raquo;</a>
+    <a href="/2007/08/15/symfony-woes.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
 
 
   <article class="post">
-  <h3 class="post-title"><a href="/2007-05-19/hosting-with-hostgator.html" title="Hosting With Hostgator">Hosting With Hostgator</a></h3>
+  <h3 class="post-title"><a href="/2007/05/19/hosting-with-hostgator.html" title="Hosting With Hostgator">Hosting With Hostgator</a></h3>
   <span class="post-date"><abbr class="published-on">May 19, 2007</abbr></span>
   <div class="post-content">
     <p><p>Up until recently my hosting was provided by Fasthosts. For reasons that have nothing to do with the experience I have had with Fasthosts I have had to move to an alternative hosting provider. After some research I opted to go with Hostgator&#8217;s Baby plan. The features included with this hosting plan are excellent for the small fee of &#194;&#163;5.00 per month. And the technical support is brilliant. I initially had problems getting SSH access, but after raising the issue via the ticket system, I had SSH access within a few emails! </p>
-    <a href="/2007-05-19/hosting-with-hostgator.html" class="more">Continue reading &raquo;</a>
+    <a href="/2007/05/19/hosting-with-hostgator.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
 

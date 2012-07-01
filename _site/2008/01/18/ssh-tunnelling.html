@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+        
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+
+<title>SSH Tunneling - Max Manders</title>
+        
+<meta charset="UTF-8" />
+<meta name="description" content="Another aide memoire, but again may be useful to some. I&#8217;d like the ability to work from home on some web development projects I&#8217;m doing at work. Getting the code locally is not a problem thanks to Subversion over ssh However viewing the results can be tricky when you consider that the development server is behind the work network. The answer is SSH tunneling.
+
+Let&#8217;s say you can access SERVER_A directly over ssh The service you want to access is on SERVER_B which you can&#8217;t access directly via SSH from your local machine. However, you can access SERVER_B from SERVER_A. I&#8217;ll assume that you want to access the service locally on port 12345, and that the remove port is port 80. The following command will allow you to access a service on SERVER_B from your local machine.
+ssh -Nf -L 12345:SERVER_B:80 username@SERVER_A
+The &#8216;-Nf&#8217; switch says don&#8217;t execute a command with this ssh session, and run this ssh process in the background. The first port is the port you want to use locally; the first server is the usually inaccessible remote server you want access to; and the third port is the remote port you want to use. The final argument gives the login to the remotely accessible server you have ssh access to directly.
+
+One caveat to this is if you are trying to access a web site that is defined using Apache virtual hosts. With this command alone, requesting localhost:12345 in Firefox would only direct you to the site that is listening remotely for requests that match &#8216;localhost&#8217;. If you would ordinarily access this site using mysite.server_b, then you need to use that as the address in Firefox on your local machine. Therefore, this needs to be added in /etc/hosts. With that done, you should be able to request mysite.server_b:12345 in Firefox and be directed to the remote &#8220;virtual host&#8221; site." />
+<meta name="keywords" content="" />
+<meta name="author" content="Max Manders" />
+        
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- Mobile Specific Metas
+================================================== -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="/styles/stylesheets/base.css">
+<link rel="stylesheet" href= "/styles/style.css">
+<link rel="stylesheet" href="/styles/stylesheets/layout.css">
+<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+
+<!-- Favicons
+================================================== -->
+<link rel="shortcut icon" href="/favicon.ico" />
+
+</head>
+
+<body class="home blog">
+
+<div class="container">
+
+<div class="header">    
+  <div class="seven columns"> 
+    <div class="logo">
+      <a href="/">
+        <h1 class="remove-bottom">Max Manders</h1>
+        <h5>thoughts of a web developer</h5>
+      </a>
+    </div>
+  </div> 
+</div>
+
+<div class="content">
+  <div class="column">
+    <div class="main">
+      <article class="post">
+  <h3 class="post-title"><a href="/2008/01/18/ssh-tunnelling.html" title="SSH Tunneling">SSH Tunneling</a></h3>
+  <span class="post-date"><abbr class="published-on">January 18, 2008</abbr></span>
+  <div class="post-content">
+    <p><p>Another aide memoire, but again may be useful to some. I&#8217;d like the ability to work from home on some web development projects I&#8217;m doing at work. Getting the code locally is not a problem thanks to Subversion over ssh However viewing the results can be tricky when you consider that the development server is behind the work network. The answer is SSH tunneling.</p>
+
+<p>Let&#8217;s say you can access SERVER_A directly over ssh The service you want to access is on SERVER_B which you can&#8217;t access directly via SSH from your local machine. However, you can access SERVER_B from SERVER_A. I&#8217;ll assume that you want to access the service locally on port 12345, and that the remove port is port 80. The following command will allow you to access a service on SERVER_B from your local machine.</p>
+<code>ssh -Nf -L 12345:SERVER_B:80 username@SERVER_A</code>
+<p>The &#8216;-Nf&#8217; switch says don&#8217;t execute a command with this ssh session, and run this ssh process in the background. The first port is the port you want to use locally; the first server is the usually inaccessible remote server you want access to; and the third port is the remote port you want to use. The final argument gives the login to the remotely accessible server you have ssh access to directly.</p>
+
+<p>One caveat to this is if you are trying to access a web site that is defined using Apache virtual hosts. With this command alone, requesting localhost:12345 in Firefox would only direct you to the site that is listening remotely for requests that match &#8216;localhost&#8217;. If you would ordinarily access this site using mysite.server_b, then you need to use that as the address in Firefox on your local machine. Therefore, this needs to be added in /etc/hosts. With that done, you should be able to request mysite.server_b:12345 in Firefox and be directed to the remote &#8220;virtual host&#8221; site.</p></p>
+  </div>
+</article>
+
+<div id="comments">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'maxmanders';
+    var disqus_identifier = '/2008/01/18/ssh-tunnelling';
+    var disqus_url = 'http://maxmanders.co.uk//2008/01/18/ssh-tunnelling.html';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+</div>
+
+
+
+      <div class="nav-below"> 
+        
+          <div class="nav-previous"></div>
+        
+        
+          <div class="nav-next"></div>
+        
+      </div>
+    </div>
+  </div>
+<!-- nav -->
+</div>
+
+<div class="clear"></div>
+<div class="footer">
+  <div class="column">
+    <div class="row">
+      <div class="eight columns alpha">
+      <h4>About Me</h4>
+      <p><a href="/about.html">I'm</a> an Edinburgh based PHP developer with a passion for <a href="http://en.wikipedia.org/wiki/Open_source">open source software</a> and <a href="http://en.wikipedia.org/wiki/Open_data">open-data</a>, currently working for <a href="http://maglabs.net" rel="co-worker met">Maglabs</a>. Living with my wife <a href="http://twitter.com/mrsjmanders" rel="met spouse">Jo</a> and our two cats, Ziggy and Maggie.</p>
+      <p><a href="/about.html">Continue reading</a></p>
+      <h4>Contact</h4>
+      <p>If you want to get in touch, you can send an email to my-first-name [at] this site.</p>
+      </div>
+      <div class="eight columns omega">
+        <div class="row">
+          <div class="four columns alpha">
+            <ul>
+              <li>
+                <img alt="Pinboard" src="/images/link.png" />
+                <a href="http://www.pinboard.in/u:maxmanders/" title="maxmanders on Pinboard">Pinboard</a>
+              </li>
+              <li>
+                <img alt="Flickr" src="/images/picture.png" />
+                <a href="http://www.flickr.com/photos/maxmanders" title="maxmanders on Flickr">Flickr</a>
+              </li>
+              <li>
+                <img alt="Last.FM" src="/images/song.png" />
+                <a href="http://www.last.fm/user/mmanders" title="mmanders on Last.FM">Last.FM</a>
+              </li>
+              <li>
+                <img alt="Twitter" src="/images/message.png" />
+                <a href="http://www.twitter.com/maxmanders" title="maxmanders on Twitter">Twitter</a>
+              </li>
+              <li>
+                <img alt="Github" src="/images/github.png" />
+                <a href="http://www.github.com/maxmanders" title="maxmanders on Github">Github</a>
+              </li>
+              <li>
+                <img alt="RSS" src="/images/maxmanders.png" />
+                <a href="http://maxmanders.co.uk/feed/rss2" title="maxmanders.co.uk RSS">RSS</a>
+              </li>
+            </ul>
+          </div>
+          <div class="four columns omega">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column alpha" id="license">
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons Licence" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+        <span>&nbsp; This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try{
+  var pageTracker = _gat._getTracker("UA-1652642-1");
+  pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>

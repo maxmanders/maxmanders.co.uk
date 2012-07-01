@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+        
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+
+<title>Hosting With Hostgator - Max Manders</title>
+        
+<meta charset="UTF-8" />
+<meta name="description" content="Up until recently my hosting was provided by Fasthosts. For reasons that have nothing to do with the experience I have had with Fasthosts I have had to move to an alternative hosting provider. After some research I opted to go with Hostgator&#8217;s Baby plan. The features included with this hosting plan are excellent for the small fee of &#194;&#163;5.00 per month. And the technical support is brilliant. I initially had problems getting SSH access, but after raising the issue via the ticket system, I had SSH access within a few emails!" />
+<meta name="keywords" content="" />
+<meta name="author" content="Max Manders" />
+        
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- Mobile Specific Metas
+================================================== -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="/styles/stylesheets/base.css">
+<link rel="stylesheet" href= "/styles/style.css">
+<link rel="stylesheet" href="/styles/stylesheets/layout.css">
+<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+
+<!-- Favicons
+================================================== -->
+<link rel="shortcut icon" href="/favicon.ico" />
+
+</head>
+
+<body class="home blog">
+
+<div class="container">
+
+<div class="header">    
+  <div class="seven columns"> 
+    <div class="logo">
+      <a href="/">
+        <h1 class="remove-bottom">Max Manders</h1>
+        <h5>thoughts of a web developer</h5>
+      </a>
+    </div>
+  </div> 
+</div>
+
+<div class="content">
+  <div class="column">
+    <div class="main">
+      <article class="post">
+  <h3 class="post-title"><a href="/2007/05/19/hosting-with-hostgator.html" title="Hosting With Hostgator">Hosting With Hostgator</a></h3>
+  <span class="post-date"><abbr class="published-on">May 19, 2007</abbr></span>
+  <div class="post-content">
+    <p><p>Up until recently my hosting was provided by Fasthosts. For reasons that have nothing to do with the experience I have had with Fasthosts I have had to move to an alternative hosting provider. After some research I opted to go with Hostgator&#8217;s Baby plan. The features included with this hosting plan are excellent for the small fee of &#194;&#163;5.00 per month. And the technical support is brilliant. I initially had problems getting SSH access, but after raising the issue via the ticket system, I had SSH access within a few emails! <!--more--></p>
+
+<p>Once I was certain I had everything I needed from the hosting, I changed the domain name servers and within a day or two my domain name was pointing to the Hostgator server and my MX records were altered accordingly. The next step - migrating Wordpress!</p>
+
+<p>This is the first time I have migrated content between hosts, and I was reasonably confident I could manage it. Hostgator did offer a migration service but I thought it would be beneficial to have a shot myself. I have come to expect reliability and robustness from Wordpress, and this migration was no exception - almost. I migrated the database between servers without any problems; a simple enough task with the help of PHPMyAdmin. Next I downloaded my wordpress directory from Fasthosts and uploaded it to Hostgator. The configuration was changed with Vi, and all was almost well.</p>
+
+<p>Unfortunately Wordpress stores the records that represent files (uploads, images etc.) as absolute filesystem paths rather than relative URLs. As such my uploaded images and other files, despite being on the new server, failed to load in the browser. I had to manually alter all of the records in the database that referred to filesystem paths so that my uploads were correctly referenced by Wordpress. I&#8217;m sure there must be a patch or plugin to do this, but at the time I couldn&#8217;t find one.</p>
+
+<p>I think now that I have done this migration without too much difficulty I&#8217;ll export my database again, and do a clean install of the latest version of Wordpress. Given that we are now in summer, although the ever changing Scottish weather would have you believe otherwise, my autumnal theme should be updated to a give a more summery feel. So that&#8217;s my next project, a redesigned &#8216;Max says&#8230;&#8217;!</p></p>
+  </div>
+</article>
+
+<div id="comments">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'maxmanders';
+    var disqus_identifier = '/2007/05/19/hosting-with-hostgator';
+    var disqus_url = 'http://maxmanders.co.uk//2007/05/19/hosting-with-hostgator.html';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+</div>
+
+
+
+      <div class="nav-below"> 
+        
+          <div class="nav-previous"></div>
+        
+        
+          <div class="nav-next"></div>
+        
+      </div>
+    </div>
+  </div>
+<!-- nav -->
+</div>
+
+<div class="clear"></div>
+<div class="footer">
+  <div class="column">
+    <div class="row">
+      <div class="eight columns alpha">
+      <h4>About Me</h4>
+      <p><a href="/about.html">I'm</a> an Edinburgh based PHP developer with a passion for <a href="http://en.wikipedia.org/wiki/Open_source">open source software</a> and <a href="http://en.wikipedia.org/wiki/Open_data">open-data</a>, currently working for <a href="http://maglabs.net" rel="co-worker met">Maglabs</a>. Living with my wife <a href="http://twitter.com/mrsjmanders" rel="met spouse">Jo</a> and our two cats, Ziggy and Maggie.</p>
+      <p><a href="/about.html">Continue reading</a></p>
+      <h4>Contact</h4>
+      <p>If you want to get in touch, you can send an email to my-first-name [at] this site.</p>
+      </div>
+      <div class="eight columns omega">
+        <div class="row">
+          <div class="four columns alpha">
+            <ul>
+              <li>
+                <img alt="Pinboard" src="/images/link.png" />
+                <a href="http://www.pinboard.in/u:maxmanders/" title="maxmanders on Pinboard">Pinboard</a>
+              </li>
+              <li>
+                <img alt="Flickr" src="/images/picture.png" />
+                <a href="http://www.flickr.com/photos/maxmanders" title="maxmanders on Flickr">Flickr</a>
+              </li>
+              <li>
+                <img alt="Last.FM" src="/images/song.png" />
+                <a href="http://www.last.fm/user/mmanders" title="mmanders on Last.FM">Last.FM</a>
+              </li>
+              <li>
+                <img alt="Twitter" src="/images/message.png" />
+                <a href="http://www.twitter.com/maxmanders" title="maxmanders on Twitter">Twitter</a>
+              </li>
+              <li>
+                <img alt="Github" src="/images/github.png" />
+                <a href="http://www.github.com/maxmanders" title="maxmanders on Github">Github</a>
+              </li>
+              <li>
+                <img alt="RSS" src="/images/maxmanders.png" />
+                <a href="http://maxmanders.co.uk/feed/rss2" title="maxmanders.co.uk RSS">RSS</a>
+              </li>
+            </ul>
+          </div>
+          <div class="four columns omega">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column alpha" id="license">
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons Licence" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+        <span>&nbsp; This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try{
+  var pageTracker = _gat._getTracker("UA-1652642-1");
+  pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+        
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+
+<title>Analysing Oracle Application Server 9i Webcache Logs - Max Manders</title>
+        
+<meta charset="UTF-8" />
+<meta name="description" content="Recently I had cause to report on the usage staff at work made of the corporate intranet. This would ordinarily be a simple enough task if the logs were plain standard Apache logs. However, I was dealing with Oracle9iAS, a very different beast indeed. Oracle9iAS is built on top of a customised version of Apache and incorporates a caching proxy server, the so-called Webcache; an implementation of J2EE called OC4J (Oracle Containers for Java) and various other bells and whistles, making it something of a behamoth." />
+<meta name="keywords" content="" />
+<meta name="author" content="Max Manders" />
+        
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- Mobile Specific Metas
+================================================== -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="/styles/stylesheets/base.css">
+<link rel="stylesheet" href= "/styles/style.css">
+<link rel="stylesheet" href="/styles/stylesheets/layout.css">
+<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+
+<!-- Favicons
+================================================== -->
+<link rel="shortcut icon" href="/favicon.ico" />
+
+</head>
+
+<body class="home blog">
+
+<div class="container">
+
+<div class="header">    
+  <div class="seven columns"> 
+    <div class="logo">
+      <a href="/">
+        <h1 class="remove-bottom">Max Manders</h1>
+        <h5>thoughts of a web developer</h5>
+      </a>
+    </div>
+  </div> 
+</div>
+
+<div class="content">
+  <div class="column">
+    <div class="main">
+      <article class="post">
+  <h3 class="post-title"><a href="/2007/08/22/analysing-oracle-application-server-9i-webcache-logs.html" title="Analysing Oracle Application Server 9i Webcache Logs">Analysing Oracle Application Server 9i Webcache Logs</a></h3>
+  <span class="post-date"><abbr class="published-on">August 22, 2007</abbr></span>
+  <div class="post-content">
+    <p><p>Recently I had cause to report on the usage staff at work made of the corporate intranet. This would ordinarily be a simple enough task if the logs were plain standard Apache logs. However, I was dealing with Oracle9iAS, a very different beast indeed. Oracle9iAS is built on top of a customised version of Apache and incorporates a caching proxy server, the so-called Webcache; an implementation of J2EE called OC4J (Oracle Containers for Java) and various other bells and whistles, making it something of a behamoth.<!--more--></p>
+
+<p>Because we use the Webcache, I would need to analyse the Webcache access logs for a representative picture of what people are requesting. However, the Webcache does not use a single log file; it uses rolling log files for each day named <pre style='border: solid 3px red; background-color: pink' class='markdown-html-error'>REXML could not parse this XML/HTML: 
+&lt;access_log.YYYYMMDD&gt;.  Also, Webcache does not use a standardised logfile format, it uses a format unique (as far as I know) to Oracle.</pre></p>
+
+<p>My task was to extract the relevant data from the various logfiles. I was only interested in &#8220;pages&#8221; from Oracle Portal. In this case, a page is a specific Oracle Portal entity, rather than a more genereal web page as you might think. I wrote a small Perl script to grab the necessary lines from each logfile and write them to a file that I would later process with Analog. <pre style='border: solid 3px red; background-color: pink' class='markdown-html-error'>REXML could not parse this XML/HTML: 
+&lt;pre lang=&quot;Perl&quot;&gt;</pre></p>
+
+<h1 id='usrbinperlcode'>!/usr/bin/perl&lt;/code&gt;</h1>
+
+<h1 id='use_directives'>USE directives</h1>
+
+<p>use Time::Local; use File::Find; use Cwd;</p>
+
+<h1 id='id1'>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</h1>
+
+<h1 id='get_elements_of_the_current_datetime'>Get elements of the current datetime</h1>
+
+<p>my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = gmtime(time); my $cwd = getcwd(); my $extension; my $regex; my $line; my $pause; my $thisfile;</p>
+
+<h1 id='convert_year_to_four_digit_yyyy_format_rather_than_year__1900'>Convert year to four digit YYYY format rather than &#8216;year - 1900&#8217;</h1>
+
+<p>$year = $year + 1900;</p>
+
+<h1 id='if_the_month_is_january_ie_mon__0_then_we_need_to_process_log_files'>If the month is January, i.e. $mon == 0, then we need to process log files</h1>
+
+<h1 id='from_the_previous_year_as_well_as_the_previous_month_ie_december_or'>from the previous year as well as the previous month, i.e. December or</h1>
+
+<h1 id='mon__12'>$mon == 12.</h1>
+
+<p>if ($mon == 0) { $mon = 12; $year -= 1; }</p>
+
+<h1 id='construct_logfile_extension_as_yyyymm_where_mm_is_previous_mm'>Construct logfile extension as YYYYMM where MM is previous MM.</h1>
+
+<p>$extension = length($mon) == 1 ? &#8220;$year&#8221; . &#8220;0&#8221; . $mon : &#8220;$year&#8221; . $mon;</p>
+
+<h1 id='file_to_output_results_to'>File to output results to.</h1>
+
+<p>$outfile = &#8220;input.log&#8221;;</p>
+
+<h1 id='regex_to_match_portal_page_uris'>Regex to match Portal page URIs.</h1>
+
+<p>$regex = &#8216;^.<em>\t/portal/page\?_pageid.</em>$&#8217;;</p>
+
+<h1 id='run_filefindfind_against_each_file_in_the_current_directory'>Run File::Find::find() against each file in the current directory.</h1>
+
+<p>find(\&#38;get_date, $cwd);</p>
+
+<h1 id='id2'>#</h1>
+
+<h1 id='callback_function_for_filefind'>Callback function for File::Find</h1>
+
+<h1 id='this_function_is_called_for_every_file_found_in_cwd'>This function is called for every file found in $cwd</h1>
+
+<h1 id='id3'>#</h1>
+
+<p>sub get_date { my $line; my @output_list; my @input_list;</p>
+
+<p># only read log files for previous month if ($File::Find::name =~ /access_log.$extension.<em>$/) { $thisfile = $File::Find::name;</em></p>
+
+<pre><code># test whether the file we are looking at is a compressed
+# file or not
+if ((substr($File::Find::name, -1)) eq &quot;Z&quot;)
+{
+  # if it is compressed, uncompress it and
+  # take name of file without .Z as the file
+  # to operate on afterwards
+  print &quot;Uncompressing $File::Find::name...&quot;;
+  system(&quot;uncompress $File::Find::name&quot;);
+  $thisfile = substr($File::Find::name, 0, -2);
+}
+print &quot;$thisfile\n&quot;;
+open(IN_FILE, $thisfile) or die (&quot;Cannot Open File: $!\n&quot;);
+open(OUT_FILE, &quot;&gt;&gt;$outfile&quot;) or die (&quot;Cannot Open File: $!\n&quot;);
+while ($line = &lt;in_file&gt;)
+{
+  if ($line =~ $regex)
+  {
+    print $line;
+    print OUT_FILE ($line);
+  }
+}
+close(IN_FILE);
+close(OUT_FILE);&lt;/in_file&gt;
+
+if ((substr($File::Find::name, -1)) eq &quot;Z&quot;)
+{
+  # If we uncompressed a compressed file then
+  # we must now recompress it.
+  $zipfile = substr($File::Find::name, 0, -2);
+  print &quot;Compressing $zipfile...&quot;;
+ system(&quot;compress $zipfile&quot;);
+}</code></pre>
+
+<p>} } &lt;/pre&gt;</p></p>
+  </div>
+</article>
+
+<div id="comments">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'maxmanders';
+    var disqus_identifier = '/2007/08/22/analysing-oracle-application-server-9i-webcache-logs';
+    var disqus_url = 'http://maxmanders.co.uk//2007/08/22/analysing-oracle-application-server-9i-webcache-logs.html';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+</div>
+
+
+
+      <div class="nav-below"> 
+        
+          <div class="nav-previous"></div>
+        
+        
+          <div class="nav-next"></div>
+        
+      </div>
+    </div>
+  </div>
+<!-- nav -->
+</div>
+
+<div class="clear"></div>
+<div class="footer">
+  <div class="column">
+    <div class="row">
+      <div class="eight columns alpha">
+      <h4>About Me</h4>
+      <p><a href="/about.html">I'm</a> an Edinburgh based PHP developer with a passion for <a href="http://en.wikipedia.org/wiki/Open_source">open source software</a> and <a href="http://en.wikipedia.org/wiki/Open_data">open-data</a>, currently working for <a href="http://maglabs.net" rel="co-worker met">Maglabs</a>. Living with my wife <a href="http://twitter.com/mrsjmanders" rel="met spouse">Jo</a> and our two cats, Ziggy and Maggie.</p>
+      <p><a href="/about.html">Continue reading</a></p>
+      <h4>Contact</h4>
+      <p>If you want to get in touch, you can send an email to my-first-name [at] this site.</p>
+      </div>
+      <div class="eight columns omega">
+        <div class="row">
+          <div class="four columns alpha">
+            <ul>
+              <li>
+                <img alt="Pinboard" src="/images/link.png" />
+                <a href="http://www.pinboard.in/u:maxmanders/" title="maxmanders on Pinboard">Pinboard</a>
+              </li>
+              <li>
+                <img alt="Flickr" src="/images/picture.png" />
+                <a href="http://www.flickr.com/photos/maxmanders" title="maxmanders on Flickr">Flickr</a>
+              </li>
+              <li>
+                <img alt="Last.FM" src="/images/song.png" />
+                <a href="http://www.last.fm/user/mmanders" title="mmanders on Last.FM">Last.FM</a>
+              </li>
+              <li>
+                <img alt="Twitter" src="/images/message.png" />
+                <a href="http://www.twitter.com/maxmanders" title="maxmanders on Twitter">Twitter</a>
+              </li>
+              <li>
+                <img alt="Github" src="/images/github.png" />
+                <a href="http://www.github.com/maxmanders" title="maxmanders on Github">Github</a>
+              </li>
+              <li>
+                <img alt="RSS" src="/images/maxmanders.png" />
+                <a href="http://maxmanders.co.uk/feed/rss2" title="maxmanders.co.uk RSS">RSS</a>
+              </li>
+            </ul>
+          </div>
+          <div class="four columns omega">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column alpha" id="license">
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons Licence" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+        <span>&nbsp; This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try{
+  var pageTracker = _gat._getTracker("UA-1652642-1");
+  pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>
