@@ -71,11 +71,11 @@ add_filter(&#8216;the_content&#8217;, &#8216;youtube_plugin&#8217;); add_filter(
   <div class="post-content">
     <p><p>As you can see from my previous post, my first attempt at writing a Wordpress Plugin was a success. This plugin is very simple and allows the user to embed a YouTube video into their post. The main function calls a callback function that replaces every occurrence of the tag &#8220;youtube&#8221; video_iduotes) with a flash video corresponding to the video_id parameter.</p>
 
-<p>Just paste the code below into a file called &#8216;youtube.php&#8217; in your wp-content/plugins directory. You should then be able to activate it via the Plugins admin option. Once activated, you can place a YouTube video in your post by going to code-view and inserting &#8220;youtube&#8221; video_idhe quotes). The video_id parameter is the &#8216;v&#8217; parameter in a YouTube URL. In the example below, the URL is http://www.youtube.com/watch?v=lL4L4Uv5rf0. Therefore, the video_id parameter should be lL4L4Uv5rf0. In the code below, you will need to remove the quotes around the word &#8220;youtube&#8221; in the regex on line 5, I had to put these in to display the code without it interpreting the tag&#8230; it&#8217;s a work in progress! <pre style='border: solid 3px red; background-color: pink' class='markdown-html-error'>REXML could not parse this XML/HTML: 
+<p>Just paste the code below into a file called &#8216;youtube.php&#8217; in your wp-content/plugins directory. You should then be able to activate it via the Plugins admin option. Once activated, you can place a YouTube video in your post by going to code-view and inserting &#8220;youtube&#8221; video_idhe quotes). The video_id parameter is the &#8216;v&#8217; parameter in a YouTube URL. In the example below, the URL is http://www.youtube.com/watch?v=lL4L4Uv5rf0. Therefore, the video_id parameter should be lL4L4Uv5rf0. In the code below, you will need to remove the quotes around the word &#8220;youtube&#8221; in the regex on line 5, I had to put these in to display the code without it interpreting the tag&#8230; it&#8217;s a work in progress! <pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
 &lt;pre lang=&quot;php&quot;&gt;</pre></p>
 
-<p>define(&#8220;YOUTUBE_WIDTH&#8221;, 425); define(&#8220;YOUTUBE_HEIGHT&#8221;, 350); define(&#8220;YOUTUBE_TAG&#8221;, &#8220;/<span>&#8220;youtube&#8221; (<span><span>:print:</span></span>+)</span>/&#8221;); define(&#8220;YOUTUBE_LINK&#8221;, &#8221;<object type='\' data='\' width='\' height='\'>
-<param value='\' name='\' /></object>&#8221;);</p>
+<p>define(&#8220;YOUTUBE_WIDTH&#8221;, 425); define(&#8220;YOUTUBE_HEIGHT&#8221;, 350); define(&#8220;YOUTUBE_TAG&#8221;, &#8220;/<span>&#8220;youtube&#8221; (<span><span>:print:</span></span>+)</span>/&#8221;); define(&#8220;YOUTUBE_LINK&#8221;, &#8221;<object data='\' height='\' width='\' type='\'>
+<param name='\' value='\' /></object>&#8221;);</p>
 
 <p>function youtube_plugin_cb($match) { $html = YOUTUBE_LINK; $html = str_replace(&#8220;###YOUTUBE_ID###&#8221;, $match<span>1</span>, $html); return ($html); }</p>
 
@@ -91,6 +91,8 @@ add_filter(&#8216;the_content&#8217;, &#8216;youtube_plugin&#8217;); add_filter(
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'maxmanders';
+    var disqus_identifier = '/2007-08-21/a-first-wordpress-plugin';
+    var disqus_url = 'http://maxmanders.co.uk//2007-08-21/a-first-wordpress-plugin.html';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
