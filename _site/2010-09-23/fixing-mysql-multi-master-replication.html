@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+        
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+
+<title>Fixing MySQL Multi-Master Replication - Max Manders</title>
+        
+<meta charset="UTF-8" />
+<meta name="description" content="I&#8217;ve had some exposure to database replication through PostgreSQL/Slony. I&#8217;m reasonably familiar with master/slave replication but in the last few days I&#8217;ve had to get my hands dirty and grok multi-master replication with MySQL, specifically with two MySQL servers in master&lt;-&gt;master mode. Although conceptually it&#8217;s not a significant leap from simple master/slave replication the added layer of replication in both directions made my brain melt a little bit at first. Now that I&#8217;ve got my head around as much as I need to, I&#8217;m writing this as a gentle reminder should replication screw up again!" />
+<meta name="keywords" content="" />
+<meta name="author" content="Max Manders" />
+        
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- Mobile Specific Metas
+================================================== -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="/styles/stylesheets/base.css">
+<link rel="stylesheet" href= "/styles/style.css">
+<link rel="stylesheet" href="/styles/stylesheets/layout.css">
+<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+
+<!-- Favicons
+================================================== -->
+<link rel="shortcut icon" href="/favicon.ico" />
+
+</head>
+
+<body class="home blog">
+
+<div class="container">
+
+<div class="header">    
+  <div class="seven columns"> 
+    <div class="logo">
+      <a href="/">
+        <h1 class="remove-bottom">Max Manders</h1>
+        <h5>thoughts of a web developer</h5>
+      </a>
+    </div>
+  </div> 
+</div>
+
+<div class="content">
+  <div class="column">
+    <div class="main">
+      <article class="post">
+  <h3 class="post-title"><a href="/2010-09-23/fixing-mysql-multi-master-replication.html" title="Fixing MySQL Multi-Master Replication">Fixing MySQL Multi-Master Replication</a></h3>
+  <span class="post-date"><abbr class="published-on">September 23, 2010</abbr></span>
+  <div class="post-content">
+    <p><p>I&#8217;ve had some exposure to database replication through PostgreSQL/Slony. I&#8217;m reasonably familiar with master/slave replication but in the last few days I&#8217;ve had to get my hands dirty and grok multi-master replication with MySQL, specifically with two MySQL servers in master&lt;-&gt;master mode. Although conceptually it&#8217;s not a significant leap from simple master/slave replication the added layer of replication in both directions made my brain melt a little bit at first. Now that I&#8217;ve got my head around as much as I need to, I&#8217;m writing this as a gentle reminder should replication screw up again!<!--more--></p>
+
+<p>In master/slave replication, one server can be thought of as authoritative; all writes are done on the master and these writes are replicated to the slave. This replication model shouldn&#8217;t be thought of as a backup solution as both <code>DELETE</code>s as well as <code>INSERT</code>s and <code>UPDATE</code>s are replicated. You should have a proper backup solution in place. Also, I&#8217;m not going to be discussing how to set up MySQL to replicate in multi-master mode.</p>
+
+<p>With master&lt;-&gt;master replication, replication happens in both directions. If we have two servers - server_a and server_b - both servers are considered masters and authoritative. server_b is considered slave with respect to server_a, and server_a is considered slave with respect to server_b. Every write that happens on the server is logged in what are called the binary log files. The master server then replicates these writes to it&#8217;s slave, where the statements are effectively <em>replayed</em> to reflect the change on the slave. To keep everything in order, each master keeps track of the current binary logfile being written to, and an integer representing the last statement that was executed against it. Each slave also keeps track of this data, and when things are running smoothly, the details on the master match that of it&#8217;s slave. However, sometimes things go wrong&#8230;</p>
+
+<p>The following instructions are meant only for a development environment where absolute data integrity isn&#8217;t crucial - very hacky; the priority is to get the replication going again. Depending on our set up, we need to pick one of the masters to consider authoritative; restoring replication requires that both master databases be identical.</p>
+
+<p>First we need to make sure replication is stopped on both servers <pre class='brush: sql'>mysql>STOP SLAVE;</pre> Next we need to get a dump of the database(s) from one of the servers, <code>scp</code> it to the other server and import it. <pre class='brush: bash'>mysqldump -u root --all-databases --lock-all-tables --master-data >dbdump.db</pre> The <em>--master-data</em> switch <em>should</em> make sure that sequence numbers are in sync so both servers know where to start sync&#8217;ing from.</p>
+
+<p>Now we pick one server and run <pre class='brush: sql'>myqsl> SHOW SLAVE STATUS\G</pre> and on the other server we run <pre class='brush: sql'>mysql> SHOW MASTER STATUS;</pre> If everything is okay, the master status file and position number should match those of the slave. Now we run the same commands but swapping which servers we run them on. Again, the master status file and position number should match those of the slave.</p>
+
+<p>If there are mismatches, we need to fix this by running on the master server <pre class='brush: sql'>mysql>CHANGE MASTER to master_log_file='file_from_slave',master_log_pos='log_position_from_slave';</pre> And vice-versa on the other master server if necessary. We can then cross our fingers and start replication again by running the following on each server. <pre class='brush: sql'>mysql> START SLAVE;</pre> To test everything is working make an update on each server, and it should appear on the other server!</p>
+<em>Disclaimer: This is probably in no way accurate and is purely here to jog my memory and that of anyone else in multi-master replication hell.  There are probably glaring omissions in the above, and this information should in no way EVER EVER EVER be used in a production environment - that's what the clever proper sysadmins are for! You have been warned, here be dragons etc.</em></p>
+  </div>
+</article>
+
+<div id="comments">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'maxmanders';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+</div>
+
+
+
+      <div class="nav-below"> 
+        
+          <div class="nav-previous"></div>
+        
+        
+          <div class="nav-next"></div>
+        
+      </div>
+    </div>
+  </div>
+<!-- nav -->
+</div>
+
+<div class="clear"></div>
+<div class="footer">
+  <div class="column">
+    <div class="row">
+      <div class="eight columns alpha">
+      <h4>About Me</h4>
+      <p><a href="/about.html">I'm</a> an Edinburgh based PHP developer with a passion for <a href="http://en.wikipedia.org/wiki/Open_source">open source software</a> and <a href="http://en.wikipedia.org/wiki/Open_data">open-data</a>, currently working for <a href="http://maglabs.net" rel="co-worker met">Maglabs</a>. Living with my wife <a href="http://twitter.com/mrsjmanders" rel="met spouse">Jo</a> and our two cats, Ziggy and Maggie.</p>
+      <p><a href="/about.html">Continue reading</a></p>
+      <h4>Contact</h4>
+      <p>If you want to get in touch, you can send an email to my-first-name [at] this site.</p>
+      </div>
+      <div class="eight columns omega">
+        <div class="row">
+          <div class="four columns alpha">
+            <ul>
+              <li>
+                <img alt="Pinboard" src="/images/link.png" />
+                <a href="http://www.pinboard.in/u:maxmanders/" title="maxmanders on Pinboard">Pinboard</a>
+              </li>
+              <li>
+                <img alt="Flickr" src="/images/picture.png" />
+                <a href="http://www.flickr.com/photos/maxmanders" title="maxmanders on Flickr">Flickr</a>
+              </li>
+              <li>
+                <img alt="Last.FM" src="/images/song.png" />
+                <a href="http://www.last.fm/user/mmanders" title="mmanders on Last.FM">Last.FM</a>
+              </li>
+              <li>
+                <img alt="Twitter" src="/images/message.png" />
+                <a href="http://www.twitter.com/maxmanders" title="maxmanders on Twitter">Twitter</a>
+              </li>
+              <li>
+                <img alt="Github" src="/images/github.png" />
+                <a href="http://www.github.com/maxmanders" title="maxmanders on Github">Github</a>
+              </li>
+              <li>
+                <img alt="RSS" src="/images/maxmanders.png" />
+                <a href="http://maxmanders.co.uk/feed/rss2" title="maxmanders.co.uk RSS">RSS</a>
+              </li>
+            </ul>
+          </div>
+          <div class="four columns omega">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column alpha" id="license">
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons Licence" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+        <span>&nbsp; This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try{
+  var pageTracker = _gat._getTracker("UA-1652642-1");
+  pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>

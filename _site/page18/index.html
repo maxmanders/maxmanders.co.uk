@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+        
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+
+<title>Max Manders</title>
+        
+<meta charset="UTF-8" />
+<meta name="description" content="Max Manders... thoughts of a web developer." />
+<meta name="keywords" content="web, web development, php, html, css, javascript, linux, max manders, manders" />
+<meta name="author" content="Max Manders" />
+        
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- Mobile Specific Metas
+================================================== -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="/styles/stylesheets/base.css">
+<link rel="stylesheet" href= "/styles/style.css">
+<link rel="stylesheet" href="/styles/stylesheets/layout.css">
+<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+
+<!-- Favicons
+================================================== -->
+<link rel="shortcut icon" href="/favicon.ico" />
+
+</head>
+
+<body class="home blog">
+
+<div class="container">
+
+<div class="header">    
+  <div class="seven columns"> 
+    <div class="logo">
+      <a href="/">
+        <h1 class="remove-bottom">Max Manders</h1>
+        <h5>thoughts of a web developer</h5>
+      </a>
+    </div>
+  </div> 
+</div>
+
+<div class="content">
+  <div class="column">
+    <div class="main">
+      
+  <article class="post">
+  <h3 class="post-title"><a href="/2007-03-01/use-your-own-url-asn-an-openid.html" title="Use Your Own URL As An OpenID">Use Your Own URL As An OpenID</a></h3>
+  <span class="post-date"><abbr class="published-on">March 01, 2007</abbr></span>
+  <div class="post-content">
+    <p><p>You may already have an OpenID from one of the many providers, for example <em>username.myopenid.com</em>. Wouldn&#8217;t it be nice if you could use your own domain name instead? Well you can! You may not actually host an identity provider capable of vouching for your ownership of your own domain, but you can always get <em>username.myopenid.com</em> to vouch for you.</p>
+
+<p>This process is called delegation. You use your own domain name as your OpenID, but add some extra markup to the head element of your homepage that tells the relying party that you are delegating the responsibility of authentication to another server. The markup you need is: <pre lang='html4strict'>
+
+
+<meta http-equiv='X-XRDS-Location' content='http://yoururl.myopenid.com/xrds' /></pre> This will tell the relying party, that it should instead visit <em>username.myopenid.com</em>. You will then authenticate to this delegate server. Once successful, by implication of having authenticated to the delegate server, you have also proved that you own the domain from which you were directed.</p>
+
+<p>The link tags are used for OpenID 1.x server discovery, and the meta tag for OpenID 2.x server discover. In order to be as compatible with OpenID consumers as possible, you should use both link and meta elements.</p></p>
+    <a href="/2007-03-01/use-your-own-url-asn-an-openid.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
+  <h3 class="post-title"><a href="/2007-02-28/refresh-edinburgh.html" title="Refresh Edinburgh">Refresh Edinburgh</a></h3>
+  <span class="post-date"><abbr class="published-on">February 28, 2007</abbr></span>
+  <div class="post-content">
+    <p><p>Coming up in April is the inaugural <a title='The Highland Fling' href='http://thehighlandfling.com/2007'>Highland Fling conference</a>. A meet up of web developers and designers aimed at getting the Scottish interweb community involved with some of the big names in web development. There are a number of speakers including <a title='Adactio' href='http://adactio.com'>Jeremy Keith</a>. The day after the conference, Friday 06 April is <a title='Refresh Edinburgh' href='http://refreshedinburgh.org/'>Refresh Edinburgh</a>. A more informal gathering where developers can discuss the state of the web with like-minded people. I will be there, and I hope as many other developers in Scotland as possible, who like me don&#8217;t often have a chance to meet and greet at conference-type-events, will be there too. See you there!</p></p>
+    <a href="/2007-02-28/refresh-edinburgh.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
+  <h3 class="post-title"><a href="/2007-02-21/openid-decentralised-user-centric-idenity-management.html" title="OpenID: Decentralised User-Centric Identity Management">OpenID: Decentralised User-Centric Identity Management</a></h3>
+  <span class="post-date"><abbr class="published-on">February 21, 2007</abbr></span>
+  <div class="post-content">
+    <p><p>We sign up to more and more services online every day. This often involves remembering multiple, often similar (in the case of username1984, user_name_84 etc) usernames and passwords. A solution to this is so called single-sign on, whereby you use only a single identity such as a Microsoft Passport or a Yahoo! username. The problem with this solution is that you can find yourself tied in to one large company&#8217;s services.</p>
+
+<p>If you already have a Microsoft Passport, you are unlikely to want to create a Yahoo! account to use their services as this would involve going through a sign up process, replicating friends lists and so on from one provider to the other etc. Besides, I don&#8217;t know about anyone else but I don&#8217;t like the idea of some large company controlling my identity: storing my username; hashed password and other details. It would be better if I could arbitrarily choose who controlled my identity, or even better, control it myself. This is where OpenID comes in.</p>
+    <a href="/2007-02-21/openid-decentralised-user-centric-idenity-management.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
+  <h3 class="post-title"><a href="/2007-02-08/the-dance-of-the-full-bus.html" title="The Dance of the Full Bus">The Dance of the Full Bus</a></h3>
+  <span class="post-date"><abbr class="published-on">February 08, 2007</abbr></span>
+  <div class="post-content">
+    <p><p>I wonder if this is an event that happens everywhere or if it is peculiar to the passengers of Edinburgh&#8217;s bus service? I have noticed that the dance frequently occurs on a packed bus. When the bus stops and people get off, you will see all the people sharing a seat get up and peek, meerkat-like, for a newly vacated seat. These passengers then perform an ornate must-get-that-seat-first maneuver, quick-stepping down the gangway to the shiny empty seat.</p>
+    <a href="/2007-02-08/the-dance-of-the-full-bus.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
+  <h3 class="post-title"><a href="/2007-02-04/dom-scripting.html" title="DOM Scripting">DOM Scripting</a></h3>
+  <span class="post-date"><abbr class="published-on">February 04, 2007</abbr></span>
+  <div class="post-content">
+    <p>
+<p>This has changed dramatically. With the introduction of a standard Document Object Model (DOM) that is supported across a wide range of browsers, it&#8217;s far easier to write cross-browser compatible, accessible and usable DOM scripts. This book brought me up to speed with the DOM and what I can achieve with it. Written to be easily accessible to both the seasoned web designer/developer and the beginner, Jeremy Keith has produced a smashing insight into modern JavaScript techniques. The book concludes with a brief introduction into the now popular technique of using asynchronous javascript methods that is AJAX. I look forward to reading his latest book <a title='Bulletproof AJAX' href='http://www.bulletproofajax.com/'>Bulletproof AJAX</a> later on in the year.</p>
+
+<p>I have previously read Andy Budd&#8217;s excellent <a title='CSS Mastery' href='http://www.cssmastery.com/'>CSS Mastery</a> which was equally well written, and presented a clear view of modern CSS to both the novice and experienced designer/developer. Friends of Ed certainly publish some good reads!</p></p>
+    <a href="/2007-02-04/dom-scripting.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+
+
+      <div class="nav-below"> 
+        
+          <div class="nav-previous"><a href="/page19">&laquo; Older</a></div>
+        
+        
+          <div class="nav-next"><a href="/page17">Newer &raquo;</a></div>
+        
+      </div>
+    </div>
+  </div>
+<!-- nav -->
+</div>
+
+<div class="clear"></div>
+<div class="footer">
+  <div class="column">
+    <div class="row">
+      <div class="eight columns alpha">
+      <h4>About Me</h4>
+      <p><a href="/about.html">I'm</a> an Edinburgh based PHP developer with a passion for <a href="http://en.wikipedia.org/wiki/Open_source">open source software</a> and <a href="http://en.wikipedia.org/wiki/Open_data">open-data</a>, currently working for <a href="http://maglabs.net" rel="co-worker met">Maglabs</a>. Living with my wife <a href="http://twitter.com/mrsjmanders" rel="met spouse">Jo</a> and our two cats, Ziggy and Maggie.</p>
+      <p><a href="/about.html">Continue reading</a></p>
+      <h4>Contact</h4>
+      <p>If you want to get in touch, you can send an email to my-first-name [at] this site.</p>
+      </div>
+      <div class="eight columns omega">
+        <div class="row">
+          <div class="four columns alpha">
+            <ul>
+              <li>
+                <img alt="Pinboard" src="/images/link.png" />
+                <a href="http://www.pinboard.in/u:maxmanders/" title="maxmanders on Pinboard">Pinboard</a>
+              </li>
+              <li>
+                <img alt="Flickr" src="/images/picture.png" />
+                <a href="http://www.flickr.com/photos/maxmanders" title="maxmanders on Flickr">Flickr</a>
+              </li>
+              <li>
+                <img alt="Last.FM" src="/images/song.png" />
+                <a href="http://www.last.fm/user/mmanders" title="mmanders on Last.FM">Last.FM</a>
+              </li>
+              <li>
+                <img alt="Twitter" src="/images/message.png" />
+                <a href="http://www.twitter.com/maxmanders" title="maxmanders on Twitter">Twitter</a>
+              </li>
+              <li>
+                <img alt="Github" src="/images/github.png" />
+                <a href="http://www.github.com/maxmanders" title="maxmanders on Github">Github</a>
+              </li>
+              <li>
+                <img alt="RSS" src="/images/maxmanders.png" />
+                <a href="http://maxmanders.co.uk/feed/rss2" title="maxmanders.co.uk RSS">RSS</a>
+              </li>
+            </ul>
+          </div>
+          <div class="four columns omega">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column alpha" id="license">
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons Licence" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+        <span>&nbsp; This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try{
+  var pageTracker = _gat._getTracker("UA-1652642-1");
+  pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>

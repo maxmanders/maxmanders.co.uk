@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+        
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+
+<title>Max Manders</title>
+        
+<meta charset="UTF-8" />
+<meta name="description" content="Max Manders... thoughts of a web developer." />
+<meta name="keywords" content="web, web development, php, html, css, javascript, linux, max manders, manders" />
+<meta name="author" content="Max Manders" />
+        
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- Mobile Specific Metas
+================================================== -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="/styles/stylesheets/base.css">
+<link rel="stylesheet" href= "/styles/style.css">
+<link rel="stylesheet" href="/styles/stylesheets/layout.css">
+<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+
+<!-- Favicons
+================================================== -->
+<link rel="shortcut icon" href="/favicon.ico" />
+
+</head>
+
+<body class="home blog">
+
+<div class="container">
+
+<div class="header">    
+  <div class="seven columns"> 
+    <div class="logo">
+      <a href="/">
+        <h1 class="remove-bottom">Max Manders</h1>
+        <h5>thoughts of a web developer</h5>
+      </a>
+    </div>
+  </div> 
+</div>
+
+<div class="content">
+  <div class="column">
+    <div class="main">
+      
+  <article class="post">
+  <h3 class="post-title"><a href="/2008-06-29/samba-linux-to-linux-gotcha.html" title="Samba: Linux to Linux Gotcha">Samba: Linux to Linux Gotcha</a></h3>
+  <span class="post-date"><abbr class="published-on">June 29, 2008</abbr></span>
+  <div class="post-content">
+    <p><p>It&#8217;s been a long time coming, but I&#8217;ve finally got my machine at work set up using Ubuntu 8.04 rather than Windows XP.&#160; I&#8217;ve been using Ubuntu at home almost exclusively for nearly a year now, so it&#8217;s good to be able to maintain my workflow from home to work.&#160; One of the problems I had was mounting&#160; my home directory on a server.</p>
+
+<p>On windows, this works fine: you specify a username, a password, and the share you want to connect to and it just works.&#160; The same is almost true with linux: you specify the username, password and share (either on the command line or in /etc/fstab).&#160; However, chances are your local UID will differ from the UID used on the server, so although the mount will succeed, permissions may be a bit iffy.</p>
+
+<p>The solution was to use CIFS rather than the outdate smbfs, and to use the extra uid option:</p>
+<pre class='brush:bash'>$ sudo mount -t cifs -o username=user,password=pass,uid=1000 //server/share /local/mount/point</pre>
+<p>This makes sure that the share you mount is owned by the local user.</p></p>
+    <a href="/2008-06-29/samba-linux-to-linux-gotcha.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
+  <h3 class="post-title"><a href="/2008-06-11/banshee-10-ipod-compatible-media-player.html" title="Banshee 1.0 - iPod Compatible Media Player">Banshee 1.0 - iPod Compatible Media Player</a></h3>
+  <span class="post-date"><abbr class="published-on">June 11, 2008</abbr></span>
+  <div class="post-content">
+    <p><p>I&#8217;ve spoken before on this site about Songbird, a viable Linux alternative to iTunes. Since my original post, I haven&#8217;t really kept up with Songbird; perhaps I should have; perhaps I will. However, in the meantime I have had Banshee 1.0 brought to my attention.</p>
+
+<p>I originally used Banshee as it&#8217;s UI is similar to iTunes. I have also spoken before that although I am right at home with Ubuntu and Linux in general, I do miss a good media manager; iTunes ticks all the boxes for me and is indispensable since I use an iPod. Banshee has pulled out the stops with the recent release of it&#8217;s first major release, version 1.0</p>
+
+<p>Banshee 1.0 is a massive improvement on the older version that I had initially dismissed as being too clunky; so much so that I&#8217;m going to use it instead of Rhythmbox. Although not compatible with the most recent iPod software, it is fully compatible if you reinitialise your library and use an older version of the software on your iPod. Since I don&#8217;t really use video or images on my iPod that&#8217;s fine by me.</p>
+
+<p>The interface is much cleaner and it is clear that a lot of time has been spent polishing it. Last.FM is built in, as is a &#8216;favourites&#8217; and &#8216;recently added&#8217; play list. These last features were missing from Rhythmbox and I really liked them in iTunes. In addition, there is an &#8220;Unheard&#8221; playlist - now I can make a point of listening to the tracks that I forgot I even had!</p>
+
+<p>In summary - a big thumbs up from me to the Banshee development team. Banshee 1.0 is a more mature and usable piece of software that it&#8217;s predecessor and I look forward to seeing it develop further. Having said that, I will take another look at Songbird&#8230;</p></p>
+    <a href="/2008-06-11/banshee-10-ipod-compatible-media-player.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
+  <h3 class="post-title"><a href="/2008-06-07/juno.html" title="Juno">Juno</a></h3>
+  <span class="post-date"><abbr class="published-on">June 07, 2008</abbr></span>
+  <div class="post-content">
+    <p><p>I&#8217;ve just finished watching <a target='_blank' title='Juno on Wikipedia' href='http://en.wikipedia.org/wiki/Juno_%28film%29'>Juno</a> and I can say it is a fantastic film.&#160; Well written, well performed, and a great sound track.&#160; Well worth a watch!</p></p>
+    <a href="/2008-06-07/juno.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
+  <h3 class="post-title"><a href="/2008-06-02/a-nice-alternative-to-gimp-on-ubuntu.html" title="A nice alternative to GIMP on Ubuntu">A nice alternative to GIMP on Ubuntu</a></h3>
+  <span class="post-date"><abbr class="published-on">June 02, 2008</abbr></span>
+  <div class="post-content">
+    <p><p>I&#8217;m not one of the many ardent Microsoft haters that use Linux, and as such I&#8217;m quite open to taking full advantage of whatever software I can to get the job done, whether I&#8217;m in Linux or Windows. I really quite like Paint.Net which I&#8217;ve used on Windows as an alternative to Photoshop and the GIMP. You can now get Paint.Net on Linux courtesy of the Mono framework:</p>
+<span style='text-decoration: line-through;'> </span><pre><span style='text-decoration: line-through;'>$ sudo apt-get install mono-common libmono* mono-gmcs
+$ svn co http://paint-mono.googlecode.com/svn/trunk/src paint-mono
+$ cd paint-mono
+$ ./configure
+$ make
+$ make install
+$ paintdotnet
+</span></pre>
+<p>I&#8217;ve been informed by someone commenting on this post that the above doesn&#8217;t appear to work any more, the below is command line output of a successful install, hope it helps. <pre>$ cd /tmp
+$ wget http://paint-mono.googlecode.com
+   /files/paintdotnet-0.1.63.tar.gz
+$ tar xvfz paintdotnet-0.1.63.tar.gz
+$ ./configure
+Looking for required packages
+Checking for revision&hellip;
+paintdotnet has been configured with
+prefix = /usr/local
+config = RELEASE_AND_PACKAGE_ANY_CPU
+$ make
+$ sudo make install
+&hellip;
+make post-install-local-hook prefix=/usr/local
+&hellip;
+$ cd /usr/local/bin
+$ ls -ltr | tail -n1
+paintdotnet
+$ ./paintdotnet</pre></p></p>
+    <a href="/2008-06-02/a-nice-alternative-to-gimp-on-ubuntu.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
+  <h3 class="post-title"><a href="/2008-04-26/hardy-and-firefox.html" title="Hardy and Firefox">Hardy and Firefox</a></h3>
+  <span class="post-date"><abbr class="published-on">April 26, 2008</abbr></span>
+  <div class="post-content">
+    <p><p>As I mentioned in my last post, I have had issues getting Firebug working in Firefox 3.0b5.&#160; Unfortunately at the moment Firebug isn&#8217;t compatible with the beta release of Firefox 3.&#160; To be honest, I&#8217;m quite happy with Firefox 2.x.&#160; From what I&#8217;ve read, Firefox 3 is more stable and less memory-hungry that its predecessor, and it does look nice (especially so according to Mac users).&#160; Unfortunately, these benefits are outweighed by my love of the Firebug extension.&#160; It is, in my opinion, the best debug tool for web developers bar none.&#160; To that end, I&#8217;ve chosen to remove Firefox 3 (and all the bits and bobs that come with it) and install Firefox 2.</p>
+
+<p>A few apt-gets later, I had got rid of Firefox-3 and related packages, and installed Firefox-2, symlinked to /usr/bin/firefox.&#160; However, Firefox-2 still used the profile created by Firefox-3 in my home directory.&#160; I started Firefox from the terminal, with the &#8216;-ProfileManager&#8217; switch.&#160; I created a new profile, renamed default, and renamed my new profile to default.&#160; I then copied my bookmarks and related data from the old profile directory to the new one.&#160; Once this was done, I started Firefox with my new default profile,&#160; installed my favourite plugins and all was good - Firebug now works like a dream!</p></p>
+    <a href="/2008-04-26/hardy-and-firefox.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+
+
+      <div class="nav-below"> 
+        
+          <div class="nav-previous"><a href="/page10">&laquo; Older</a></div>
+        
+        
+          <div class="nav-next"><a href="/page8">Newer &raquo;</a></div>
+        
+      </div>
+    </div>
+  </div>
+<!-- nav -->
+</div>
+
+<div class="clear"></div>
+<div class="footer">
+  <div class="column">
+    <div class="row">
+      <div class="eight columns alpha">
+      <h4>About Me</h4>
+      <p><a href="/about.html">I'm</a> an Edinburgh based PHP developer with a passion for <a href="http://en.wikipedia.org/wiki/Open_source">open source software</a> and <a href="http://en.wikipedia.org/wiki/Open_data">open-data</a>, currently working for <a href="http://maglabs.net" rel="co-worker met">Maglabs</a>. Living with my wife <a href="http://twitter.com/mrsjmanders" rel="met spouse">Jo</a> and our two cats, Ziggy and Maggie.</p>
+      <p><a href="/about.html">Continue reading</a></p>
+      <h4>Contact</h4>
+      <p>If you want to get in touch, you can send an email to my-first-name [at] this site.</p>
+      </div>
+      <div class="eight columns omega">
+        <div class="row">
+          <div class="four columns alpha">
+            <ul>
+              <li>
+                <img alt="Pinboard" src="/images/link.png" />
+                <a href="http://www.pinboard.in/u:maxmanders/" title="maxmanders on Pinboard">Pinboard</a>
+              </li>
+              <li>
+                <img alt="Flickr" src="/images/picture.png" />
+                <a href="http://www.flickr.com/photos/maxmanders" title="maxmanders on Flickr">Flickr</a>
+              </li>
+              <li>
+                <img alt="Last.FM" src="/images/song.png" />
+                <a href="http://www.last.fm/user/mmanders" title="mmanders on Last.FM">Last.FM</a>
+              </li>
+              <li>
+                <img alt="Twitter" src="/images/message.png" />
+                <a href="http://www.twitter.com/maxmanders" title="maxmanders on Twitter">Twitter</a>
+              </li>
+              <li>
+                <img alt="Github" src="/images/github.png" />
+                <a href="http://www.github.com/maxmanders" title="maxmanders on Github">Github</a>
+              </li>
+              <li>
+                <img alt="RSS" src="/images/maxmanders.png" />
+                <a href="http://maxmanders.co.uk/feed/rss2" title="maxmanders.co.uk RSS">RSS</a>
+              </li>
+            </ul>
+          </div>
+          <div class="four columns omega">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column alpha" id="license">
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons Licence" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+        <span>&nbsp; This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try{
+  var pageTracker = _gat._getTracker("UA-1652642-1");
+  pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>

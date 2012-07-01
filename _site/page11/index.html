@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+        
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+
+<title>Max Manders</title>
+        
+<meta charset="UTF-8" />
+<meta name="description" content="Max Manders... thoughts of a web developer." />
+<meta name="keywords" content="web, web development, php, html, css, javascript, linux, max manders, manders" />
+<meta name="author" content="Max Manders" />
+        
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- Mobile Specific Metas
+================================================== -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="/styles/stylesheets/base.css">
+<link rel="stylesheet" href= "/styles/style.css">
+<link rel="stylesheet" href="/styles/stylesheets/layout.css">
+<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+
+<!-- Favicons
+================================================== -->
+<link rel="shortcut icon" href="/favicon.ico" />
+
+</head>
+
+<body class="home blog">
+
+<div class="container">
+
+<div class="header">    
+  <div class="seven columns"> 
+    <div class="logo">
+      <a href="/">
+        <h1 class="remove-bottom">Max Manders</h1>
+        <h5>thoughts of a web developer</h5>
+      </a>
+    </div>
+  </div> 
+</div>
+
+<div class="content">
+  <div class="column">
+    <div class="main">
+      
+  <article class="post">
+  <h3 class="post-title"><a href="/2008-02-12/sshfs.html" title="sshfs">sshfs</a></h3>
+  <span class="post-date"><abbr class="published-on">February 12, 2008</abbr></span>
+  <div class="post-content">
+    <p><p>If you don&#8217;t want the trouble of configuring NFS or Samba, then sshfs is a good option. sshfs (ssh File System) makes use of Fuse (File System in Userspace) to allow you to locally mount a directory that you have remote access to using ssh. To install sshfs in Ubuntu use:</p>
+sudo apt-get install sshfs
+
+<p>Once this is done, you will need to add yourself to the new group (fuse) that has been created:</p>
+<pre style='border: solid 3px red; background-color: pink' class='markdown-html-error'>REXML could not parse this XML/HTML: 
+&lt;code&gt;sudo adduser &lt;user&gt; fuse&lt;/code&gt;</pre>
+<p>Create a local directory in which to mount your remote directory and make sure it is owned by you: &lt;code&gt; mkdir <span>-p</span> /path/to/directory chown &lt;user&gt;.&lt;group&gt; /path/to/directory &lt;/code&gt; Now you can mount your remote directory as follows: &lt;code&gt; sshfs &lt;user&gt;@&lt;remote_host&gt;:/path/to/directory/ /path/to/directory &lt;/code&gt;</p></p>
+    <a href="/2008-02-12/sshfs.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
+  <h3 class="post-title"><a href="/2008-01-26/moving-to-dreamhost.html" title="Moving To Dreamhost">Moving To Dreamhost</a></h3>
+  <span class="post-date"><abbr class="published-on">January 26, 2008</abbr></span>
+  <div class="post-content">
+    <p><p>After some months of being unhappy with the service from Hostgator, I decided yesterday to move to Dreamhost.&#160; While Hostgator are very affordable and for the most part reliable, the ssh connection was always painfully slow; it took me considerable effort in the beginning to even get ssh access (having been required to justify my need to them); the control panel they provided (cPanel) made it difficult to get anything done; and as far as I know I could only host a single site with them.</p>
+
+<p>After a recommendation from a colleague at work, I decided to switch to Dreamhost.&#160; I opted to pay for a year in advance, as the monthly direct-debit payments are a little more expensive otherwise, and there is an initial setup fee if you pay monthly.&#160; The control panel is far more intuitive and a lot easier to use.&#160; I can host as many sites and sub-domains as I like with as many users, email accounts and MySQL databases as I like.&#160; Once I had created the account and switched my name servers with my domain registrar everything was underway.&#160; Within half an hour I had shell access, an initial account with which I could create more accounts, an initial email address of my choosing (thus reducing email outage to a minimum) and a general impression that Dreamhost were a lot more professional and experienced.</p>
+
+<p>Obviously it will take up to 48 hours for the new name server settings to propagate to the root name servers, but despite this within about four hours the name server change had been effective for me.&#160; After about 15 minutes work making changes to my local copy of my Wordpress installation and MySQL dump, I rsync-ed everything to the new server, got the database up and running, and job done!</p></p>
+    <a href="/2008-01-26/moving-to-dreamhost.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
+  <h3 class="post-title"><a href="/2008-01-20/i-can-haz-trombone.html" title="I Can Haz Trombone?">I Can Haz Trombone?</a></h3>
+  <span class="post-date"><abbr class="published-on">January 20, 2008</abbr></span>
+  <div class="post-content">
+    <p><p>As a trombone player, this made me smile!</p>
+</p>
+    <a href="/2008-01-20/i-can-haz-trombone.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
+  <h3 class="post-title"><a href="/2008-01-18/ssh-tunnelling.html" title="SSH Tunneling">SSH Tunneling</a></h3>
+  <span class="post-date"><abbr class="published-on">January 18, 2008</abbr></span>
+  <div class="post-content">
+    <p><p>Another aide memoire, but again may be useful to some. I&#8217;d like the ability to work from home on some web development projects I&#8217;m doing at work. Getting the code locally is not a problem thanks to Subversion over ssh However viewing the results can be tricky when you consider that the development server is behind the work network. The answer is SSH tunneling.</p>
+
+<p>Let&#8217;s say you can access SERVER_A directly over ssh The service you want to access is on SERVER_B which you can&#8217;t access directly via SSH from your local machine. However, you can access SERVER_B from SERVER_A. I&#8217;ll assume that you want to access the service locally on port 12345, and that the remove port is port 80. The following command will allow you to access a service on SERVER_B from your local machine.</p>
+ssh -Nf -L 12345:SERVER_B:80 username@SERVER_A
+<p>The &#8216;-Nf&#8217; switch says don&#8217;t execute a command with this ssh session, and run this ssh process in the background. The first port is the port you want to use locally; the first server is the usually inaccessible remote server you want access to; and the third port is the remote port you want to use. The final argument gives the login to the remotely accessible server you have ssh access to directly.</p>
+
+<p>One caveat to this is if you are trying to access a web site that is defined using Apache virtual hosts. With this command alone, requesting localhost:12345 in Firefox would only direct you to the site that is listening remotely for requests that match &#8216;localhost&#8217;. If you would ordinarily access this site using mysite.server_b, then you need to use that as the address in Firefox on your local machine. Therefore, this needs to be added in /etc/hosts. With that done, you should be able to request mysite.server_b:12345 in Firefox and be directed to the remote &#8220;virtual host&#8221; site.</p></p>
+    <a href="/2008-01-18/ssh-tunnelling.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
+  <h3 class="post-title"><a href="/2008-01-12/gutsy-realtek-hd-audio-and-the-toshiba-u300.html" title="Gutsy, Realtek HD Audio and the Toshiba U300">Gutsy, Realtek HD Audio and the Toshiba U300</a></h3>
+  <span class="post-date"><abbr class="published-on">January 12, 2008</abbr></span>
+  <div class="post-content">
+    <p><p>This post is really an aide-memoire for me should I need to rebuild my laptop in the future, but it may prove useful to others. My Toshiba U300 laptop seems to have problems with Realtek HD Audio. After some searching and trial-and-error, I found that the following gets things working.</p>
+<pre>
+sudo apt-get install linux-backports-modules-generic
+</pre></p>
+    <a href="/2008-01-12/gutsy-realtek-hd-audio-and-the-toshiba-u300.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+
+
+      <div class="nav-below"> 
+        
+          <div class="nav-previous"><a href="/page12">&laquo; Older</a></div>
+        
+        
+          <div class="nav-next"><a href="/page10">Newer &raquo;</a></div>
+        
+      </div>
+    </div>
+  </div>
+<!-- nav -->
+</div>
+
+<div class="clear"></div>
+<div class="footer">
+  <div class="column">
+    <div class="row">
+      <div class="eight columns alpha">
+      <h4>About Me</h4>
+      <p><a href="/about.html">I'm</a> an Edinburgh based PHP developer with a passion for <a href="http://en.wikipedia.org/wiki/Open_source">open source software</a> and <a href="http://en.wikipedia.org/wiki/Open_data">open-data</a>, currently working for <a href="http://maglabs.net" rel="co-worker met">Maglabs</a>. Living with my wife <a href="http://twitter.com/mrsjmanders" rel="met spouse">Jo</a> and our two cats, Ziggy and Maggie.</p>
+      <p><a href="/about.html">Continue reading</a></p>
+      <h4>Contact</h4>
+      <p>If you want to get in touch, you can send an email to my-first-name [at] this site.</p>
+      </div>
+      <div class="eight columns omega">
+        <div class="row">
+          <div class="four columns alpha">
+            <ul>
+              <li>
+                <img alt="Pinboard" src="/images/link.png" />
+                <a href="http://www.pinboard.in/u:maxmanders/" title="maxmanders on Pinboard">Pinboard</a>
+              </li>
+              <li>
+                <img alt="Flickr" src="/images/picture.png" />
+                <a href="http://www.flickr.com/photos/maxmanders" title="maxmanders on Flickr">Flickr</a>
+              </li>
+              <li>
+                <img alt="Last.FM" src="/images/song.png" />
+                <a href="http://www.last.fm/user/mmanders" title="mmanders on Last.FM">Last.FM</a>
+              </li>
+              <li>
+                <img alt="Twitter" src="/images/message.png" />
+                <a href="http://www.twitter.com/maxmanders" title="maxmanders on Twitter">Twitter</a>
+              </li>
+              <li>
+                <img alt="Github" src="/images/github.png" />
+                <a href="http://www.github.com/maxmanders" title="maxmanders on Github">Github</a>
+              </li>
+              <li>
+                <img alt="RSS" src="/images/maxmanders.png" />
+                <a href="http://maxmanders.co.uk/feed/rss2" title="maxmanders.co.uk RSS">RSS</a>
+              </li>
+            </ul>
+          </div>
+          <div class="four columns omega">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column alpha" id="license">
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons Licence" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+        <span>&nbsp; This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try{
+  var pageTracker = _gat._getTracker("UA-1652642-1");
+  pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>
