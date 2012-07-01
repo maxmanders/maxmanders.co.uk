@@ -8,7 +8,6 @@
 <title>Max Manders</title>
         
 <meta charset="UTF-8" />
-<meta name="description" content="Max Manders... thoughts of a web developer." />
 <meta name="keywords" content="web, web development, php, html, css, javascript, linux, max manders, manders" />
 <meta name="author" content="Max Manders" />
         
@@ -25,6 +24,7 @@
 <link rel="stylesheet" href="/styles/stylesheets/base.css">
 <link rel="stylesheet" href= "/styles/style.css">
 <link rel="stylesheet" href="/styles/stylesheets/layout.css">
+<link rel="stylesheet" href="/styles/highlight.css">
 <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
 
 <!-- Favicons
@@ -53,6 +53,18 @@
     <div class="main">
       
   <article class="post">
+  <h3 class="post-title"><a href="/2008/03/07/the-new-look.html" title="The New Look">The New Look</a></h3>
+  <span class="post-date"><abbr class="published-on">March 07, 2008</abbr></span>
+  <div class="post-content">
+    <p><p>I decided some time ago that I wasn&#8217;t happy with the way this site looked.&#160; Unfortunately I haven&#8217;t had much time to do anything about it.&#160; I&#8217;ve finally got around to making some changes, the most important of which you may notice is the minimalist design.&#160; I don&#8217;t know if I plan to change this any time in the future, but for now it will do.</p>
+
+<p>I&#8217;ve also tried to pull in some data from other services I use (perhaps not as frequently as I would like) such as Twitter, Facebook and Flickr.&#160; To that end, my recent Twitter tweets are now displayed, together with my Facebook status.&#160; I&#8217;ve also pulled in some random images from my public Flickr collection.</p></p>
+    <a href="/2008/03/07/the-new-look.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
   <h3 class="post-title"><a href="/2008/02/12/sshfs.html" title="sshfs">sshfs</a></h3>
   <span class="post-date"><abbr class="published-on">February 12, 2008</abbr></span>
   <div class="post-content">
@@ -60,7 +72,7 @@
 sudo apt-get install sshfs
 
 <p>Once this is done, you will need to add yourself to the new group (fuse) that has been created:</p>
-<pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
+<pre style='border: solid 3px red; background-color: pink' class='markdown-html-error'>REXML could not parse this XML/HTML: 
 &lt;code&gt;sudo adduser &lt;user&gt; fuse&lt;/code&gt;</pre>
 <p>Create a local directory in which to mount your remote directory and make sure it is owned by you: &lt;code&gt; mkdir <span>-p</span> /path/to/directory chown &lt;user&gt;.&lt;group&gt; /path/to/directory &lt;/code&gt; Now you can mount your remote directory as follows: &lt;code&gt; sshfs &lt;user&gt;@&lt;remote_host&gt;:/path/to/directory/ /path/to/directory &lt;/code&gt;</p></p>
     <a href="/2008/02/12/sshfs.html" class="more">Continue reading &raquo;</a>
@@ -105,19 +117,6 @@ ssh -Nf -L 12345:SERVER_B:80 username@SERVER_A
 
 <p>One caveat to this is if you are trying to access a web site that is defined using Apache virtual hosts. With this command alone, requesting localhost:12345 in Firefox would only direct you to the site that is listening remotely for requests that match &#8216;localhost&#8217;. If you would ordinarily access this site using mysite.server_b, then you need to use that as the address in Firefox on your local machine. Therefore, this needs to be added in /etc/hosts. With that done, you should be able to request mysite.server_b:12345 in Firefox and be directed to the remote &#8220;virtual host&#8221; site.</p></p>
     <a href="/2008/01/18/ssh-tunnelling.html" class="more">Continue reading &raquo;</a>
-  </div>
-</article>
-
-
-  <article class="post">
-  <h3 class="post-title"><a href="/2008/01/12/gutsy-realtek-hd-audio-and-the-toshiba-u300.html" title="Gutsy, Realtek HD Audio and the Toshiba U300">Gutsy, Realtek HD Audio and the Toshiba U300</a></h3>
-  <span class="post-date"><abbr class="published-on">January 12, 2008</abbr></span>
-  <div class="post-content">
-    <p><p>This post is really an aide-memoire for me should I need to rebuild my laptop in the future, but it may prove useful to others. My Toshiba U300 laptop seems to have problems with Realtek HD Audio. After some searching and trial-and-error, I found that the following gets things working.</p>
-<pre>
-sudo apt-get install linux-backports-modules-generic
-</pre></p>
-    <a href="/2008/01/12/gutsy-realtek-hd-audio-and-the-toshiba-u300.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
 

@@ -8,13 +8,6 @@
 <title>Samba: Linux to Linux Gotcha - Max Manders</title>
         
 <meta charset="UTF-8" />
-<meta name="description" content="It&#8217;s been a long time coming, but I&#8217;ve finally got my machine at work set up using Ubuntu 8.04 rather than Windows XP.&#160; I&#8217;ve been using Ubuntu at home almost exclusively for nearly a year now, so it&#8217;s good to be able to maintain my workflow from home to work.&#160; One of the problems I had was mounting&#160; my home directory on a server.
-
-On windows, this works fine: you specify a username, a password, and the share you want to connect to and it just works.&#160; The same is almost true with linux: you specify the username, password and share (either on the command line or in /etc/fstab).&#160; However, chances are your local UID will differ from the UID used on the server, so although the mount will succeed, permissions may be a bit iffy.
-
-The solution was to use CIFS rather than the outdate smbfs, and to use the extra uid option:
-$ sudo mount -t cifs -o username=user,password=pass,uid=1000 //server/share /local/mount/point
-This makes sure that the share you mount is owned by the local user." />
 <meta name="keywords" content="" />
 <meta name="author" content="Max Manders" />
         
@@ -31,6 +24,7 @@ This makes sure that the share you mount is owned by the local user." />
 <link rel="stylesheet" href="/styles/stylesheets/base.css">
 <link rel="stylesheet" href= "/styles/style.css">
 <link rel="stylesheet" href="/styles/stylesheets/layout.css">
+<link rel="stylesheet" href="/styles/highlight.css">
 <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
 
 <!-- Favicons

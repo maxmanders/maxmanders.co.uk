@@ -8,34 +8,6 @@
 <title>A nice alternative to GIMP on Ubuntu - Max Manders</title>
         
 <meta charset="UTF-8" />
-<meta name="description" content="I&#8217;m not one of the many ardent Microsoft haters that use Linux, and as such I&#8217;m quite open to taking full advantage of whatever software I can to get the job done, whether I&#8217;m in Linux or Windows. I really quite like Paint.Net which I&#8217;ve used on Windows as an alternative to Photoshop and the GIMP. You can now get Paint.Net on Linux courtesy of the Mono framework:
- $ sudo apt-get install mono-common libmono* mono-gmcs
-$ svn co http://paint-mono.googlecode.com/svn/trunk/src paint-mono
-$ cd paint-mono
-$ ./configure
-$ make
-$ make install
-$ paintdotnet
-
-I&#8217;ve been informed by someone commenting on this post that the above doesn&#8217;t appear to work any more, the below is command line output of a successful install, hope it helps. $ cd /tmp
-$ wget http://paint-mono.googlecode.com
-   /files/paintdotnet-0.1.63.tar.gz
-$ tar xvfz paintdotnet-0.1.63.tar.gz
-$ ./configure
-Looking for required packages
-Checking for revision&hellip;
-paintdotnet has been configured with
-prefix = /usr/local
-config = RELEASE_AND_PACKAGE_ANY_CPU
-$ make
-$ sudo make install
-&hellip;
-make post-install-local-hook prefix=/usr/local
-&hellip;
-$ cd /usr/local/bin
-$ ls -ltr | tail -n1
-paintdotnet
-$ ./paintdotnet" />
 <meta name="keywords" content="" />
 <meta name="author" content="Max Manders" />
         
@@ -52,6 +24,7 @@ $ ./paintdotnet" />
 <link rel="stylesheet" href="/styles/stylesheets/base.css">
 <link rel="stylesheet" href= "/styles/style.css">
 <link rel="stylesheet" href="/styles/stylesheets/layout.css">
+<link rel="stylesheet" href="/styles/highlight.css">
 <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
 
 <!-- Favicons

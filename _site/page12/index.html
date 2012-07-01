@@ -8,7 +8,6 @@
 <title>Max Manders</title>
         
 <meta charset="UTF-8" />
-<meta name="description" content="Max Manders... thoughts of a web developer." />
 <meta name="keywords" content="web, web development, php, html, css, javascript, linux, max manders, manders" />
 <meta name="author" content="Max Manders" />
         
@@ -25,6 +24,7 @@
 <link rel="stylesheet" href="/styles/stylesheets/base.css">
 <link rel="stylesheet" href= "/styles/style.css">
 <link rel="stylesheet" href="/styles/stylesheets/layout.css">
+<link rel="stylesheet" href="/styles/highlight.css">
 <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
 
 <!-- Favicons
@@ -52,6 +52,19 @@
   <div class="column">
     <div class="main">
       
+  <article class="post">
+  <h3 class="post-title"><a href="/2008/01/12/gutsy-realtek-hd-audio-and-the-toshiba-u300.html" title="Gutsy, Realtek HD Audio and the Toshiba U300">Gutsy, Realtek HD Audio and the Toshiba U300</a></h3>
+  <span class="post-date"><abbr class="published-on">January 12, 2008</abbr></span>
+  <div class="post-content">
+    <p><p>This post is really an aide-memoire for me should I need to rebuild my laptop in the future, but it may prove useful to others. My Toshiba U300 laptop seems to have problems with Realtek HD Audio. After some searching and trial-and-error, I found that the following gets things working.</p>
+<pre>
+sudo apt-get install linux-backports-modules-generic
+</pre></p>
+    <a href="/2008/01/12/gutsy-realtek-hd-audio-and-the-toshiba-u300.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
   <article class="post">
   <h3 class="post-title"><a href="/2008/01/02/happy-new-year-and-new-year-resolutions.html" title="Happy New Year and New Year Resolutions">Happy New Year and New Year Resolutions</a></h3>
   <span class="post-date"><abbr class="published-on">January 02, 2008</abbr></span>
@@ -101,29 +114,6 @@ You can also specify a URL for a your own install of Wordpress, TextPattern and 
 
 <p>This problem can be resolved by setting the output module for your player of choice to X11.&#194;&#160; In VLC, goto Settings-&gt;Preferences-&gt;Video-&gt;Output Modules.&#194;&#160; Check the &#8220;Advanced Options&#8221; box.&#194;&#160; Select &#8220;X11 video output&#8221; from the drop down box and save the changes.</p></p>
     <a href="/2007/12/07/compiz-and-video-playback-problems.html" class="more">Continue reading &raquo;</a>
-  </div>
-</article>
-
-
-  <article class="post">
-  <h3 class="post-title"><a href="/2007/12/07/compiz-on-the-intel-965gm-chipset.html" title="Compiz on the Intel 965GM Chipset">Compiz on the Intel 965GM Chipset</a></h3>
-  <span class="post-date"><abbr class="published-on">December 07, 2007</abbr></span>
-  <div class="post-content">
-    <p><p>I recently tried to get compiz working on my laptop; a Toshiba u300 running Ubuntu 7.10 &#8220;Gutsy Gibbon&#8221;. The Toshiba U300 uses the Intel 965GM chipset which doesn&#8217;t seem to be compatible with compiz. After some digging I discovered a repository that contains a modified xorg-xserver-video-intel package. This combined with the 915resolution package allowed me ues the native 1280 * 800 resolution, and enable compiz desktop effects. <pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
-&lt;pre&gt;</pre></p>
-
-as root / sudo
-
-<p>echo &#8220;deb http://ppa.launchpad.net/kyle/ubuntu gutsy main&#8221;&#160;&#187; /etc/apt/sources.list&#8221;</p>
-
-<p>apt-get update</p>
-
-<p>apt-get upgrade</p>
-
-<p>apt-get install xserver-xorg-video-intel</p>
-
-<p>dpkg-reconfigure xserver-xorg&lt;/pre&gt; One reboot later and all was well.</p></p>
-    <a href="/2007/12/07/compiz-on-the-intel-965gm-chipset.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
 

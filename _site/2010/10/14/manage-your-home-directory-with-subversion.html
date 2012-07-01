@@ -8,7 +8,6 @@
 <title>Manage Your Home Directory With Subversion - Max Manders</title>
         
 <meta charset="UTF-8" />
-<meta name="description" content="Revision control systems serve their purpose well for managing codebases, but they can also be used to good effect for configuration management.&#160; I&#8217;ll discuss how I&#8217;ve used Subversion to manage the configuration of my home directory.&#160; The same goal could probably be achieved just as easily with Git.&#160; While I use Git and Github for personal projects, I have employed this solution at work where we use Subversion." />
 <meta name="keywords" content="" />
 <meta name="author" content="Max Manders" />
         
@@ -25,6 +24,7 @@
 <link rel="stylesheet" href="/styles/stylesheets/base.css">
 <link rel="stylesheet" href= "/styles/style.css">
 <link rel="stylesheet" href="/styles/stylesheets/layout.css">
+<link rel="stylesheet" href="/styles/highlight.css">
 <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
 
 <!-- Favicons
@@ -68,13 +68,13 @@ SVNParentPath /var/lib/svn
 AuthType Basic
 AuthName "Subversion Repository"
 AuthUserFile /etc/apache2/dav_svn.passwd
-Require valid-user</pre> This configuration will allow you to refer to your repositories via e.g. http://example.com/svn, where the actual location of your repositories on the filesystem is <em>/var/lib/svn</em>.&#160; We&#8217;re also using basic authentication here, so we&#8217;ll need to add a valid user. <pre class='brush: bash'>sudo htpasswd -c /etc/apache2/dav_svn.passwd username</pre> Next, we need to create our SVN directory and create a first repository <pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
+Require valid-user</pre> This configuration will allow you to refer to your repositories via e.g. http://example.com/svn, where the actual location of your repositories on the filesystem is <em>/var/lib/svn</em>.&#160; We&#8217;re also using basic authentication here, so we&#8217;ll need to add a valid user. <pre class='brush: bash'>sudo htpasswd -c /etc/apache2/dav_svn.passwd username</pre> Next, we need to create our SVN directory and create a first repository <pre style='border: solid 3px red; background-color: pink' class='markdown-html-error'>REXML could not parse this XML/HTML: 
 &lt;pre class=&quot;brush: bash&quot;&gt;sudo mkdir -p /var/lib/svn
 sudo svnadmin create /var/lib/svn/homedir
 sudo chown -R :www-data /var/lib/svn
 sudo chmod 700 /var/lib/svn
 sudo chmod -R 755 /var/lib/svn/homedir</pre></p>
-<pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
+<pre style='border: solid 3px red; background-color: pink' class='markdown-html-error'>REXML could not parse this XML/HTML: 
 &lt;/pre&gt;</pre>
 <p>Now, on a server that has a good baseline set of configuration files, we can check out a working copy <pre class='brush: bash'>svn co http://example.com/svn/homedir .</pre> Add some configuration files <pre class='brush: bash'>cp ~/.bashrc ~/.vimrc ~/.vimrc ~/homedir
 cd ~/homedir

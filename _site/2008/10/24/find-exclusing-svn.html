@@ -8,11 +8,6 @@
 <title>Find Excluding SVN - Max Manders</title>
         
 <meta charset="UTF-8" />
-<meta name="description" content="So, you need to take a copy of a subversion working copy, but it has local changes that you also need to copy.&#160; This precludes the use of svn export since the local changes won&#8217;t be included.&#160; One option is to do an svn export anyway, and then cp -ra the local changes.&#160; Another solution is to use a find command that excludes subversion metadata, and then copy the resulting files:
-
-find . -path &#39;*/.svn&#39; -prune -o -type f -print
-
-I did something similar some time ago, but forgot the command, so here it is for posterity." />
 <meta name="keywords" content="" />
 <meta name="author" content="Max Manders" />
         
@@ -29,6 +24,7 @@ I did something similar some time ago, but forgot the command, so here it is for
 <link rel="stylesheet" href="/styles/stylesheets/base.css">
 <link rel="stylesheet" href= "/styles/style.css">
 <link rel="stylesheet" href="/styles/stylesheets/layout.css">
+<link rel="stylesheet" href="/styles/highlight.css">
 <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
 
 <!-- Favicons

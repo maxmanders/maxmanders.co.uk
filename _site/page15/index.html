@@ -8,7 +8,6 @@
 <title>Max Manders</title>
         
 <meta charset="UTF-8" />
-<meta name="description" content="Max Manders... thoughts of a web developer." />
 <meta name="keywords" content="web, web development, php, html, css, javascript, linux, max manders, manders" />
 <meta name="author" content="Max Manders" />
         
@@ -25,6 +24,7 @@
 <link rel="stylesheet" href="/styles/stylesheets/base.css">
 <link rel="stylesheet" href= "/styles/style.css">
 <link rel="stylesheet" href="/styles/stylesheets/layout.css">
+<link rel="stylesheet" href="/styles/highlight.css">
 <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
 
 <!-- Favicons
@@ -52,6 +52,18 @@
   <div class="column">
     <div class="main">
       
+  <article class="post">
+  <h3 class="post-title"><a href="/2007/09/16/damn-funny-cats.html" title="Damn Funny Cats">Damn Funny Cats</a></h3>
+  <span class="post-date"><abbr class="published-on">September 16, 2007</abbr></span>
+  <div class="post-content">
+    <p><p>A collection of some really great cat video clips. Enjoy!</p>
+
+<p><span>youtube b11R7wiaTvU</span></p></p>
+    <a href="/2007/09/16/damn-funny-cats.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
   <article class="post">
   <h3 class="post-title"><a href="/2007/09/05/needless-signup-for-online-services.html" title="Needless Signup for Online Services">Needless Signup for Online Services</a></h3>
   <span class="post-date"><abbr class="published-on">September 05, 2007</abbr></span>
@@ -90,30 +102,6 @@
   <div class="post-content">
     <p><p>Recently I had cause to report on the usage staff at work made of the corporate intranet. This would ordinarily be a simple enough task if the logs were plain standard Apache logs. However, I was dealing with Oracle9iAS, a very different beast indeed. Oracle9iAS is built on top of a customised version of Apache and incorporates a caching proxy server, the so-called Webcache; an implementation of J2EE called OC4J (Oracle Containers for Java) and various other bells and whistles, making it something of a behamoth.</p>
     <a href="/2007/08/22/analysing-oracle-application-server-9i-webcache-logs.html" class="more">Continue reading &raquo;</a>
-  </div>
-</article>
-
-
-  <article class="post">
-  <h3 class="post-title"><a href="/2007/08/21/a-first-wordpress-plugin.html" title="A First Wordpress Plugin">A First Wordpress Plugin</a></h3>
-  <span class="post-date"><abbr class="published-on">August 21, 2007</abbr></span>
-  <div class="post-content">
-    <p><p>As you can see from my previous post, my first attempt at writing a Wordpress Plugin was a success. This plugin is very simple and allows the user to embed a YouTube video into their post. The main function calls a callback function that replaces every occurrence of the tag &#8220;youtube&#8221; video_iduotes) with a flash video corresponding to the video_id parameter.</p>
-
-<p>Just paste the code below into a file called &#8216;youtube.php&#8217; in your wp-content/plugins directory. You should then be able to activate it via the Plugins admin option. Once activated, you can place a YouTube video in your post by going to code-view and inserting &#8220;youtube&#8221; video_idhe quotes). The video_id parameter is the &#8216;v&#8217; parameter in a YouTube URL. In the example below, the URL is http://www.youtube.com/watch?v=lL4L4Uv5rf0. Therefore, the video_id parameter should be lL4L4Uv5rf0. In the code below, you will need to remove the quotes around the word &#8220;youtube&#8221; in the regex on line 5, I had to put these in to display the code without it interpreting the tag&#8230; it&#8217;s a work in progress! <pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
-&lt;pre lang=&quot;php&quot;&gt;</pre></p>
-
-<p>define(&#8220;YOUTUBE_WIDTH&#8221;, 425); define(&#8220;YOUTUBE_HEIGHT&#8221;, 350); define(&#8220;YOUTUBE_TAG&#8221;, &#8220;/<span>&#8220;youtube&#8221; (<span><span>:print:</span></span>+)</span>/&#8221;); define(&#8220;YOUTUBE_LINK&#8221;, &#8221;<object type='\' data='\' width='\' height='\'>
-<param name='\' value='\' /></object>&#8221;);</p>
-
-<p>function youtube_plugin_cb($match) { $html = YOUTUBE_LINK; $html = str_replace(&#8220;###YOUTUBE_ID###&#8221;, $match<span>1</span>, $html); return ($html); }</p>
-
-<p>function youtube_plugin($content) { return (preg_replace_callback(YOUTUBE_TAG, &#8216;youtube_plugin_cb&#8217;, $content)); }</p>
-
-<p>add_filter(&#8216;the_content&#8217;, &#8216;youtube_plugin&#8217;); add_filter(&#8216;comment_text&#8217;, &#8216;youtube_plugin&#8217;);</p>
-
-<p>?&gt;&lt;/pre&gt;</p></p>
-    <a href="/2007/08/21/a-first-wordpress-plugin.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
 

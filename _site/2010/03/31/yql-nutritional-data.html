@@ -8,12 +8,6 @@
 <title>YQL Nutritional Data - Max Manders</title>
         
 <meta charset="UTF-8" />
-<meta name="description" content="My todo list has been telling me to play with Yahoo&#8217;s YQL for far too long now, so last night I did something about it.&#160; YQL is a Yahoo SQL-like language that allows developers to easily aggregate data from various disparate data sources without having to go through the rigmarole of writing their own API.&#160; There is a large selection of base tables that allow the developer to work with e.g. Flickr or Upcoming.&#160; There is also a community contributed selection of tables (see datatables.org).&#160; You can contribute to the project by forking the GitHub project and sending a pull request once you&#8217;ve committed changed to your tree.
-
-That&#8217;s exactly what I did last night.&#160; I did some digging and found the UK government&#8217;s data source for nutritional information, the "Composition of Foods" report.&#160; To use the data, I had to apply for a free Click-Use license.&#160; I didn&#8217;t have to specify what data I was using or how I was going to use it; it seemed more the case that I had to have my name added to a list of people who use government data in some way, shape or form.&#160; Once I&#8217;d munged the data a bit, I created a CSV, and corresponding XML file as described by the DataTables documentation.
-
-You can use my DataTable by querying YQL (or in the YQL-console) like this for example: use "http://maxmanders.co.uk/lab/nutritionals/nutritionals.xml";
-select * from nutritionals where name = 'banana';" />
 <meta name="keywords" content="" />
 <meta name="author" content="Max Manders" />
         
@@ -30,6 +24,7 @@ select * from nutritionals where name = 'banana';" />
 <link rel="stylesheet" href="/styles/stylesheets/base.css">
 <link rel="stylesheet" href= "/styles/style.css">
 <link rel="stylesheet" href="/styles/stylesheets/layout.css">
+<link rel="stylesheet" href="/styles/highlight.css">
 <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
 
 <!-- Favicons
