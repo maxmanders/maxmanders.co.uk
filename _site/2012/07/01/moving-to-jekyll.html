@@ -90,15 +90,53 @@
 <h4 id='migration'>Migration</h4>
 
 <p>The data migration was relatively straight forward, thanks to Jekyll&#8217;s out-of-the-box support for exporting Wordpress posts to markdown files. First, I took a dump of my live database and imported it to my local machine. Then, I took a clone of the Jekyll source and used the migration utility, as documented.</p>
-<div class='highlight'><pre><code class='bash'><span class='lineno'>1</span> git clone https://github.com/mojombo/jekyll.git
-<span class='lineno'>2</span> <span class='nb'>export </span><span class='nv'>DB</span><span class='o'>=</span>my_wp_database
-<span class='lineno'>3</span> <span class='nb'>export </span><span class='nv'>USER</span><span class='o'>=</span>my_wp_user
-<span class='lineno'>4</span> <span class='nb'>export </span><span class='nv'>PASS</span><span class='o'>=</span>my_wp_pass
-<span class='lineno'>5</span> ruby -r <span class='s1'>&#39;~/tmp/jekyll/lib/jekyll/migrators/wordpress&#39;</span> <span class='se'>\</span>
-<span class='lineno'>6</span>   -e <span class='s1'>&#39;Jekyll::WordPress.process( &quot;#{ENV[&quot;DB&quot;]}&quot;, &quot;#{ENV[&quot;USER&quot;]}&quot;, &quot;#{ENV[&quot;PASS&quot;]}&quot;)&#39;</span>
+<div class='highlight'><pre><code class='bash'><span class='lineno'>1</span>     git clone https://github.com/mojombo/jekyll.git
+<span class='lineno'>2</span>     <span class='nb'>export </span><span class='nv'>DB</span><span class='o'>=</span>my_wp_database
+<span class='lineno'>3</span>     <span class='nb'>export </span><span class='nv'>USER</span><span class='o'>=</span>my_wp_user
+<span class='lineno'>4</span>     <span class='nb'>export </span><span class='nv'>PASS</span><span class='o'>=</span>my_wp_pass
+<span class='lineno'>5</span>     ruby -r <span class='s1'>&#39;~/tmp/jekyll/lib/jekyll/migrators/wordpress&#39;</span> <span class='se'>\</span>
+<span class='lineno'>6</span>         -e <span class='s1'>&#39;Jekyll::WordPress.process( &quot;#{ENV[&quot;DB&quot;]}&quot;, &quot;#{ENV[&quot;USER&quot;]}&quot;, &quot;#{ENV[&quot;PASS&quot;]}&quot;)&#39;</span>
+<span class='lineno'>7</span>     
 </code></pre>
 </div>
-<p>This resulted in the creation of a <code>_posts</code> directory, filled with markdown versions of all my posts, appropriately named.</p></p>
+<p>This resulted in the creation of a <code>_posts</code> directory, filled with markdown versions of all my posts, appropriately named. I copied this directory in to my own repository and ran <code>jekyll --pygments</code> over it to make sure everything looked okay.</p>
+
+<p>Having successfully migrated my existing content, getting the theme set up was a fairly straight forward matter of copying my main Wordpress template into the <code>_layouts</code> directory and adjusting the template variables to suit Jekyll, rather than calling Wordpress template functions.</p>
+
+<h4 id='deployment'>Deployment</h4>
+
+<p>Although I still have cause to use SVN, I favour Git for most revision-control matters. Maintaining my blog is no exception, and it makes sense since all I&#8217;m really managing is a collection of static text files. I could have deployed to Github and used Github Pages to host my blog, but I&#8217;ve chose to host things myself. This was partly motivated by a desire to control and take responsibility for everything, since I already have Git working perfectly well on my server. The other motivation to do it myself was that you require a paid service to point a CNAME at Github Pages. I don&#8217;t have any use for private repositories so don&#8217;t use the paid service, and couldn&#8217;t justify the small cost purely to allow Github to host my blog.</p>
+
+<p>So, ignoring the actual server deployment for now, the first thing I wanted was a mechanism whereby I could edit a post in a markdown file, and have the static HTML files in the <code>_site</code> directory automatically generated.</p>
+<div class='highlight'><pre><code class='bash'><span class='lineno'>1</span>     <span class='c'>#!/bin/sh</span>
+<span class='lineno'>2</span> 
+<span class='lineno'>3</span>     <span class='nb'>echo</span> <span class='s2'>&quot;Building with Jekyll&quot;</span>
+<span class='lineno'>4</span>     jekyll --pygments
+<span class='lineno'>5</span>     git add -v -f _site
+<span class='lineno'>6</span>     
+</code></pre>
+</div>
+<p>The commands above live in <code>.git/hooks/pre-commit</code> and prior to actually adding the commit to the index will run Jekyll and add the <code>_site</code> directory to the commit. This is necessary because I&#8217;ve explicitly ignored <code>_site</code> in my <code>.gitignore</code> file.</p>
+
+<p>This is complimented by a post-receive hook that refreshes the live copy of the repository. I have a bare repository that I push to, and a virtual host configured that points to a live clone of the bare repository. When I push to my remote origin, the following post-receive hook is run (<code>.git/hooks/post-receive</code>).</p>
+<div class='highlight'><pre><code class='bash'><span class='lineno'> 1</span>     <span class='c'>#!/bin/sh</span>
+<span class='lineno'> 2</span> 
+<span class='lineno'> 3</span>     <span class='nv'>GIT_REPO</span><span class='o'>=</span>/path/to/bare/repo
+<span class='lineno'> 4</span>     <span class='nv'>PUBLIC_WWW</span><span class='o'>=</span>/path/to/live/copy
+<span class='lineno'> 5</span> 
+<span class='lineno'> 6</span>     rm -Rf <span class='nv'>$PUBLIC_WWW</span>/*
+<span class='lineno'> 7</span>     rm -Rf <span class='nv'>$PUBLIC_WWW</span>/.*
+<span class='lineno'> 8</span>     <span class='nb'>cd</span> <span class='nv'>$PUBLIC_WWW</span>
+<span class='lineno'> 9</span>     git clone <span class='nv'>$GIT_REPO</span> .
+<span class='lineno'>10</span>     <span class='nb'>exit</span>
+<span class='lineno'>11</span>     
+</code></pre>
+</div>
+<p>This removes anything that&#8217;s currently live and clones a fresh copy that includes my newly added content.</p>
+
+<h3 id='summary'>Summary</h3>
+
+<p>I use a https://github.com/kinnetica/jekyll-pluginsenerator plugin) that is called when I run Jekyll, and updates my <code>sitemap.xml</code> file. Draft posts are created using Git branches. While there may be more succinct or efficient methods for managing it all, this works for me.</p></p>
   </div>
 </article>
 

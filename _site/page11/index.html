@@ -72,7 +72,7 @@
 sudo apt-get install sshfs
 
 <p>Once this is done, you will need to add yourself to the new group (fuse) that has been created:</p>
-<pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
+<pre style='border: solid 3px red; background-color: pink' class='markdown-html-error'>REXML could not parse this XML/HTML: 
 &lt;code&gt;sudo adduser &lt;user&gt; fuse&lt;/code&gt;</pre>
 <p>Create a local directory in which to mount your remote directory and make sure it is owned by you: &lt;code&gt; mkdir <span>-p</span> /path/to/directory chown &lt;user&gt;.&lt;group&gt; /path/to/directory &lt;/code&gt; Now you can mount your remote directory as follows: &lt;code&gt; sshfs &lt;user&gt;@&lt;remote_host&gt;:/path/to/directory/ /path/to/directory &lt;/code&gt;</p></p>
     <a href="/2008/02/12/sshfs.html" class="more">Continue reading &raquo;</a>

@@ -57,14 +57,74 @@ support for exporting Wordpress posts to markdown files.  First, I took a dump o
 live database and imported it to my local machine.  Then, I took a clone of the
 Jekyll source and used the migration utility, as documented.
 
-{% highlight bash linenos %}
-git clone https://github.com/mojombo/jekyll.git
-export DB=my_wp_database
-export USER=my_wp_user
-export PASS=my_wp_pass
-ruby -r '~/tmp/jekyll/lib/jekyll/migrators/wordpress' \
-  -e 'Jekyll::WordPress.process( "#{ENV["DB"]}", "#{ENV["USER"]}", "#{ENV["PASS"]}")'
-{% endhighlight %}
+    {% highlight bash linenos %}
+    git clone https://github.com/mojombo/jekyll.git
+    export DB=my_wp_database
+    export USER=my_wp_user
+    export PASS=my_wp_pass
+    ruby -r '~/tmp/jekyll/lib/jekyll/migrators/wordpress' \
+        -e 'Jekyll::WordPress.process( "#{ENV["DB"]}", "#{ENV["USER"]}", "#{ENV["PASS"]}")'
+    {% endhighlight %}
 
 This resulted in the creation of a `_posts` directory, filled with markdown versions of
-all my posts, appropriately named.
+all my posts, appropriately named.  I copied this directory in to my own repository and
+ran `jekyll --pygments` over it to make sure everything looked okay.
+
+Having successfully migrated my existing content, getting the theme set up was a fairly
+straight forward matter of copying my main Wordpress template into the `_layouts`
+directory and adjusting the template variables to suit Jekyll, rather than calling
+Wordpress template functions.
+
+#### Deployment ####
+Although I still have cause to use SVN, I favour Git for most revision-control matters.
+Maintaining my blog is no exception, and it makes sense since all I'm really managing is
+a collection of static text files.  I could have deployed to Github and used Github Pages to host
+my blog, but I've chose to host things myself.  This was partly motivated by a desire
+to control and take responsibility for everything, since I already have Git working perfectly
+well on my server.  The other motivation to do it myself was that you require a paid
+service to point a CNAME at Github Pages.  I don't have any use for private repositories
+so don't use the paid service, and couldn't justify the small cost purely to allow
+Github to host my blog.
+
+So, ignoring the actual server deployment for now, the first thing I wanted was a
+mechanism whereby I could edit a post in a markdown file, and have the static HTML
+files in the `_site` directory automatically generated.
+
+    {% highlight bash linenos %}
+    #!/bin/sh
+
+    echo "Building with Jekyll"
+    jekyll --pygments
+    git add -v -f _site
+    {% endhighlight %}
+
+The commands above live in `.git/hooks/pre-commit` and prior to actually adding the commit
+to the index will run Jekyll and add the `_site` directory to the commit.  This is
+necessary because I've explicitly ignored `_site` in my `.gitignore` file.
+
+This is complimented by a post-receive hook that refreshes the live copy of the
+repository.  I have a bare repository that I push to, and a virtual host configured that
+points to a live clone of the bare repository.  When I push to my remote origin, the
+following post-receive hook is run (`.git/hooks/post-receive`).
+
+    {% highlight bash linenos %}
+    #!/bin/sh
+
+    GIT_REPO=/path/to/bare/repo
+    PUBLIC_WWW=/path/to/live/copy
+
+    rm -Rf $PUBLIC_WWW/*
+    rm -Rf $PUBLIC_WWW/.*
+    cd $PUBLIC_WWW
+    git clone $GIT_REPO .
+    exit
+    {% endhighlight %}
+
+This removes anything that's currently live and clones a fresh copy that includes my newly
+added content. 
+
+### Summary ###
+I use a [https://github.com/kinnetica/jekyll-plugins](Sitemap Generator
+plugin) that is called when I run Jekyll, and updates my `sitemap.xml` file.
+Draft posts are created using Git branches.  While there may be more succinct
+or efficient methods for managing it all, this works for me.
