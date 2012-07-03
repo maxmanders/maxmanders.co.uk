@@ -53,6 +53,20 @@
     <div class="main">
       
   <article class="post">
+  <h3 class="post-title"><a href="/2008/04/18/firefox-200-on-gutsy-bugfix.html" title="Firefox 2 on Gutsy: Bugfix">Firefox 2 on Gutsy: Bugfix</a></h3>
+  <span class="post-date"><abbr class="published-on">April 18, 2008</abbr></span>
+  <div class="post-content">
+    <p><p>I would expect that the Ctrl+Backspace key combination would behave in Firefox as it does in other GTK applications, and indeed Firefox under Win32. The expected behavior is that Ctrl+Backspace will delete one word backwards from the cursor (more specifically it will delete backwards until a punctuation character). However, when I use this combination in the Firefox address bar under Gutsy, the whole URL is deleted. After some digging I came up with a solution: add the following to the bottom of /etc/firefox/pref/firefox.js:</p>
+<pre>
+// Make Ctrl+Backspace behave as expected.
+pref("layout.word_select.stop_at_punctuation", true);</pre>
+<p>Hope this helps.</p></p>
+    <a href="/2008/04/18/firefox-200-on-gutsy-bugfix.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
   <h3 class="post-title"><a href="/2008/03/07/the-new-look.html" title="The New Look">The New Look</a></h3>
   <span class="post-date"><abbr class="published-on">March 07, 2008</abbr></span>
   <div class="post-content">
@@ -72,7 +86,7 @@
 sudo apt-get install sshfs
 
 <p>Once this is done, you will need to add yourself to the new group (fuse) that has been created:</p>
-<pre style='border: solid 3px red; background-color: pink' class='markdown-html-error'>REXML could not parse this XML/HTML: 
+<pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
 &lt;code&gt;sudo adduser &lt;user&gt; fuse&lt;/code&gt;</pre>
 <p>Create a local directory in which to mount your remote directory and make sure it is owned by you: &lt;code&gt; mkdir <span>-p</span> /path/to/directory chown &lt;user&gt;.&lt;group&gt; /path/to/directory &lt;/code&gt; Now you can mount your remote directory as follows: &lt;code&gt; sshfs &lt;user&gt;@&lt;remote_host&gt;:/path/to/directory/ /path/to/directory &lt;/code&gt;</p></p>
     <a href="/2008/02/12/sshfs.html" class="more">Continue reading &raquo;</a>
@@ -101,22 +115,6 @@ sudo apt-get install sshfs
     <p><p>As a trombone player, this made me smile!</p>
 </p>
     <a href="/2008/01/20/i-can-haz-trombone.html" class="more">Continue reading &raquo;</a>
-  </div>
-</article>
-
-
-  <article class="post">
-  <h3 class="post-title"><a href="/2008/01/18/ssh-tunnelling.html" title="SSH Tunneling">SSH Tunneling</a></h3>
-  <span class="post-date"><abbr class="published-on">January 18, 2008</abbr></span>
-  <div class="post-content">
-    <p><p>Another aide memoire, but again may be useful to some. I&#8217;d like the ability to work from home on some web development projects I&#8217;m doing at work. Getting the code locally is not a problem thanks to Subversion over ssh However viewing the results can be tricky when you consider that the development server is behind the work network. The answer is SSH tunneling.</p>
-
-<p>Let&#8217;s say you can access SERVER_A directly over ssh The service you want to access is on SERVER_B which you can&#8217;t access directly via SSH from your local machine. However, you can access SERVER_B from SERVER_A. I&#8217;ll assume that you want to access the service locally on port 12345, and that the remove port is port 80. The following command will allow you to access a service on SERVER_B from your local machine.</p>
-ssh -Nf -L 12345:SERVER_B:80 username@SERVER_A
-<p>The &#8216;-Nf&#8217; switch says don&#8217;t execute a command with this ssh session, and run this ssh process in the background. The first port is the port you want to use locally; the first server is the usually inaccessible remote server you want access to; and the third port is the remote port you want to use. The final argument gives the login to the remotely accessible server you have ssh access to directly.</p>
-
-<p>One caveat to this is if you are trying to access a web site that is defined using Apache virtual hosts. With this command alone, requesting localhost:12345 in Firefox would only direct you to the site that is listening remotely for requests that match &#8216;localhost&#8217;. If you would ordinarily access this site using mysite.server_b, then you need to use that as the address in Firefox on your local machine. Therefore, this needs to be added in /etc/hosts. With that done, you should be able to request mysite.server_b:12345 in Firefox and be directed to the remote &#8220;virtual host&#8221; site.</p></p>
-    <a href="/2008/01/18/ssh-tunnelling.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
 

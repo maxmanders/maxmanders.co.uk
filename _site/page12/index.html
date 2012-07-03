@@ -53,6 +53,22 @@
     <div class="main">
       
   <article class="post">
+  <h3 class="post-title"><a href="/2008/01/18/ssh-tunnelling.html" title="SSH Tunneling">SSH Tunneling</a></h3>
+  <span class="post-date"><abbr class="published-on">January 18, 2008</abbr></span>
+  <div class="post-content">
+    <p><p>Another aide memoire, but again may be useful to some. I&#8217;d like the ability to work from home on some web development projects I&#8217;m doing at work. Getting the code locally is not a problem thanks to Subversion over ssh However viewing the results can be tricky when you consider that the development server is behind the work network. The answer is SSH tunneling.</p>
+
+<p>Let&#8217;s say you can access SERVER_A directly over ssh The service you want to access is on SERVER_B which you can&#8217;t access directly via SSH from your local machine. However, you can access SERVER_B from SERVER_A. I&#8217;ll assume that you want to access the service locally on port 12345, and that the remove port is port 80. The following command will allow you to access a service on SERVER_B from your local machine.</p>
+ssh -Nf -L 12345:SERVER_B:80 username@SERVER_A
+<p>The &#8216;-Nf&#8217; switch says don&#8217;t execute a command with this ssh session, and run this ssh process in the background. The first port is the port you want to use locally; the first server is the usually inaccessible remote server you want access to; and the third port is the remote port you want to use. The final argument gives the login to the remotely accessible server you have ssh access to directly.</p>
+
+<p>One caveat to this is if you are trying to access a web site that is defined using Apache virtual hosts. With this command alone, requesting localhost:12345 in Firefox would only direct you to the site that is listening remotely for requests that match &#8216;localhost&#8217;. If you would ordinarily access this site using mysite.server_b, then you need to use that as the address in Firefox on your local machine. Therefore, this needs to be added in /etc/hosts. With that done, you should be able to request mysite.server_b:12345 in Firefox and be directed to the remote &#8220;virtual host&#8221; site.</p></p>
+    <a href="/2008/01/18/ssh-tunnelling.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
   <h3 class="post-title"><a href="/2008/01/12/gutsy-realtek-hd-audio-and-the-toshiba-u300.html" title="Gutsy, Realtek HD Audio and the Toshiba U300">Gutsy, Realtek HD Audio and the Toshiba U300</a></h3>
   <span class="post-date"><abbr class="published-on">January 12, 2008</abbr></span>
   <div class="post-content">
@@ -102,18 +118,6 @@ sudo apt-get install linux-backports-modules-generic
 <p>I&#8217;ve just done an &#8220;apt-cache search applet gnome&#8221; and discovered a load of new Gnome applets. I&#8217;m using one of them to write this post. It&#8217;s called gnome-blog and lets you specify a username and password for an existing Blog from a number of popular providers, e.g. Blogger, LiveJournal etc.&lt;/p&gt;<p>
 You can also specify a URL for a your own install of Wordpress, TextPattern and many more.  Then, like me, you can post to your blog from your Gnome desktop!</p></p></p>
     <a href="/2007/12/08/ubuntu-applets-post-to-blog.html" class="more">Continue reading &raquo;</a>
-  </div>
-</article>
-
-
-  <article class="post">
-  <h3 class="post-title"><a href="/2007/12/07/compiz-and-video-playback-problems.html" title="Compiz and Video Playback Problems">Compiz and Video Playback Problems</a></h3>
-  <span class="post-date"><abbr class="published-on">December 07, 2007</abbr></span>
-  <div class="post-content">
-    <p><p>There seem to be a number of bugs related to video playback while compiz desktop effects are enabled, specifically on systems using the Intel 965GM chipset.&#194;&#160; If desktop effects are enabled, any attempts to play video files result in the player closing.</p>
-
-<p>This problem can be resolved by setting the output module for your player of choice to X11.&#194;&#160; In VLC, goto Settings-&gt;Preferences-&gt;Video-&gt;Output Modules.&#194;&#160; Check the &#8220;Advanced Options&#8221; box.&#194;&#160; Select &#8220;X11 video output&#8221; from the drop down box and save the changes.</p></p>
-    <a href="/2007/12/07/compiz-and-video-playback-problems.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
 

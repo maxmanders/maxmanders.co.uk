@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+        
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+
+<title>Zend Framework 1 Build With Jenkins - Max Manders</title>
+        
+<meta charset="UTF-8" />
+<meta name="keywords" content="ci, php, jenkins, linux, apache" />
+<meta name="author" content="Max Manders" />
+        
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- Mobile Specific Metas
+================================================== -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="/styles/stylesheets/base.css">
+<link rel="stylesheet" href= "/styles/style.css">
+<link rel="stylesheet" href="/styles/stylesheets/layout.css">
+<link rel="stylesheet" href="/styles/highlight.css">
+<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+
+<!-- Favicons
+================================================== -->
+<link rel="shortcut icon" href="/favicon.ico" />
+
+</head>
+
+<body class="home blog">
+
+<div class="container">
+
+<div class="header">    
+  <div class="seven columns"> 
+    <div class="logo">
+      <a href="/">
+        <h1 class="remove-bottom">Max Manders</h1>
+        <h5>thoughts of a web developer</h5>
+      </a>
+    </div>
+  </div> 
+</div>
+
+<div class="content">
+  <div class="column">
+    <div class="main">
+      <article class="post">
+  <h3 class="post-title"><a href="/2012/07/03/zend-framework-1-build-with-jenkins.html" title="Zend Framework 1 Build With Jenkins">Zend Framework 1 Build With Jenkins</a></h3>
+  <span class="post-date"><abbr class="published-on">July 03, 2012</abbr></span>
+  <div class="post-content">
+    <p><p>It&#8217;s high time I that got up to speed on testing best practices. I&#8217;ve dabbled with Selenium, SimpleTest and PHPUnit, but not in any way comprehensively. I&#8217;ve read and thoroughly enjoyed <a href='http://twitter.com/grmpyprogrammer'>@grmpyprogrammer&#8217;s</a> <a href='http://leanpub.com/grumpy-testing'>book</a>, and you should too.</p>
+
+<p>However, I don&#8217;t have the opportunity to exercise these interests in my current job, so I&#8217;ve taken it upon myself to learn in my own time with a pet-project I&#8217;m working on.<!--more--> The details of the application aren&#8217;t important for the purposes of this post, but some specifics about the environment and tools I&#8217;m using are:</p>
+
+<ul>
+<li>Zend Framework 1.11</li>
+
+<li>Doctrine 2</li>
+
+<li>Apache 2</li>
+
+<li>MySQL</li>
+</ul>
+
+<p>I&#8217;ve been learning Zend Framework on and off for a while now, and until things look more promising on the ZF2 front, I&#8217;m sticking with what I know in ZF1. I don&#8217;t doubt that ZF2 will be released soon, and will be a great framework, but for educational purposes, I&#8217;d prefer to stick with something consistent that doesn&#8217;t have a danger of becoming instantly obsolete or broken from backward incompatibilities that may have been introduced.</p>
+
+<p>There are any number of highly rated continuous integration applications available at the moment, and although not entirely arbitrarily, I opted to investigate using <a href='http://jenkins-ci.org'>Jenkins</a>. That lead me to <a href='http://sebastian-bergmann.de/'>Sebastian Bermann&#8217;s</a> <a href='http://jenkins-php.org/'>Jenkins PHP project</a>. I followed the steps outlined on the site, but it quickly became apparent through errors and some Google verification that this wasn&#8217;t going to work for me out-of-the-box.</p>
+
+<p>Zend Framework 1.x is supported by a significant number of PHPUnit unit tests, which were written against PHPUnit &#8804; 3.5.3. When PHPUnit 3.6 was released, I understand it was significantly refactored, making the existing ZF1 test suite incompatible with the new version of PHPUnit. In a similar fashion, testing controllers by extending Zend Framework classes that themselves extend PHPUnit classes will not work in ZF1 against PHPUnit 3.6.</p>
+
+<p>After some trial and error, I managed to install PHPUnit 3.5.3 and the other tools I need for the build.</p>
+<div class='highlight'><pre><code class='bash'><span class='lineno'> 1</span>     <span class='nv'>$ </span>sudo pear channel-discover pear.phpunit.de
+<span class='lineno'> 2</span>     <span class='nv'>$ </span>sudo pear channel-discover  components.ez.no
+<span class='lineno'> 3</span>     <span class='nv'>$ </span>sudo pear channel-discover pear.phing.info
+<span class='lineno'> 4</span>     <span class='nv'>$ </span>sudo pear channel-discover pear.phpunit.de
+<span class='lineno'> 5</span>     <span class='nv'>$ </span>sudo pear channel-discover pear.phpmd.org
+<span class='lineno'> 6</span>     <span class='nv'>$ </span>sudo pear channel-discover pear.pdepend.org
+<span class='lineno'> 7</span>     <span class='nv'>$ </span>sudo pear channel-discover pear.phpdoc.org
+<span class='lineno'> 8</span>     <span class='nv'>$ </span>sudo pear install pear.symfony-project.com/YAML-1.0.2
+<span class='lineno'> 9</span>     <span class='nv'>$ </span>sudo pear install phpunit/PHPUnit_Selenium-1.0.1
+<span class='lineno'>10</span>     <span class='nv'>$ </span>sudo pear install phpunit/Text_Template-1.0.0
+<span class='lineno'>11</span>     <span class='nv'>$ </span>sudo pear install phpunit/PHPUnit_MockObject-1.0.3
+<span class='lineno'>12</span>     <span class='nv'>$ </span>sudo pear install phpunit/PHP_Timer-1.0.0
+<span class='lineno'>13</span>     <span class='nv'>$ </span>sudo pear install phpunit/File_Iterator-1.2.3
+<span class='lineno'>14</span>     <span class='nv'>$ </span>sudo pear install phpunit/PHP_TokenStream-1.0.1
+<span class='lineno'>15</span>     <span class='nv'>$ </span>sudo pear install phpunit/PHP_CodeCoverage-1.0.2
+<span class='lineno'>16</span>     <span class='nv'>$ </span>sudo pear install phpunit/DbUnit-1.0.0
+<span class='lineno'>17</span>     <span class='nv'>$ </span>sudo pear install phpunit/PHPUnit-3.5.15
+<span class='lineno'>18</span>     <span class='nv'>$ </span>sudo pear install pear.phpunit.de/phploc-1.6.0
+<span class='lineno'>19</span>     <span class='nv'>$ </span>sudo pear install php_CodeSniffer
+<span class='lineno'>20</span>     <span class='nv'>$ </span>sudo pear install phpdoc/phpDocumentor-alpha
+<span class='lineno'>21</span>     <span class='nv'>$ </span>sudo pear install pear.phpunit.de/PHP_CodeBrowser-1.0.0
+<span class='lineno'>22</span>     <span class='nv'>$ </span>sudo pear install phpdoc/phpDocumentor-2.0.0a1
+<span class='lineno'>23</span>     <span class='nv'>$ </span>sudo apt-get install php5-xsl
+<span class='lineno'>24</span>     <span class='nv'>$ </span>sudo apt-get install graphviz
+<span class='lineno'>25</span>     <span class='nv'>$ </span>sudo apt-get install jenkins
+<span class='lineno'>26</span>     <span class='nv'>$ </span>sudo apt-get install ant
+<span class='lineno'>27</span>     
+</code></pre>
+</div>
+<p>The above commands install the necessary tools for my build. So what does the build file actually look like? It&#8217;s nothing original on my part, but comes courtesy of <a href='http://jenkins-php.org/'>Jenkins PHP project</a>. In fact, other than installing the appropriate versions of the tools such that we can continue using PHPUnit 3.5 the rest of the steps are straight from http://jenkins-php.org.</p>
+
+<p>This is all good and well for running a local Jenkins instance, but this would be much more useful if it was installed on a remote server! Out-of-the-box, Jenkins doesn&#8217;t require authentication, and will happily sit open to the world on port 8080. So, I chose to create a subdomain A record and VirtualHost and stick Jenkins behind basic HTTP authentication.</p>
+<div class='highlight'><pre><code class='apache'><span class='lineno'> 1</span>     <span class='nt'>&lt;VirtualHost</span> <span class='s'>{ip}:80</span><span class='nt'>&gt;</span>
+<span class='lineno'> 2</span>       <span class='nb'>ServerName</span> {fqdn}
+<span class='lineno'> 3</span>       <span class='nb'>ServerAdmin</span> max@maxmanders.co.uk
+<span class='lineno'> 4</span> 
+<span class='lineno'> 5</span>       <span class='nb'>ErrorLog</span> <span class='sx'>/path/to/error.log</span>
+<span class='lineno'> 6</span>       <span class='nb'>LogLevel</span> <span class='k'>warn</span>
+<span class='lineno'> 7</span>       <span class='nb'>CustomLog</span> <span class='sx'>/path/to/access.log</span> combined
+<span class='lineno'> 8</span> 
+<span class='lineno'> 9</span>       <span class='nb'>ProxyPass</span>           / http://localhost:8080/
+<span class='lineno'>10</span>       <span class='nb'>ProxyPassReverse</span>    / http://localhost:8080/
+<span class='lineno'>11</span>       <span class='nb'>ProxyRequests</span> <span class='k'>Off</span>
+<span class='lineno'>12</span> 
+<span class='lineno'>13</span>       <span class='nt'>&lt;Proxy</span> <span class='s'>http://localhost:8080/</span><span class='nt'>&gt;</span>
+<span class='lineno'>14</span>         <span class='nb'>Order</span> Deny,Allow
+<span class='lineno'>15</span>         <span class='nb'>Allow</span> From <span class='k'>All</span>
+<span class='lineno'>16</span>       <span class='nt'>&lt;/Proxy&gt;</span>
+<span class='lineno'>17</span> 
+<span class='lineno'>18</span>       <span class='nt'>&lt;Location</span> <span class='s'>/</span><span class='nt'>&gt;</span>
+<span class='lineno'>19</span>         <span class='nb'>Allow</span> From <span class='k'>All</span>
+<span class='lineno'>20</span>         <span class='nb'>AuthType</span> basic
+<span class='lineno'>21</span>         <span class='nb'>AuthName</span> <span class='s2'>&quot;{authentication_message}&quot;</span>
+<span class='lineno'>22</span>         <span class='nb'>AuthUserFile</span> <span class='s2'>&quot;/path/to/htpasswd_file&quot;</span>
+<span class='lineno'>23</span>         <span class='nb'>Require</span> <span class='k'>User</span> {secure_user}
+<span class='lineno'>24</span>       <span class='nt'>&lt;/Location&gt;</span>
+<span class='lineno'>25</span> 
+<span class='lineno'>26</span>     <span class='nt'>&lt;/VirualHost&gt;</span>
+<span class='lineno'>27</span>     
+</code></pre>
+</div>
+<p>And we can create the password file using, e.g. <code>sudo htpasswd -c /path/to/password_file {user}</code>. We start Jenkins on the server, only binding to <code>localhost</code>. The above VirtualHost tells Apache to respond to requests for the server name, but to pass them off to the service listening on <code>localhost:8080</code>, i.e. Jenkins. But before Apache will handle the request, we need to successfully authenticate.</p>
+
+<p>With this configuration in place, the instructions on <a href='http://jenkins-php.org/'>Jenkins PHP project</a> for setting up a project by copying the example PHP template project can be followed to get a successful build working.</p></p>
+  </div>
+</article>
+<div id="categories">
+<span class="meta-header">Categories: </span>
+
+  <a href="/categories/php.html" rel="category">php</a>
+
+</div>
+<div id="tags">
+<span class="meta-header">Tags: </span>
+
+  <a href="/tags/ci.html" rel="tag">ci</a>, 
+
+  <a href="/tags/php.html" rel="tag">php</a>, 
+
+  <a href="/tags/jenkins.html" rel="tag">jenkins</a>, 
+
+  <a href="/tags/linux.html" rel="tag">linux</a>, 
+
+  <a href="/tags/apache.html" rel="tag">apache</a>
+ 
+</tags>
+
+<div id="comments">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'maxmanders';
+    var disqus_identifier = '/2012/07/03/zend-framework-1-build-with-jenkins';
+    var disqus_url = 'http://maxmanders.co.uk//2012/07/03/zend-framework-1-build-with-jenkins.html';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+</div>
+
+
+
+      <div class="nav-below"> 
+        
+          <div class="nav-previous"></div>
+        
+        
+          <div class="nav-next"></div>
+        
+      </div>
+    </div>
+  </div>
+<!-- nav -->
+</div>
+
+<div class="clear"></div>
+<div class="footer">
+  <div class="column">
+    <div class="row">
+      <div class="eight columns alpha">
+      <h4>About Me</h4>
+      <p><a href="/about.html">I'm</a> an Edinburgh based PHP developer with a passion for <a href="http://en.wikipedia.org/wiki/Open_source">open source software</a> and <a href="http://en.wikipedia.org/wiki/Open_data">open-data</a>, currently working for <a href="http://maglabs.net" rel="co-worker met">Maglabs</a>. Living with my wife <a href="http://twitter.com/mrsjmanders" rel="met spouse">Jo</a> and our two cats, Ziggy and Maggie.</p>
+      <p><a href="/about.html">Continue reading</a></p>
+      <h4>Contact</h4>
+      <p>If you want to get in touch, you can send an email to my-first-name [at] this site.</p>
+      </div>
+      <div class="eight columns omega">
+        <div class="row">
+          <div class="four columns alpha">
+            <ul>
+              <li>
+                <img alt="Pinboard" src="/images/link.png" />
+                <a href="http://www.pinboard.in/u:maxmanders/" title="maxmanders on Pinboard">Pinboard</a>
+              </li>
+              <li>
+                <img alt="Flickr" src="/images/picture.png" />
+                <a href="http://www.flickr.com/photos/maxmanders" title="maxmanders on Flickr">Flickr</a>
+              </li>
+              <li>
+                <img alt="Last.FM" src="/images/song.png" />
+                <a href="http://www.last.fm/user/mmanders" title="mmanders on Last.FM">Last.FM</a>
+              </li>
+              <li>
+                <img alt="Twitter" src="/images/message.png" />
+                <a href="http://www.twitter.com/maxmanders" title="maxmanders on Twitter">Twitter</a>
+              </li>
+              <li>
+                <img alt="Github" src="/images/github.png" />
+                <a href="http://www.github.com/maxmanders" title="maxmanders on Github">Github</a>
+              </li>
+              <li>
+                <img alt="RSS" src="/images/maxmanders.png" />
+                <a href="http://maxmanders.co.uk/feed/rss2" title="maxmanders.co.uk RSS">RSS</a>
+              </li>
+            </ul>
+          </div>
+          <div class="four columns omega">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column alpha" id="license">
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons Licence" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+        <span>&nbsp; This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try{
+  var pageTracker = _gat._getTracker("UA-1652642-1");
+  pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>

@@ -53,10 +53,20 @@
     <div class="main">
       
   <article class="post">
+  <h3 class="post-title"><a href="/2007/11/04/i-can-haz-preacher-kat.html" title="I Can Haz Preacher Kat">I Can Haz Preacher Kat</a></h3>
+  <span class="post-date"><abbr class="published-on">November 04, 2007</abbr></span>
+  <div class="post-content">
+    <p><a href='http://icanhascheezburger.com/2007/10/12/hallelujah-praise-the-lawd/'></a></p>
+    <a href="/2007/11/04/i-can-haz-preacher-kat.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
   <h3 class="post-title"><a href="/2007/11/03/edlug-talk-an-introduction-to-openid.html" title="EdLUG Talk - An Introduction to OpenID">EdLUG Talk - An Introduction to OpenID</a></h3>
   <span class="post-date"><abbr class="published-on">November 03, 2007</abbr></span>
   <div class="post-content">
-    <p><p>On Thursday 01 November I gave a brief talk titled &#8220;An Introduction to OpenID&#8221; at the monthly EdLUG meeting.&#194;&#160; The <a title='An Introduction to OpenID (Slides).' href='http://www.slideshare.net/maxmanders/an-introduction-to-openid'>slides for the talk</a> are available on Slideshare.&#194;&#160; It seemed to go well despite my fear of public speaking.&#194;&#160; A few questions were put to me; some of which I could answer.</p>
+    <p><p>On Thursday 01 November I gave a brief talk titled &#8220;An Introduction to OpenID&#8221; at the monthly EdLUG meeting.&#194;&#160; The <a href='http://www.slideshare.net/maxmanders/an-introduction-to-openid' title='An Introduction to OpenID (Slides).'>slides for the talk</a> are available on Slideshare.&#194;&#160; It seemed to go well despite my fear of public speaking.&#194;&#160; A few questions were put to me; some of which I could answer.</p>
 
 <p>The few I couldn&#8217;t answer were mainly regarding the specifics of the OpenID authentication process.&#194;&#160; Perhaps it was nerves, but in hindsight I realise I knew the answer all along.&#194;&#160; I was asked if OpenID could tie into Kerberos or PAM.&#194;&#160; This is really down to how one chooses to implement the standard.</p>
 
@@ -90,26 +100,8 @@
   <h3 class="post-title"><a href="/2007/10/02/go-pink-for-october-be-breast-cancer-aware.html" title="Go Pink For October - Be Breast Cancer Aware">Go Pink For October - Be Breast Cancer Aware</a></h3>
   <span class="post-date"><abbr class="published-on">October 02, 2007</abbr></span>
   <div class="post-content">
-    <p><p>October is <a title='Breast Cancer Care' href='http://www.breastcancercare.org.uk/'>Breast Cancer Awareness Month</a>. Please help raise awareness by placing an <a title='Go Pink For October Images' href='http://pinkforoctober.org/downloads'>image</a> on your site.&#194;&#160; Some people are changing their whole colour schemes to pink; if I had more free time I would join in too!&#194;&#160; You can find out more at <a title='Go Pink For October' href='http://pinkforoctober.org'>Go Pink For October</a>. Thank You.</p></p>
+    <p><p>October is <a href='http://www.breastcancercare.org.uk/' title='Breast Cancer Care'>Breast Cancer Awareness Month</a>. Please help raise awareness by placing an <a href='http://pinkforoctober.org/downloads' title='Go Pink For October Images'>image</a> on your site.&#194;&#160; Some people are changing their whole colour schemes to pink; if I had more free time I would join in too!&#194;&#160; You can find out more at <a href='http://pinkforoctober.org' title='Go Pink For October'>Go Pink For October</a>. Thank You.</p></p>
     <a href="/2007/10/02/go-pink-for-october-be-breast-cancer-aware.html" class="more">Continue reading &raquo;</a>
-  </div>
-</article>
-
-
-  <article class="post">
-  <h3 class="post-title"><a href="/2007/09/23/taming-the-fedora-beast.html" title="Taming The Fedora Beast">Taming The Fedora Beast</a></h3>
-  <span class="post-date"><abbr class="published-on">September 23, 2007</abbr></span>
-  <div class="post-content">
-    <p><p>As some of you might be aware, I have rencetly been having some problems with my web/development server. It&#8217;s a Fedora 7 machine with a LAMP install, Java 5 and a few other odds and ends, and although I appreciate that Fedora tends to be an experiment vehicle on which Redhat tests new bits-and-bobs I was a little put off when I discovered problems with my network after updating the kernel to 2.6.22.4.</p>
-
-<p>Essentially, everything seemed to be working okay, but for some reason I couldn&#8217;t ping any other computer on the network from the web server; nor could I ping the web server from any other machine on the network. The eth0 interface was up; I could ping localhost, and the static IP address I&#8217;d assigned the NIC; the Ethernet cable was good (I tried two cables, both of which I was certain were good). However, the LED on the hub was constantly on for the web server connection, and &#8216;ethtool etho&#8217; indicated that there was no link.</p>
-
-<p>After several days of trying to fix the problem, I tried building an older kernel to use. It was the first time I had tried this, and it all went well - however, this did not fix the problem. It would seem that my initial assessment that the kernel update was causing the problems was incorrect.</p>
-
-<p>Then I came up with the solution. Prior to the problems, I had been using the onboard NIC, a SiS900 based interface. I disabled the onboard, and put in a PCI SiS900 based NIC. This solved the problem and all was well. I still can&#8217;t think what the problem was - and don&#8217;t have the expertise to go through the logs and reverse the updates. For some reason - beyond my ken - updating the system interfered with the onboard NIC, but a PCI NIC with the same chipset worked fine. It wasn&#8217;t the kernel because I reverted that to the version prior to the update.</p>
-
-<p>All&#8217;s well that ends well as they say&#8230; I now have my web server up and running. Well, almost. I used to do a lot of coding and administration using FreeNX over SSH to get a desktop. FreeNX has now stopped working! I&#8217;ve won the battle, but still the war goes on!</p></p>
-    <a href="/2007/09/23/taming-the-fedora-beast.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
 

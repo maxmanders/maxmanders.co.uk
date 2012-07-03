@@ -53,6 +53,16 @@
     <div class="main">
       
   <article class="post">
+  <h3 class="post-title"><a href="/2010/09/23/fixing-mysql-multi-master-replication.html" title="Fixing MySQL Multi-Master Replication">Fixing MySQL Multi-Master Replication</a></h3>
+  <span class="post-date"><abbr class="published-on">September 23, 2010</abbr></span>
+  <div class="post-content">
+    <p><p>I&#8217;ve had some exposure to database replication through PostgreSQL/Slony. I&#8217;m reasonably familiar with master/slave replication but in the last few days I&#8217;ve had to get my hands dirty and grok multi-master replication with MySQL, specifically with two MySQL servers in master&lt;-&gt;master mode. Although conceptually it&#8217;s not a significant leap from simple master/slave replication the added layer of replication in both directions made my brain melt a little bit at first. Now that I&#8217;ve got my head around as much as I need to, I&#8217;m writing this as a gentle reminder should replication screw up again!</p>
+    <a href="/2010/09/23/fixing-mysql-multi-master-replication.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
   <h3 class="post-title"><a href="/2010/08/31/hello-goodbye.html" title="Hello, Goodbye">Hello, Goodbye</a></h3>
   <span class="post-date"><abbr class="published-on">August 31, 2010</abbr></span>
   <div class="post-content">
@@ -101,20 +111,10 @@
 sudo tee /etc/apt/sources.list.d/karmic.list
 </pre> Having done that, we need to generate an aptitude preferences file for PHP: <pre class='brush:bash'>awk '{print "Package: " $0; print "Pin: release a=karmic\nPin-Priority: 991\n"}' /tmp/php.packages |\
 sudo tee /etc/apt/preferences.d/php
-</pre> This preferences file tells aptitude that for each listed package, we want to pin down the installation candidate to that from the Karmic repositories. We can now install the packages that we previously removed, but this time the versions from the Karmic repositories: <pre style='border: solid 3px red; background-color: pink' class='markdown-html-error'>REXML could not parse this XML/HTML: 
+</pre> This preferences file tells aptitude that for each listed package, we want to pin down the installation candidate to that from the Karmic repositories. We can now install the packages that we previously removed, but this time the versions from the Karmic repositories: <pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
 &lt;pre class=&quot;brush:bash&quot;&gt;sudo apt-get update &amp;&amp; apt-get install $(cat /tmp/php.packages | tr &quot;\n&quot; &quot; &quot;)
 &lt;/pre&gt;</pre> A quick restart of Apache and everything seems to be working with the older version of PHP!</p></p>
     <a href="/2010/04/30/revert-to-php-5-2-in-ubuntu-10-04-lucid-lynx.html" class="more">Continue reading &raquo;</a>
-  </div>
-</article>
-
-
-  <article class="post">
-  <h3 class="post-title"><a href="/2010/04/11/uk-geocoding-update.html" title="UK Geocoding - Update">UK Geocoding - Update</a></h3>
-  <span class="post-date"><abbr class="published-on">April 11, 2010</abbr></span>
-  <div class="post-content">
-    <p><p>I&#8217;ve updated the <a href='http://ukgeocode.maxmanders.co.uk/'>UK Geocoding site</a> to provide better documentation, and a UI for geocoding, in addition to the XML API.</p></p>
-    <a href="/2010/04/11/uk-geocoding-update.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
 

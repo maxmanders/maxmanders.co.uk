@@ -53,13 +53,25 @@
     <div class="main">
       
   <article class="post">
+  <h3 class="post-title"><a href="/2011/12/31/2011-a-year-in-review.html" title="2011 A Year In Review">2011 A Year In Review</a></h3>
+  <span class="post-date"><abbr class="published-on">December 31, 2011</abbr></span>
+  <div class="post-content">
+    <p><p>2011 has truly been a fantastic year!</p>
+
+<p>Without a doubt, the highlight of my year has to be <a href='http://maxmanders.co.uk/2011/06/26/our-wedding/' title='Our Wedding'>marrying</a> my darling wife <a href='http://twitter.com/mrsjmanders'>Jo</a>. &#160;It was a <a href='http://maxmanders.co.uk/2011/06/26/our-wedding/' title='Our Wedding'>perfect, wonderful day</a>, and we all enjoyed a brilliant reception in the evening. &#160;That was followed by an <a href='http://maxmanders.co.uk/2011/07/11/parisian-honeymoon/' title='Parisian Honeymoon'>amazing honeymoon</a> in the gorgeous French capital of Paris; and after 27 years, my first trip abroad!</p>
+    <a href="/2011/12/31/2011-a-year-in-review.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
   <h3 class="post-title"><a href="/2011/09/22/ssmtp-local-mta-using-google-apps-account.html" title="SSMTP Local MTA Using Google Apps Account">SSMTP Local MTA Using Google Apps Account</a></h3>
   <span class="post-date"><abbr class="published-on">September 22, 2011</abbr></span>
   <div class="post-content">
     <p><p>While there are plenty of MTAs out there, I find it quite handy to have SSMTP installed locally; it&#8217;s quick to install and configure and lacks some of the overhead of a more <em>enterprise</em>&#160;MTA such as Sendmail, Postfix, Exim etc. &#160;The following assumes you have a &#8220;Google Apps for Domains&#8221; user account &#8211; ssmtp_user@domain.com &#8211; through which you will relay all email. &#160;Additionally, the steps below work on Ubuntu 10.10, similar steps should work on other distributions.</p>
 <strong>Install SSMTP</strong><pre class='brush: bash'>
 sudo apt-get install ssmtp
-</pre><strong>Edit configuration in /etc/ssmtp/ssmtp.conf</strong><pre style='border: solid 3px red; background-color: pink' class='markdown-html-error'>REXML could not parse this XML/HTML: 
+</pre><strong>Edit configuration in /etc/ssmtp/ssmtp.conf</strong><pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
 &lt;pre class=&quot;brush: bash&quot;&gt;
 # Backup the original first
 sudo cp /etc/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf.out
@@ -112,18 +124,6 @@ echo "Testing" | mail -s "Test Email" someone@example.com
   <div class="post-content">
     <p><p>May 28th 2011. &#160;A day I&#8217;ll never forget; the day Jo and I got married. &#160;It&#8217;s always difficult finding the time to write new posts, but I&#8217;d be remiss if I didn&#8217;t at the very least make sure I wrote something about, clich&#233; as it may be, the happiest day of my life. &#160;We&#8217;d originally planned the wedding for 10th October 2010: of course that date was nothing to do with the fact that 10-10-10 is easy to remember; not was it in any way related to the fact that 101010 in binary represents 42 in decimal &#8211; &#8220;the answer to life, the universe, and everything&#8221;! &#160;That date wasn&#8217;t to be, due in no small part to a severe lack of funds and planning. &#160;Fast forward to May 28th 2011 and having spent a not-exorbitant sum of money on eBay enjoyed a perfectly planned and executed wedding day in Edinburgh. &#160;The weather was even good to us - it only rained when we were inside! &#160;A massive thanks to Jo&#8217;s bridesmaids, Jess and Mip for supporting and helping her; my best man Sally for her support and help; my dad for doing a wonderful job of the photography and of course my beautiful wife Jo for doing me the greatest honour of marrying me!</p>
     <a href="/2011/06/26/our-wedding.html" class="more">Continue reading &raquo;</a>
-  </div>
-</article>
-
-
-  <article class="post">
-  <h3 class="post-title"><a href="/2011/03/06/automating-internet-explorer-vpc-images-on-virtualbox.html" title="Automating Internet Explorer VPC Images On VirtualBox">Automating Internet Explorer VPC Images On VirtualBox</a></h3>
-  <span class="post-date"><abbr class="published-on">March 06, 2011</abbr></span>
-  <div class="post-content">
-    <p><p>In order to facilitate testing of websites in different browsers, Microsoft have released what they call their &#8217;<a target='_blank' title='Microsoft Application Compatibility VPC Images' href='http://www.microsoft.com/downloads/en/details.aspx?FamilyID=21eabb90-958f-4b64-b5f1-73d0a413c8ef&amp;displaylang=en'>Application Compatibility Virtual PC Images</a>&#8217;. &#160;These time-limited <a target='_blank' title='Virtualization (V12n)' href='en.wikipedia.org/wiki/Virtualization'>V12n</a> solutions are great for quickly bringing up a VM for a particular version of Internet Explorer but they are built for Microsoft&#8217;s Virtual PC (VPC) software.</p>
-
-<p>I work&#160;predominantly&#160;with Linux and use <a target='_blank' title='Virtual Box' href='http://www.virtualbox.org'>Virtual Box</a> as my V12n application of choice. &#160;Later versions of Virtual Box support VPC&#8217;s VHD disk image format. &#160;This means it&#8217;s possible to run these VPC images under VirtualBox, but it involves downloading and extracting files from the win32 executables; downloading drivers for the ethernet adapter and other time consuming steps that I&#8217;d rather not repeat every time my IE VM expires. &#160;I&#8217;m a programmer, therefore I&#8217;m lazy and don&#8217;t like doing things more than once; I&#8217;d rather script something to do it for me. &#160;In keeping with this virtue, I&#8217;ve written <a title='msie2vbox' href='http://maxmanders.co.uk/msie2vbox'>msie2vbox</a> to automate this stuff for me. &#160;It&#8217;s on <a target='_blank' title='msie2vbox on Github' href='https://github.com/maxmanders/msie2vbox/'>Github</a> with a GPLv3 license. &#160;There&#8217;s some outstanding todo items but it does the job for me, and I thought it might be of use to others.</p></p>
-    <a href="/2011/03/06/automating-internet-explorer-vpc-images-on-virtualbox.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
 
