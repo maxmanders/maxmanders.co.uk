@@ -3,6 +3,11 @@ date: 2012-07-01 12:18:00
 layout: post
 title: Moving To Jekyll
 author: Max Manders
+tags: [jekyll, general]
+categories:
+- Jekyll
+- General
+- Linux
 ---
 
 I've been using [Wordpress](http://www.wordpress.org "Wordpress") to maintain

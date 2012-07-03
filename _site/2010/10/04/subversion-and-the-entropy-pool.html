@@ -60,6 +60,18 @@
 <p>Strace showed that subversion reads from /dev/random as part of the commit, and that&#8217;s where the problem seemed to be happening.&#160; After doing some research, I discovered that /dev/random generates random numbers using the so-called <em>entropy pool</em>.&#160; This <em>entropy pool</em> is just random bits of noise generated from things such as mouse movements, time between keystrokes and so on.&#160; For whatever reason, on the client server, this <em>entropy pool</em> was empty!&#160; Using /dev/random is cryptographically <em>more random</em> than using /dev/urandom; and /dev/random blocks when the <em>entropy pool</em> is empty, whereas /dev/urandom is non-blocking.&#160; Moving /dev/random to /dev/random.old and linking /dev/urandom to /dev/random solved the problem.&#160; There may be a better solution to this, and depending on your cryptographic requirements it might be better to find an alternative, but this did the trick for me.&#160; One svn commit later and all was well.</p></p>
   </div>
 </article>
+<div id="categories">
+<span class="meta-header">Categories: </span>
+
+  <a href="/categories/development.html" rel="category">Development</a>, 
+
+  <a href="/categories/linux.html" rel="category">Linux</a>
+
+</div>
+<div id="tags">
+<span class="meta-header">Tags: </span>
+ 
+</tags>
 
 <div id="comments">
 <div id="disqus_thread"></div>

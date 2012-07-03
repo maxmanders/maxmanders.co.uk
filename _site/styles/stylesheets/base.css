@@ -224,6 +224,7 @@
 	.remove-bottom { margin-bottom: 0 !important; }
 	.half-bottom { margin-bottom: 10px !important; }
 	.add-bottom { margin-bottom: 20px !important; }
+  .meta-header { font-size: 16px; font-weight: bold; }
         
         
         /* #Sidebar
