@@ -48,6 +48,8 @@ $ sudo apt-get install ruby
 $ sudo apt-get install rubygems
 $ sudo apt-get install libmysql-ruby1.9.1
 $ sudo apt-get install libhtmlentities-ruby1.9.1
+$ sudo apt-get install python-pygments
+$ sudo apt-get install ruby-liquid
 $ sudo gem install jekyll 
 {% endhighlight %}
 
