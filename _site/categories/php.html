@@ -5,7 +5,7 @@
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
 
-<title>PHP category - Max Manders</title>
+<title>php category - Max Manders</title>
         
 <meta charset="UTF-8" />
 <meta name="keywords" content="web, web development, php, html, css, javascript, linux, max manders, manders" />
@@ -52,56 +52,18 @@
   <div class="column">
     <div class="main">
       <div class="single hentry">
-  <h2 class="entry-title">Catgegory &mdash; PHP</h2>
+  <h2 class="entry-title">Catgegory &mdash; php</h2>
 </div>
 
 
   <article class="post">
-  <h3 class="post-title"><a href="/2010/04/30/revert-to-php-5-2-in-ubuntu-10-04-lucid-lynx.html" title="Revert to PHP 5.2 in Ubuntu 10.04 (Lucid Lynx)">Revert to PHP 5.2 in Ubuntu 10.04 (Lucid Lynx)</a></h3>
-  <span class="post-date"><abbr class="published-on">April 30, 2010</abbr></span>
+  <h3 class="post-title"><a href="/2012/07/03/zend-framework-1-build-with-jenkins.html" title="Zend Framework 1 Build With Jenkins">Zend Framework 1 Build With Jenkins</a></h3>
+  <span class="post-date"><abbr class="published-on">July 03, 2012</abbr></span>
   <div class="post-content">
-    <p><p>Despite suppressing updates of my LAMP stack, the upgrade to Ubuntu 10.04 ignored that, and as such I now have PHP 5.3.X installed.&#160; Ordinarilly this woud be fine, but one of the open source web applications I work with doesn&#8217;t play well with PHP 5.3.X.&#160; I needed a simple way to revert to a previous 5.2.X version of PHP.&#160; The version in the Ubuntu 9.10 (Karmic) repositories would do the trick, so it was jsut a case of forcing Ubuntu to honour the 9.10 versions of various PHP packages over the 10.04 versions.</p>
+    <p><p>It&#8217;s high time I that got up to speed on testing best practices. I&#8217;ve dabbled with Selenium, SimpleTest and PHPUnit, but not in any way comprehensively. I&#8217;ve read and thoroughly enjoyed <a href='http://twitter.com/grmpyprogrammer'>@grmpyprogrammer&#8217;s</a> <a href='http://leanpub.com/grumpy-testing'>book</a>, and you should too.</p>
 
-<p>First, we get a list of all the currently installed PHP packages: <pre class='brush:bash'>sudo dpkg -l | grep php > /tmp/php.packages
-</pre> Next we remove the currently installed PHP packages: <pre class='brush:bash'>sudo apt-get remove --purge $(dpkg -l | grep php)
-</pre> Now we need to create an alternative sources list: <pre class='brush:bash'>sed s/lucid/karmic/g /etc/apt/sources.list |\
-sudo tee /etc/apt/sources.list.d/karmic.list
-</pre> Having done that, we need to generate an aptitude preferences file for PHP: <pre class='brush:bash'>awk '{print "Package: " $0; print "Pin: release a=karmic\nPin-Priority: 991\n"}' /tmp/php.packages |\
-sudo tee /etc/apt/preferences.d/php
-</pre> This preferences file tells aptitude that for each listed package, we want to pin down the installation candidate to that from the Karmic repositories. We can now install the packages that we previously removed, but this time the versions from the Karmic repositories: <pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
-&lt;pre class=&quot;brush:bash&quot;&gt;sudo apt-get update &amp;&amp; apt-get install $(cat /tmp/php.packages | tr &quot;\n&quot; &quot; &quot;)
-&lt;/pre&gt;</pre> A quick restart of Apache and everything seems to be working with the older version of PHP!</p></p>
-    <a href="/2010/04/30/revert-to-php-5-2-in-ubuntu-10-04-lucid-lynx.html" class="more">Continue reading &raquo;</a>
-  </div>
-</article>
-
-
-  <article class="post">
-  <h3 class="post-title"><a href="/2010/04/11/uk-geocoding-update.html" title="UK Geocoding - Update">UK Geocoding - Update</a></h3>
-  <span class="post-date"><abbr class="published-on">April 11, 2010</abbr></span>
-  <div class="post-content">
-    <p><p>I&#8217;ve updated the <a href='http://ukgeocode.maxmanders.co.uk/'>UK Geocoding site</a> to provide better documentation, and a UI for geocoding, in addition to the XML API.</p></p>
-    <a href="/2010/04/11/uk-geocoding-update.html" class="more">Continue reading &raquo;</a>
-  </div>
-</article>
-
-
-  <article class="post">
-  <h3 class="post-title"><a href="/2010/04/10/uk-geocoding.html" title="UK Geocoding">UK Geocoding</a></h3>
-  <span class="post-date"><abbr class="published-on">April 10, 2010</abbr></span>
-  <div class="post-content">
-    <p><p>After a little hard work, I&#8217;m releasing my attempt to address the shortfall in accurate UK geocoding services.&#160; Courtesy of open data provided by Ordnance Survey Open Click-Point, some sed, SQLite, PHP and YQL I&#8217;ve produced a REST API, and a YQL datatable.&#160; I&#8217;ve also written <a title='UK Geocoding' href='http://maxmanders.co.uk/uk-geocode/'>a more thorough account</a> of this by way of documenation.</p></p>
-    <a href="/2010/04/10/uk-geocoding.html" class="more">Continue reading &raquo;</a>
-  </div>
-</article>
-
-
-  <article class="post">
-  <h3 class="post-title"><a href="/2008/10/12/playing-with-perl-sockets.html" title="Playing With Perl Sockets">Playing With Perl Sockets</a></h3>
-  <span class="post-date"><abbr class="published-on">October 12, 2008</abbr></span>
-  <div class="post-content">
-    <p><p>At work, I have a <a href='http://www.snom.com/en/products/snom-360-voip-phone/'>Snom 360</a> IP phone that is hooked up to our internal <a href='http://www.asterisk.org/'>Asterisk</a> PBX.&#160; If I&#8217;m listening to music with my headphones in, I&#8217;m not always aware that my phone is ringing - some Perl and PHP hacking later, I&#8217;ve got a crude (and work-in-progress) solution.</p>
-    <a href="/2008/10/12/playing-with-perl-sockets.html" class="more">Continue reading &raquo;</a>
+<p>However, I don&#8217;t have the opportunity to exercise these interests in my current job, so I&#8217;ve taken it upon myself to learn in my own time with a pet-project I&#8217;m working on.</p>
+    <a href="/2012/07/03/zend-framework-1-build-with-jenkins.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
 

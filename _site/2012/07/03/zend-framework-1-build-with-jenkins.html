@@ -93,16 +93,17 @@
 <span class='lineno'>15</span>     <span class='nv'>$ </span>sudo pear install phpunit/PHP_CodeCoverage-1.0.2
 <span class='lineno'>16</span>     <span class='nv'>$ </span>sudo pear install phpunit/DbUnit-1.0.0
 <span class='lineno'>17</span>     <span class='nv'>$ </span>sudo pear install phpunit/PHPUnit-3.5.15
-<span class='lineno'>18</span>     <span class='nv'>$ </span>sudo pear install pear.phpunit.de/phploc-1.6.0
-<span class='lineno'>19</span>     <span class='nv'>$ </span>sudo pear install php_CodeSniffer
-<span class='lineno'>20</span>     <span class='nv'>$ </span>sudo pear install phpdoc/phpDocumentor-alpha
+<span class='lineno'>18</span>     <span class='nv'>$ </span>sudo pear install pear.phpunit.de/phploc
+<span class='lineno'>19</span>     <span class='nv'>$ </span>sudo pear install phpdoc/phpDocumentor-alpha
+<span class='lineno'>20</span>     <span class='nv'>$ </span>sudo pear install pdepend/PHP_Depend-beta
 <span class='lineno'>21</span>     <span class='nv'>$ </span>sudo pear install pear.phpunit.de/PHP_CodeBrowser-1.0.0
-<span class='lineno'>22</span>     <span class='nv'>$ </span>sudo pear install phpdoc/phpDocumentor-2.0.0a1
-<span class='lineno'>23</span>     <span class='nv'>$ </span>sudo apt-get install php5-xsl
-<span class='lineno'>24</span>     <span class='nv'>$ </span>sudo apt-get install graphviz
-<span class='lineno'>25</span>     <span class='nv'>$ </span>sudo apt-get install jenkins
-<span class='lineno'>26</span>     <span class='nv'>$ </span>sudo apt-get install ant
-<span class='lineno'>27</span>     
+<span class='lineno'>22</span>     <span class='nv'>$ </span>sudo pear install pear.phpunit.de/phpcpd-1.3.0
+<span class='lineno'>23</span>     <span class='nv'>$ </span>sudo pear install php_CodeSniffer    
+<span class='lineno'>24</span>     <span class='nv'>$ </span>sudo apt-get install php5-xsl
+<span class='lineno'>25</span>     <span class='nv'>$ </span>sudo apt-get install graphviz
+<span class='lineno'>26</span>     <span class='nv'>$ </span>sudo apt-get install jenkins
+<span class='lineno'>27</span>     <span class='nv'>$ </span>sudo apt-get install ant
+<span class='lineno'>28</span>     
 </code></pre>
 </div>
 <p>The above commands install the necessary tools for my build. So what does the build file actually look like? It&#8217;s nothing original on my part, but comes courtesy of <a href='http://jenkins-php.org/'>Jenkins PHP project</a>. In fact, other than installing the appropriate versions of the tools such that we can continue using PHPUnit 3.5 the rest of the steps are straight from http://jenkins-php.org.</p>

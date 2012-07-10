@@ -64,11 +64,12 @@ for the build.
     $ sudo pear install phpunit/PHP_CodeCoverage-1.0.2
     $ sudo pear install phpunit/DbUnit-1.0.0
     $ sudo pear install phpunit/PHPUnit-3.5.15
-    $ sudo pear install pear.phpunit.de/phploc-1.6.0
-    $ sudo pear install php_CodeSniffer
+    $ sudo pear install pear.phpunit.de/phploc
     $ sudo pear install phpdoc/phpDocumentor-alpha
+    $ sudo pear install pdepend/PHP_Depend-beta
     $ sudo pear install pear.phpunit.de/PHP_CodeBrowser-1.0.0
-    $ sudo pear install phpdoc/phpDocumentor-2.0.0a1
+    $ sudo pear install pear.phpunit.de/phpcpd-1.3.0
+    $ sudo pear install php_CodeSniffer    
     $ sudo apt-get install php5-xsl
     $ sudo apt-get install graphviz
     $ sudo apt-get install jenkins
