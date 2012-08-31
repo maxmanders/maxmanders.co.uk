@@ -13,4 +13,4 @@ September, when I start my new roll with [Cloudreach](http://www.cloudreach.com)
 joining the devops team, working with a wide range of platforms and languages helping our
 customers take advantage of cloud technologies, particularly with services offered by
 Amazon and Google.  I've even started using a MacBook, and I'm reluctant to say I'm
-actually quite liking it - bet you never thought you'd hear me say that!
+actually quite liking it - bet you never thought you'd hear me say that! 
