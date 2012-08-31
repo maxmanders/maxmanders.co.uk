@@ -53,6 +53,16 @@
     <div class="main">
       
   <article class="post">
+  <h3 class="post-title"><a href="/2011/06/26/our-wedding.html" title="Our Wedding">Our Wedding</a></h3>
+  <span class="post-date"><abbr class="published-on">June 26, 2011</abbr></span>
+  <div class="post-content">
+    <p><p>May 28th 2011. &#160;A day I&#8217;ll never forget; the day Jo and I got married. &#160;It&#8217;s always difficult finding the time to write new posts, but I&#8217;d be remiss if I didn&#8217;t at the very least make sure I wrote something about, clich&#233; as it may be, the happiest day of my life. &#160;We&#8217;d originally planned the wedding for 10th October 2010: of course that date was nothing to do with the fact that 10-10-10 is easy to remember; not was it in any way related to the fact that 101010 in binary represents 42 in decimal &#8211; &#8220;the answer to life, the universe, and everything&#8221;! &#160;That date wasn&#8217;t to be, due in no small part to a severe lack of funds and planning. &#160;Fast forward to May 28th 2011 and having spent a not-exorbitant sum of money on eBay enjoyed a perfectly planned and executed wedding day in Edinburgh. &#160;The weather was even good to us - it only rained when we were inside! &#160;A massive thanks to Jo&#8217;s bridesmaids, Jess and Mip for supporting and helping her; my best man Sally for her support and help; my dad for doing a wonderful job of the photography and of course my beautiful wife Jo for doing me the greatest honour of marrying me!</p>
+    <a href="/2011/06/26/our-wedding.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
   <h3 class="post-title"><a href="/2011/03/06/automating-internet-explorer-vpc-images-on-virtualbox.html" title="Automating Internet Explorer VPC Images On VirtualBox">Automating Internet Explorer VPC Images On VirtualBox</a></h3>
   <span class="post-date"><abbr class="published-on">March 06, 2011</abbr></span>
   <div class="post-content">
@@ -108,18 +118,6 @@ SELECT * FROM spotify.search.track where track = 'Crash Years';
   <div class="post-content">
     <p><p>Revision control systems serve their purpose well for managing codebases, but they can also be used to good effect for configuration management.&#160; I&#8217;ll discuss how I&#8217;ve used Subversion to manage the configuration of my home directory.&#160; The same goal could probably be achieved just as easily with Git.&#160; While I use Git and Github for personal projects, I have employed this solution at work where we use Subversion.</p>
     <a href="/2010/10/14/manage-your-home-directory-with-subversion.html" class="more">Continue reading &raquo;</a>
-  </div>
-</article>
-
-
-  <article class="post">
-  <h3 class="post-title"><a href="/2010/10/04/subversion-and-the-entropy-pool.html" title="Subversion And The Entropy Pool">Subversion And The Entropy Pool</a></h3>
-  <span class="post-date"><abbr class="published-on">October 04, 2010</abbr></span>
-  <div class="post-content">
-    <p><p>I ran into an interesting little subversion problem earlier.&#160; I was trying to commit a change, and the commit just seemed to hang indefinitely.&#160; I couldn&#8217;t sent an interrupt, and eventually resorted to killing the process.&#160; I tried all sorts of command line options in case there was an authentication problem - with no luck.&#160; I then thought I had made a mistake when switching my working copy to a different branch.&#160; I checked the logs on the server to find nothing pertinent; it seemed as though svn didn&#8217;t get as far as taking to the server.&#160; At a loss, I thought there was nothing for it but to run the command with strace.&#160; Bingo!</p>
-
-<p>Strace showed that subversion reads from /dev/random as part of the commit, and that&#8217;s where the problem seemed to be happening.&#160; After doing some research, I discovered that /dev/random generates random numbers using the so-called <em>entropy pool</em>.&#160; This <em>entropy pool</em> is just random bits of noise generated from things such as mouse movements, time between keystrokes and so on.&#160; For whatever reason, on the client server, this <em>entropy pool</em> was empty!&#160; Using /dev/random is cryptographically <em>more random</em> than using /dev/urandom; and /dev/random blocks when the <em>entropy pool</em> is empty, whereas /dev/urandom is non-blocking.&#160; Moving /dev/random to /dev/random.old and linking /dev/urandom to /dev/random solved the problem.&#160; There may be a better solution to this, and depending on your cryptographic requirements it might be better to find an alternative, but this did the trick for me.&#160; One svn commit later and all was well.</p></p>
-    <a href="/2010/10/04/subversion-and-the-entropy-pool.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
 

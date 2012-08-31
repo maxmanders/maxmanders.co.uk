@@ -53,6 +53,26 @@
     <div class="main">
       
   <article class="post">
+  <h3 class="post-title"><a href="/2010/04/30/revert-to-php-5-2-in-ubuntu-10-04-lucid-lynx.html" title="Revert to PHP 5.2 in Ubuntu 10.04 (Lucid Lynx)">Revert to PHP 5.2 in Ubuntu 10.04 (Lucid Lynx)</a></h3>
+  <span class="post-date"><abbr class="published-on">April 30, 2010</abbr></span>
+  <div class="post-content">
+    <p><p>Despite suppressing updates of my LAMP stack, the upgrade to Ubuntu 10.04 ignored that, and as such I now have PHP 5.3.X installed.&#160; Ordinarilly this woud be fine, but one of the open source web applications I work with doesn&#8217;t play well with PHP 5.3.X.&#160; I needed a simple way to revert to a previous 5.2.X version of PHP.&#160; The version in the Ubuntu 9.10 (Karmic) repositories would do the trick, so it was jsut a case of forcing Ubuntu to honour the 9.10 versions of various PHP packages over the 10.04 versions.</p>
+
+<p>First, we get a list of all the currently installed PHP packages: <pre class='brush:bash'>sudo dpkg -l | grep php > /tmp/php.packages
+</pre> Next we remove the currently installed PHP packages: <pre class='brush:bash'>sudo apt-get remove --purge $(dpkg -l | grep php)
+</pre> Now we need to create an alternative sources list: <pre class='brush:bash'>sed s/lucid/karmic/g /etc/apt/sources.list |\
+sudo tee /etc/apt/sources.list.d/karmic.list
+</pre> Having done that, we need to generate an aptitude preferences file for PHP: <pre class='brush:bash'>awk '{print "Package: " $0; print "Pin: release a=karmic\nPin-Priority: 991\n"}' /tmp/php.packages |\
+sudo tee /etc/apt/preferences.d/php
+</pre> This preferences file tells aptitude that for each listed package, we want to pin down the installation candidate to that from the Karmic repositories. We can now install the packages that we previously removed, but this time the versions from the Karmic repositories: <pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
+&lt;pre class=&quot;brush:bash&quot;&gt;sudo apt-get update &amp;&amp; apt-get install $(cat /tmp/php.packages | tr &quot;\n&quot; &quot; &quot;)
+&lt;/pre&gt;</pre> A quick restart of Apache and everything seems to be working with the older version of PHP!</p></p>
+    <a href="/2010/04/30/revert-to-php-5-2-in-ubuntu-10-04-lucid-lynx.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
   <h3 class="post-title"><a href="/2010/04/11/uk-geocoding-update.html" title="UK Geocoding - Update">UK Geocoding - Update</a></h3>
   <span class="post-date"><abbr class="published-on">April 11, 2010</abbr></span>
   <div class="post-content">
@@ -97,22 +117,6 @@ select * from nutritionals where name = 'banana';</pre></p></p>
 
 <p>I seem to have lost my creative inspiration and enthusiasm for what was my hobby but is now my career. Has anyone else been in a similar position of having the programmers equivalent of writer&#8217;s block? Any thoughts or suggestions as to how I can regain my enthusiasm on a postcard please. How do other coders come up with ideas for personal projects to keep them engaged and up to speed with the latest APIs and tools? Hopefully this can all be put down to seasonal blues and I&#8217;ll find inspiration soon.</p></p>
     <a href="/2010/01/19/coders-block.html" class="more">Continue reading &raquo;</a>
-  </div>
-</article>
-
-
-  <article class="post">
-  <h3 class="post-title"><a href="/2010/01/02/whats-in-store-for-2010.html" title="What's In Store For 2010">What's In Store For 2010</a></h3>
-  <span class="post-date"><abbr class="published-on">January 02, 2010</abbr></span>
-  <div class="post-content">
-    <p><p>And so the new year is upon us.&#160; Whether it&#8217;s <em>twenty-ten</em> or <em>two thousand and ten</em> I don&#8217;t know, but in any case it seems obligatory in the blogosphere to reflect on the year gone by and to expound upon the year to come.</p>
-
-<p>A year ago I wrote a similarly themed post in which I set out a number of so called <em>resolutions</em> that I had the best of intentions of keeping.&#160; Unsurprisingly, I didn&#8217;t manage to keep any of them.&#160; I still smoke, although I can honestly say that I smoke less than I did this time last year; I doubt very much that I have lost any weight in fact quite the opposite; my caffeine intake has probably risen and I think I&#8217;ve only played the trombone while severely inebriated.&#160; If the object of a new years resolution is to endeavour to do the exact opposite, then I have most certainly succeeded in keeping all of last years resolutions.</p>
-
-<p>So moving forward to the year ahead, I will be trying my utmost to fulfil the resolutions of last year whilst in addition trying to be generally less grumpy and trying not to succumb to stressful situations.</p>
-
-<p>And without a doubt. the most exciting event I have to look forward to in the coming year is my being married to my fiance&#233; Jo.&#160; All in all I&#8217;m hopeful that 2010 will be a great year!</p></p>
-    <a href="/2010/01/02/whats-in-store-for-2010.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
 

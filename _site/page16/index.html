@@ -53,6 +53,16 @@
     <div class="main">
       
   <article class="post">
+  <h3 class="post-title"><a href="/2007/09/02/a-gorilla-and-phil-colins-odd-combination-you-decide.html" title="A Gorilla and Phil Colins... Odd Combination? You Decide.">A Gorilla and Phil Colins... Odd Combination? You Decide.</a></h3>
+  <span class="post-date"><abbr class="published-on">September 02, 2007</abbr></span>
+  <div class="post-content">
+    <p><p>This has got to be the most original piece of advertising I've seen.  It had me in hysterics.  What do you think?</p><p>[youtube CbLr2NEV_7o]</p></p>
+    <a href="/2007/09/02/a-gorilla-and-phil-colins-odd-combination-you-decide.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
   <h3 class="post-title"><a href="/2007/08/22/analysing-oracle-application-server-9i-webcache-logs.html" title="Analysing Oracle Application Server 9i Webcache Logs">Analysing Oracle Application Server 9i Webcache Logs</a></h3>
   <span class="post-date"><abbr class="published-on">August 22, 2007</abbr></span>
   <div class="post-content">
@@ -71,8 +81,8 @@
 <p>Just paste the code below into a file called &#8216;youtube.php&#8217; in your wp-content/plugins directory. You should then be able to activate it via the Plugins admin option. Once activated, you can place a YouTube video in your post by going to code-view and inserting &#8220;youtube&#8221; video_idhe quotes). The video_id parameter is the &#8216;v&#8217; parameter in a YouTube URL. In the example below, the URL is http://www.youtube.com/watch?v=lL4L4Uv5rf0. Therefore, the video_id parameter should be lL4L4Uv5rf0. In the code below, you will need to remove the quotes around the word &#8220;youtube&#8221; in the regex on line 5, I had to put these in to display the code without it interpreting the tag&#8230; it&#8217;s a work in progress! <pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
 &lt;pre lang=&quot;php&quot;&gt;</pre></p>
 
-<p>define(&#8220;YOUTUBE_WIDTH&#8221;, 425); define(&#8220;YOUTUBE_HEIGHT&#8221;, 350); define(&#8220;YOUTUBE_TAG&#8221;, &#8220;/<span>&#8220;youtube&#8221; (<span><span>:print:</span></span>+)</span>/&#8221;); define(&#8220;YOUTUBE_LINK&#8221;, &#8221;<object height='\' type='\' data='\' width='\'>
-<param value='\' name='\' /></object>&#8221;);</p>
+<p>define(&#8220;YOUTUBE_WIDTH&#8221;, 425); define(&#8220;YOUTUBE_HEIGHT&#8221;, 350); define(&#8220;YOUTUBE_TAG&#8221;, &#8220;/<span>&#8220;youtube&#8221; (<span><span>:print:</span></span>+)</span>/&#8221;); define(&#8220;YOUTUBE_LINK&#8221;, &#8221;<object data='\' height='\' type='\' width='\'>
+<param name='\' value='\' /></object>&#8221;);</p>
 
 <p>function youtube_plugin_cb($match) { $html = YOUTUBE_LINK; $html = str_replace(&#8220;###YOUTUBE_ID###&#8221;, $match<span>1</span>, $html); return ($html); }</p>
 
@@ -126,20 +136,6 @@ Serve the sauce on top of the piping hot pasta and grate a generous amount of pa
 Season with salt and pepper, and enjoy.
 </ol></p>
     <a href="/2007/08/21/pasta-with-tomato-and-basil-sauce.html" class="more">Continue reading &raquo;</a>
-  </div>
-</article>
-
-
-  <article class="post">
-  <h3 class="post-title"><a href="/2007/08/16/java-this-and-that.html" title="Java - this and that">Java - this and that</a></h3>
-  <span class="post-date"><abbr class="published-on">August 16, 2007</abbr></span>
-  <div class="post-content">
-    <p><p>My work has recently taken a departure from the usual web development as I&#8217;ve been &#8220;borrowed&#8221; by the other development team to help out with a Java project. Now, my Java is reasonable sound but yesterday I came across a curious situation involving passing about the current object.</p>
-
-<p>In common with a lot of languages, the current object is represented by the &#8216;this&#8217; keyword. I wanted to pass &#8216;this&#8217; to a static method of another class. Of course, I can&#8217;t refer to the object as &#8216;this&#8217; in the static method context as that would be ambiguous insofar as it could refer to the class with the static method I&#8217;m working with. This pattern is often used with callbacks where for example you might want to register a class with a particular listener objcet. To avoid confusion, I named the actual parameter in the static method <pre lang='Java'>that</pre> I assumed that I would reference the fields and methods of the object using <pre lang='Java'>that.someMethod()</pre> rather than <pre lang='Java'>this.someMethod()</pre> This is where the fun begins. Let&#8217;s call the original object <pre lang='Java'>SomeObject theObject</pre> and I want to call the static method <pre lang='Java'>SomeClass.doStaticMethod(SomeObject that)</pre> I would call that method, from within theObject, using <pre lang='Java'>SomeClass.doStaticMethod(this)</pre> When in theObject, I have access to private fields and methods since private fields and methods are within scope. I assumed the same would be true when I passed &#8220;theObject&#8221; as &#8220;this&#8221; to &#8220;SomeClass.doStaticMethod(SomeObject that)&#8221;. However, when I actually try to access private fields such as &#8220;that.privateField&#8221;, it would appear that I no longer have access. I could create appropriate accessor methods, but that would defeat the idea of encapsulation.</p>
-
-<p>Does anyone have any ideas? Am I missing some fundamental (and so obvious I missed it) rule of scope or object passing?</p></p>
-    <a href="/2007/08/16/java-this-and-that.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
 
