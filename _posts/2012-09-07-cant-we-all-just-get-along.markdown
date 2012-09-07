@@ -10,7 +10,7 @@ This post may prove to be controversial; it shouldn't!  Can't we all just get al
 Seriously.  I know we as developers are all different, and have our own personal views on
 what makes us tick.  Surely though, we can all agree on having one thing in common: we
 thrive on solving interesting and challenging problems, and solving them in an elegant and
-clean fashion.
+clean fashion.<!--more-->
 
 New stable versions of arguably two of the most popular PHP frameworks were released in
 the last few days: Zend Framework 2 and Symfony 2.1.  Both releases involved tremendous
