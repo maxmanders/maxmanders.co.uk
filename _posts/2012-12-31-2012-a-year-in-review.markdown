@@ -1,7 +1,10 @@
 --- 
-date: 2012-12-31 20:37
+date: 2012-12-31 21:32:58 +00:00
+published: true
 layout: post
-title: 2013 - A Year In Review
+categories: 
+- General
+title: 2012 A Year In Review
 author: Max Manders
 ---
 It's the end of another year and a new one is just around the corner, so it's time to post
