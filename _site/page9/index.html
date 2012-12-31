@@ -53,10 +53,22 @@
     <div class="main">
       
   <article class="post">
+  <h3 class="post-title"><a href="/2009/02/28/goodreads.html" title="Goodreads">Goodreads</a></h3>
+  <span class="post-date"><abbr class="published-on">February 28, 2009</abbr></span>
+  <div class="post-content">
+    <p><p>I've just come across <a href="http://www.goodreads.com">goodreads</a> - another social-networking site, with a difference.&nbsp; The site lets you add books&nbsp; you've read with arbitrary tags, giving reviews, ratings etc.&nbsp; The site also offers a REST API that returns XML based on request URIs using OAuth for authentication where required.&nbsp; I'm going to add some books to it and have a play with the API.</p>
+</p>
+    <a href="/2009/02/28/goodreads.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
   <h3 class="post-title"><a href="/2008/10/30/ubuntu-810-intrepid-ibex.html" title="Ubuntu 8.10 Intrepid Ibex">Ubuntu 8.10 Intrepid Ibex</a></h3>
   <span class="post-date"><abbr class="published-on">October 30, 2008</abbr></span>
   <div class="post-content">
-    <p><p>Having upgraded my Hardy distribution to Intrepd, I can say that I&#8217;m impressed.&#160; The changes to the desktop, although subtle, are very much welcome.&#160; I haven&#8217;t had any teething troubles with any of my hardware; the only &#8216;glitch&#8217; I&#8217;ve noticed involves the title bars of open applications, it goes transparent now and then - but I&#8217;m sure I can put up with it until it gets fixed.&#160; Good work Ubuntu!</p></p>
+    <p><p>Having upgraded my Hardy distribution to Intrepd, I can say that I'm impressed.&nbsp; The changes to the desktop, although subtle, are very much welcome.&nbsp; I haven't had any teething troubles with any of my hardware; the only 'glitch' I've noticed involves the title bars of open applications, it goes transparent now and then - but I'm sure I can put up with it until it gets fixed.&nbsp; Good work Ubuntu!</p>
+</p>
     <a href="/2008/10/30/ubuntu-810-intrepid-ibex.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
@@ -66,11 +78,12 @@
   <h3 class="post-title"><a href="/2008/10/24/find-exclusing-svn.html" title="Find Excluding SVN">Find Excluding SVN</a></h3>
   <span class="post-date"><abbr class="published-on">October 24, 2008</abbr></span>
   <div class="post-content">
-    <p><p>So, you need to take a copy of a subversion working copy, but it has local changes that you also need to copy.&#160; This precludes the use of svn export since the local changes won&#8217;t be included.&#160; One option is to do an svn export anyway, and then cp -ra the local changes.&#160; Another solution is to use a find command that excludes subversion metadata, and then copy the resulting files:</p>
+    <p><p>So, you need to take a copy of a subversion working copy, but it has local changes that you also need to copy.&nbsp; This precludes the use of svn export since the local changes won't be included.&nbsp; One option is to do an svn export anyway, and then cp -ra the local changes.&nbsp; Another solution is to use a find command that excludes subversion metadata, and then copy the resulting files:</p>
 
-<p>find . -path &#39;*/.svn&#39; -prune -o -type f -print</p>
+<p>find . -path '*/.svn' -prune -o -type f -print</p>
 
-<p>I did something similar some time ago, but forgot the command, so here it is for posterity.</p></p>
+<p>I did something similar some time ago, but forgot the command, so here it is for posterity.</p>
+</p>
     <a href="/2008/10/24/find-exclusing-svn.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
@@ -80,7 +93,8 @@
   <h3 class="post-title"><a href="/2008/10/16/cheezburger-not-ripe-yet.html" title="Cheezburger Not Ripe Yet">Cheezburger Not Ripe Yet</a></h3>
   <span class="post-date"><abbr class="published-on">October 16, 2008</abbr></span>
   <div class="post-content">
-    <p><a href='http://icanhascheezburger.com/2008/10/15/funny-pictures-cheezburger-not-ripe-yet/'>http://icanhascheezburger.com/2008/10/15/funny-pictures-cheezburger-not-ripe-yet/</a></p>
+    <p><p><a href="http://icanhascheezburger.com/2008/10/15/funny-pictures-cheezburger-not-ripe-yet/">http://icanhascheezburger.com/2008/10/15/funny-pictures-cheezburger-not-ripe-yet/</a></p>
+</p>
     <a href="/2008/10/16/cheezburger-not-ripe-yet.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
@@ -90,24 +104,8 @@
   <h3 class="post-title"><a href="/2008/10/12/playing-with-perl-sockets.html" title="Playing With Perl Sockets">Playing With Perl Sockets</a></h3>
   <span class="post-date"><abbr class="published-on">October 12, 2008</abbr></span>
   <div class="post-content">
-    <p><p>At work, I have a <a href='http://www.snom.com/en/products/snom-360-voip-phone/'>Snom 360</a> IP phone that is hooked up to our internal <a href='http://www.asterisk.org/'>Asterisk</a> PBX.&#160; If I&#8217;m listening to music with my headphones in, I&#8217;m not always aware that my phone is ringing - some Perl and PHP hacking later, I&#8217;ve got a crude (and work-in-progress) solution.</p>
+    <p><p>At work, I have a <a href="http://www.snom.com/en/products/snom-360-voip-phone/">Snom 360</a> IP phone that is hooked up to our internal <a href="http://www.asterisk.org/">Asterisk</a> PBX.&nbsp; If I'm listening to music with my headphones in, I'm not always aware that my phone is ringing - some Perl and PHP hacking later, I've got a crude (and work-in-progress) solution.</p>
     <a href="/2008/10/12/playing-with-perl-sockets.html" class="more">Continue reading &raquo;</a>
-  </div>
-</article>
-
-
-  <article class="post">
-  <h3 class="post-title"><a href="/2008/06/29/samba-linux-to-linux-gotcha.html" title="Samba: Linux to Linux Gotcha">Samba: Linux to Linux Gotcha</a></h3>
-  <span class="post-date"><abbr class="published-on">June 29, 2008</abbr></span>
-  <div class="post-content">
-    <p><p>It&#8217;s been a long time coming, but I&#8217;ve finally got my machine at work set up using Ubuntu 8.04 rather than Windows XP.&#160; I&#8217;ve been using Ubuntu at home almost exclusively for nearly a year now, so it&#8217;s good to be able to maintain my workflow from home to work.&#160; One of the problems I had was mounting&#160; my home directory on a server.</p>
-
-<p>On windows, this works fine: you specify a username, a password, and the share you want to connect to and it just works.&#160; The same is almost true with linux: you specify the username, password and share (either on the command line or in /etc/fstab).&#160; However, chances are your local UID will differ from the UID used on the server, so although the mount will succeed, permissions may be a bit iffy.</p>
-
-<p>The solution was to use CIFS rather than the outdate smbfs, and to use the extra uid option:</p>
-<pre class='brush:bash'>$ sudo mount -t cifs -o username=user,password=pass,uid=1000 //server/share /local/mount/point</pre>
-<p>This makes sure that the share you mount is owned by the local user.</p></p>
-    <a href="/2008/06/29/samba-linux-to-linux-gotcha.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
 

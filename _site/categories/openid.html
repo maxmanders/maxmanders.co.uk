@@ -60,11 +60,12 @@
   <h3 class="post-title"><a href="/2007/11/03/edlug-talk-an-introduction-to-openid.html" title="EdLUG Talk - An Introduction to OpenID">EdLUG Talk - An Introduction to OpenID</a></h3>
   <span class="post-date"><abbr class="published-on">November 03, 2007</abbr></span>
   <div class="post-content">
-    <p><p>On Thursday 01 November I gave a brief talk titled &#8220;An Introduction to OpenID&#8221; at the monthly EdLUG meeting.&#194;&#160; The <a href='http://www.slideshare.net/maxmanders/an-introduction-to-openid' title='An Introduction to OpenID (Slides).'>slides for the talk</a> are available on Slideshare.&#194;&#160; It seemed to go well despite my fear of public speaking.&#194;&#160; A few questions were put to me; some of which I could answer.</p>
+    <p><p>On Thursday 01 November I gave a brief talk titled "An Introduction to OpenID" at the monthly EdLUG meeting.&Acirc;&nbsp; The <a href="http://www.slideshare.net/maxmanders/an-introduction-to-openid" title="An Introduction to OpenID (Slides).">slides for the talk</a> are available on Slideshare.&Acirc;&nbsp; It seemed to go well despite my fear of public speaking.&Acirc;&nbsp; A few questions were put to me; some of which I could answer.</p>
 
-<p>The few I couldn&#8217;t answer were mainly regarding the specifics of the OpenID authentication process.&#194;&#160; Perhaps it was nerves, but in hindsight I realise I knew the answer all along.&#194;&#160; I was asked if OpenID could tie into Kerberos or PAM.&#194;&#160; This is really down to how one chooses to implement the standard.</p>
+<p>The few I couldn't answer were mainly regarding the specifics of the OpenID authentication process.&Acirc;&nbsp; Perhaps it was nerves, but in hindsight I realise I knew the answer all along.&Acirc;&nbsp; I was asked if OpenID could tie into Kerberos or PAM.&Acirc;&nbsp; This is really down to how one chooses to implement the standard.</p>
 
-<p>The OpenID specifications state that at at some point authentication must be performed with the Identity Provider.&#194;&#160; However, the details of how this authentication must be performed are purposefully not specified and instead left up to the implementor.&#194;&#160; So in answer to the questions, yes you can use Kerberos or PAM in the authentication process, but it&#8217;s up to&#194;&#160; you to tie it all together.&#194;&#160; In fact, traditional username/password combinations need not be used.&#194;&#160; If one so chooses secure fobs or biometrics could indeed be used; it&#8217;s up to you!</p></p>
+<p>The OpenID specifications state that at at some point authentication must be performed with the Identity Provider.&Acirc;&nbsp; However, the details of how this authentication must be performed are purposefully not specified and instead left up to the implementor.&Acirc;&nbsp; So in answer to the questions, yes you can use Kerberos or PAM in the authentication process, but it's up to&Acirc;&nbsp; you to tie it all together.&Acirc;&nbsp; In fact, traditional username/password combinations need not be used.&Acirc;&nbsp; If one so chooses secure fobs or biometrics could indeed be used; it's up to you!</p>
+</p>
     <a href="/2007/11/03/edlug-talk-an-introduction-to-openid.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
@@ -74,14 +75,20 @@
   <h3 class="post-title"><a href="/2007/03/01/use-your-own-url-asn-an-openid.html" title="Use Your Own URL As An OpenID">Use Your Own URL As An OpenID</a></h3>
   <span class="post-date"><abbr class="published-on">March 01, 2007</abbr></span>
   <div class="post-content">
-    <p><p>You may already have an OpenID from one of the many providers, for example <em>username.myopenid.com</em>. Wouldn&#8217;t it be nice if you could use your own domain name instead? Well you can! You may not actually host an identity provider capable of vouching for your ownership of your own domain, but you can always get <em>username.myopenid.com</em> to vouch for you.</p>
+    <p><p>You may already have an OpenID from one of the many providers, for example <em>username.myopenid.com</em>.  Wouldn't it be nice if you could use your own domain name instead?  Well you can!  You may not actually host an identity provider capable of vouching for your ownership of your own domain, but you can always get <em>username.myopenid.com</em> to vouch for you.</p>
 
-<p>This process is called delegation. You use your own domain name as your OpenID, but add some extra markup to the head element of your homepage that tells the relying party that you are delegating the responsibility of authentication to another server. The markup you need is: <pre lang='html4strict'>
+<p>This process is called delegation.  You use your own domain name as your OpenID, but add some extra markup to the head element of your homepage that tells the relying party that you are delegating the responsibility of authentication to another server.  The markup you need is:</p>
+
+<pre lang="html4strict">
 
 
-<meta content='http://yoururl.myopenid.com/xrds' http-equiv='X-XRDS-Location' /></pre> This will tell the relying party, that it should instead visit <em>username.myopenid.com</em>. You will then authenticate to this delegate server. Once successful, by implication of having authenticated to the delegate server, you have also proved that you own the domain from which you were directed.</p>
+<meta http-equiv="X-XRDS-Location" content="http://yoururl.myopenid.com/xrds" /></pre>
 
-<p>The link tags are used for OpenID 1.x server discovery, and the meta tag for OpenID 2.x server discover. In order to be as compatible with OpenID consumers as possible, you should use both link and meta elements.</p></p>
+
+<p>This will tell the relying party, that it should instead visit <em>username.myopenid.com</em>.  You will then authenticate to this delegate server.  Once successful, by implication of having authenticated to the delegate server, you have also proved that you own the domain from which you were directed.</p>
+
+<p>The link tags are used for OpenID 1.x server discovery, and the meta tag for OpenID 2.x server discover.  In order to be as compatible with OpenID consumers as possible, you should use both link and meta elements.</p>
+</p>
     <a href="/2007/03/01/use-your-own-url-asn-an-openid.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
@@ -91,9 +98,9 @@
   <h3 class="post-title"><a href="/2007/02/21/openid-decentralised-user-centric-idenity-management.html" title="OpenID: Decentralised User-Centric Identity Management">OpenID: Decentralised User-Centric Identity Management</a></h3>
   <span class="post-date"><abbr class="published-on">February 21, 2007</abbr></span>
   <div class="post-content">
-    <p><p>We sign up to more and more services online every day. This often involves remembering multiple, often similar (in the case of username1984, user_name_84 etc) usernames and passwords. A solution to this is so called single-sign on, whereby you use only a single identity such as a Microsoft Passport or a Yahoo! username. The problem with this solution is that you can find yourself tied in to one large company&#8217;s services.</p>
+    <p><p>We sign up to more and more services online every day.  This often involves remembering multiple, often similar (in the case of username1984, user_name_84 etc) usernames and passwords.  A solution to this is so called single-sign on, whereby you use only a single identity such as a Microsoft Passport or a Yahoo! username.  The problem with this solution is that you can find yourself tied in to one large company's services.</p>
 
-<p>If you already have a Microsoft Passport, you are unlikely to want to create a Yahoo! account to use their services as this would involve going through a sign up process, replicating friends lists and so on from one provider to the other etc. Besides, I don&#8217;t know about anyone else but I don&#8217;t like the idea of some large company controlling my identity: storing my username; hashed password and other details. It would be better if I could arbitrarily choose who controlled my identity, or even better, control it myself. This is where OpenID comes in.</p>
+<p>If you already have a Microsoft Passport, you are unlikely to want to create a Yahoo! account to use their services as this would involve going through a sign up process, replicating friends lists and so on from one provider to the other etc.  Besides, I don't know about anyone else but I don't like the idea of some large company controlling my identity: storing my username; hashed password and other details.  It would be better if I could arbitrarily choose who controlled my identity, or even better, control it myself.  This is where OpenID comes in.</p>
     <a href="/2007/02/21/openid-decentralised-user-centric-idenity-management.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>

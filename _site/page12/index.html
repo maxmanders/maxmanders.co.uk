@@ -53,14 +53,42 @@
     <div class="main">
       
   <article class="post">
+  <h3 class="post-title"><a href="/2008/02/12/sshfs.html" title="sshfs">sshfs</a></h3>
+  <span class="post-date"><abbr class="published-on">February 12, 2008</abbr></span>
+  <div class="post-content">
+    <p><p>If you don't want the trouble of configuring NFS or Samba, then sshfs is a good option.  sshfs (ssh File System) makes use of Fuse (File System in Userspace) to allow you to locally mount a directory that you have remote access to using ssh.  To install sshfs in Ubuntu use:</p>
+
+<p>sudo apt-get install sshfs
+
+Once this is done, you will need to add yourself to the new group (fuse) that has been created:</p>
+
+<p>sudo adduser  fuse</p>
+
+<p>Create a local directory in which to mount your remote directory and make sure it is owned by you:
+
+mkdir [-p] /path/to/directory
+chown .<group> /path/to/directory
+
+Now you can mount your remote directory as follows:
+
+sshfs @<remote_host>:/path/to/directory/ /path/to/directory
+</p>
+</p>
+    <a href="/2008/02/12/sshfs.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
   <h3 class="post-title"><a href="/2008/01/26/moving-to-dreamhost.html" title="Moving To Dreamhost">Moving To Dreamhost</a></h3>
   <span class="post-date"><abbr class="published-on">January 26, 2008</abbr></span>
   <div class="post-content">
-    <p><p>After some months of being unhappy with the service from Hostgator, I decided yesterday to move to Dreamhost.&#160; While Hostgator are very affordable and for the most part reliable, the ssh connection was always painfully slow; it took me considerable effort in the beginning to even get ssh access (having been required to justify my need to them); the control panel they provided (cPanel) made it difficult to get anything done; and as far as I know I could only host a single site with them.</p>
+    <p><p>After some months of being unhappy with the service from Hostgator, I decided yesterday to move to Dreamhost.&nbsp; While Hostgator are very affordable and for the most part reliable, the ssh connection was always painfully slow; it took me considerable effort in the beginning to even get ssh access (having been required to justify my need to them); the control panel they provided (cPanel) made it difficult to get anything done; and as far as I know I could only host a single site with them.</p>
 
-<p>After a recommendation from a colleague at work, I decided to switch to Dreamhost.&#160; I opted to pay for a year in advance, as the monthly direct-debit payments are a little more expensive otherwise, and there is an initial setup fee if you pay monthly.&#160; The control panel is far more intuitive and a lot easier to use.&#160; I can host as many sites and sub-domains as I like with as many users, email accounts and MySQL databases as I like.&#160; Once I had created the account and switched my name servers with my domain registrar everything was underway.&#160; Within half an hour I had shell access, an initial account with which I could create more accounts, an initial email address of my choosing (thus reducing email outage to a minimum) and a general impression that Dreamhost were a lot more professional and experienced.</p>
+<p>After a recommendation from a colleague at work, I decided to switch to Dreamhost.&nbsp; I opted to pay for a year in advance, as the monthly direct-debit payments are a little more expensive otherwise, and there is an initial setup fee if you pay monthly.&nbsp; The control panel is far more intuitive and a lot easier to use.&nbsp; I can host as many sites and sub-domains as I like with as many users, email accounts and MySQL databases as I like.&nbsp; Once I had created the account and switched my name servers with my domain registrar everything was underway.&nbsp; Within half an hour I had shell access, an initial account with which I could create more accounts, an initial email address of my choosing (thus reducing email outage to a minimum) and a general impression that Dreamhost were a lot more professional and experienced.</p>
 
-<p>Obviously it will take up to 48 hours for the new name server settings to propagate to the root name servers, but despite this within about four hours the name server change had been effective for me.&#160; After about 15 minutes work making changes to my local copy of my Wordpress installation and MySQL dump, I rsync-ed everything to the new server, got the database up and running, and job done!</p></p>
+<p>Obviously it will take up to 48 hours for the new name server settings to propagate to the root name servers, but despite this within about four hours the name server change had been effective for me.&nbsp; After about 15 minutes work making changes to my local copy of my Wordpress installation and MySQL dump, I rsync-ed everything to the new server, got the database up and running, and job done!</p>
+</p>
     <a href="/2008/01/26/moving-to-dreamhost.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
@@ -71,6 +99,8 @@
   <span class="post-date"><abbr class="published-on">January 20, 2008</abbr></span>
   <div class="post-content">
     <p><p>As a trombone player, this made me smile!</p>
+
+<p></p>
 </p>
     <a href="/2008/01/20/i-can-haz-trombone.html" class="more">Continue reading &raquo;</a>
   </div>
@@ -81,13 +111,16 @@
   <h3 class="post-title"><a href="/2008/01/18/ssh-tunnelling.html" title="SSH Tunneling">SSH Tunneling</a></h3>
   <span class="post-date"><abbr class="published-on">January 18, 2008</abbr></span>
   <div class="post-content">
-    <p><p>Another aide memoire, but again may be useful to some. I&#8217;d like the ability to work from home on some web development projects I&#8217;m doing at work. Getting the code locally is not a problem thanks to Subversion over ssh However viewing the results can be tricky when you consider that the development server is behind the work network. The answer is SSH tunneling.</p>
+    <p><p>Another aide memoire, but again may be useful to some.  I'd like the ability to work from home on some web development projects I'm doing at work.  Getting the code locally is not a problem thanks to Subversion over ssh  However viewing the results can be tricky when you consider that the development server is behind the work network.  The answer is SSH tunneling.</p>
 
-<p>Let&#8217;s say you can access SERVER_A directly over ssh The service you want to access is on SERVER_B which you can&#8217;t access directly via SSH from your local machine. However, you can access SERVER_B from SERVER_A. I&#8217;ll assume that you want to access the service locally on port 12345, and that the remove port is port 80. The following command will allow you to access a service on SERVER_B from your local machine.</p>
-ssh -Nf -L 12345:SERVER_B:80 username@SERVER_A
-<p>The &#8216;-Nf&#8217; switch says don&#8217;t execute a command with this ssh session, and run this ssh process in the background. The first port is the port you want to use locally; the first server is the usually inaccessible remote server you want access to; and the third port is the remote port you want to use. The final argument gives the login to the remotely accessible server you have ssh access to directly.</p>
+<p>Let's say you can access SERVER_A directly over ssh  The service you want to access is on SERVER_B which you can't access directly via SSH from your local machine.  However, you can access SERVER_B from SERVER_A.  I'll assume that you want to access the service locally on port 12345, and that the remove port is port 80.  The following command will allow you to access a service on SERVER_B from your local machine.</p>
 
-<p>One caveat to this is if you are trying to access a web site that is defined using Apache virtual hosts. With this command alone, requesting localhost:12345 in Firefox would only direct you to the site that is listening remotely for requests that match &#8216;localhost&#8217;. If you would ordinarily access this site using mysite.server_b, then you need to use that as the address in Firefox on your local machine. Therefore, this needs to be added in /etc/hosts. With that done, you should be able to request mysite.server_b:12345 in Firefox and be directed to the remote &#8220;virtual host&#8221; site.</p></p>
+<p>ssh -Nf -L 12345:SERVER_B:80 username@SERVER_A</p>
+
+<p>The '-Nf' switch says don't execute a command with this ssh session, and run this ssh process in the background.  The first port is the port you want to use locally; the first server is the usually inaccessible remote server you want access to; and the third port is the remote port you want to use.  The final argument gives the login to the remotely accessible server you have ssh access to directly.</p>
+
+<p>One caveat to this is if you are trying to access a web site that is defined using Apache virtual hosts.  With this command alone, requesting localhost:12345 in Firefox would only direct you to the site that is listening remotely for requests that match 'localhost'.  If you would ordinarily access this site using mysite.server_b, then you need to use that as the address in Firefox on your local machine.  Therefore, this needs to be added in /etc/hosts.  With that done, you should be able to request mysite.server_b:12345 in Firefox and be directed to the remote "virtual host" site.</p>
+</p>
     <a href="/2008/01/18/ssh-tunnelling.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
@@ -97,30 +130,14 @@ ssh -Nf -L 12345:SERVER_B:80 username@SERVER_A
   <h3 class="post-title"><a href="/2008/01/12/gutsy-realtek-hd-audio-and-the-toshiba-u300.html" title="Gutsy, Realtek HD Audio and the Toshiba U300">Gutsy, Realtek HD Audio and the Toshiba U300</a></h3>
   <span class="post-date"><abbr class="published-on">January 12, 2008</abbr></span>
   <div class="post-content">
-    <p><p>This post is really an aide-memoire for me should I need to rebuild my laptop in the future, but it may prove useful to others. My Toshiba U300 laptop seems to have problems with Realtek HD Audio. After some searching and trial-and-error, I found that the following gets things working.</p>
+    <p><p>This post is really an aide-memoire for me should I need to rebuild my laptop in the future, but it may prove useful to others.  My Toshiba U300 laptop seems to have problems with Realtek HD Audio.  After some searching and trial-and-error, I found that the following gets things working.</p>
+
 <pre>
 sudo apt-get install linux-backports-modules-generic
-</pre></p>
+</pre>
+
+</p>
     <a href="/2008/01/12/gutsy-realtek-hd-audio-and-the-toshiba-u300.html" class="more">Continue reading &raquo;</a>
-  </div>
-</article>
-
-
-  <article class="post">
-  <h3 class="post-title"><a href="/2008/01/02/happy-new-year-and-new-year-resolutions.html" title="Happy New Year and New Year Resolutions">Happy New Year and New Year Resolutions</a></h3>
-  <span class="post-date"><abbr class="published-on">January 02, 2008</abbr></span>
-  <div class="post-content">
-    <p><p>Happy New Year!</p>
-
-<p>I&#8217;m not much of a &#8216;New Years&#8217; person. While I appreciate that Hogmanay is a big holiday for a lot of people, I&#8217;m not one of them. I always feel that it is a holiday where you are expected to force yourself to have a good time for the sake of it. Having said that, I did have a good Hogmanay this year! Going hand in hand with my &#8216;bah humbug&#8217; feeling of New Years, is my opinion of so called resolutions.</p>
-
-<p>Rarely do people manage to stick to resolutions that they make at the beginning of the year, and I tend to make a point of not making resolutions because I&#8217;ll just feel guilty when I inevitably break them. Nonetheless, I am going to make a few this year that I will try very hard not to break: <ol>
-	Stop smoking
-	Lose weight
-	Play the trombone more
-	Drink less coffee
-</ol> Surely I can manage four things! Although I don&#8217;t hold out much hope for the first two&#8230; we&#8217;ll see!</p></p>
-    <a href="/2008/01/02/happy-new-year-and-new-year-resolutions.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
 

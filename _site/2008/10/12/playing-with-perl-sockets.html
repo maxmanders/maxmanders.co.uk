@@ -55,48 +55,109 @@
   <h3 class="post-title"><a href="/2008/10/12/playing-with-perl-sockets.html" title="Playing With Perl Sockets">Playing With Perl Sockets</a></h3>
   <span class="post-date"><abbr class="published-on">October 12, 2008</abbr></span>
   <div class="post-content">
-    <p><p>At work, I have a <a href='http://www.snom.com/en/products/snom-360-voip-phone/'>Snom 360</a> IP phone that is hooked up to our internal <a href='http://www.asterisk.org/'>Asterisk</a> PBX.&#160; If I&#8217;m listening to music with my headphones in, I&#8217;m not always aware that my phone is ringing - some Perl and PHP hacking later, I&#8217;ve got a crude (and work-in-progress) solution.<!--more--></p>
+    <p><p>At work, I have a <a href="http://www.snom.com/en/products/snom-360-voip-phone/">Snom 360</a> IP phone that is hooked up to our internal <a href="http://www.asterisk.org/">Asterisk</a> PBX.&nbsp; If I'm listening to music with my headphones in, I'm not always aware that my phone is ringing - some Perl and PHP hacking later, I've got a crude (and work-in-progress) solution.<!--more--></p>
 
-<p>The phone has an internal web server that lets the user customise a number of options.&#160; The one I&#8217;m interested in is &#8216;Action URI&#8217;.&#160; When a call comes through to my phone, I can enter a URI that my phone will request.&#160; I can send arbitrary parameters in the query string, e.g. a message or the phone number of the caller.&#160; My solution involves a PHP script that the phone can request, a simple Perl socket server sitting listening on my laptop, and a simpel Perl Tk script that will open a window to alert me to the call.</p>
+<p>The phone has an internal web server that lets the user customise a number of options.&nbsp; The one I'm interested in is 'Action URI'.&nbsp; When a call comes through to my phone, I can enter a URI that my phone will request.&nbsp; I can send arbitrary parameters in the query string, e.g. a message or the phone number of the caller.&nbsp; My solution involves a PHP script that the phone can request, a simple Perl socket server sitting listening on my laptop, and a simpel Perl Tk script that will open a window to alert me to the call.</p>
 
-<p>The PHP script that my phone requests is quite simple: <pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
-&lt;pre class=&quot;brush:perl&quot;&gt;
+<p>The PHP script that my phone requests is quite simple:</p>
+
+<pre class="brush:perl">
 // Hostname of machine
-$host = &apos;somehost&apos;;
+$host = 'somehost';
 // Port to connect to
-$port = &apos;7890&apos;;
+$port = '7890';
 $timeout = 30;
-$message = $_GET[&apos;message&apos;];</pre></p>
+$message = $_GET['message'];
 
-<p>$socket = fsockopen($host, $port, $errnum, $errstr, $timeout); if (!is_resource($socket)) { exit(&#8220;Cannot connect: &#8221; . $errnum . &#8221; &#8221; . $errstr); } else { fputs($socket, $message); } fclose($socket); &lt;/pre&gt; This script is called from my phone and connects to the socket server listening on my laptop. The code for the corresponding socket server follows: <pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
-&lt;pre class=&quot;brush:perl&quot;&gt;
+$socket = fsockopen($host, $port, $errnum, $errstr, $timeout);
+if (!is_resource($socket))
+{
+exit("Cannot connect: " . $errnum . " " . $errstr);
+}
+else
+{
+fputs($socket, $message);
+}
+fclose($socket);
+</pre>
+
+
+<p>This script is called from my phone and connects to the socket server listening on my laptop.  The code for the corresponding socket server follows:</p>
+
+<pre class="brush:perl">
 use strict;
 use IO::Socket;
-use Net::hostent;</pre></p>
+use Net::hostent;
 
-<p>my $PORT = 7890; my $IP = &#8216;192.168.0.1&#8217;;</p>
+my $PORT = 7890;
+my $IP = '192.168.0.1';
 
-<p>my $serverSocket = IO::Socket::INET-&gt;new( Proto =&gt; &#8216;tcp&#8217;, LocalHost =&gt; $IP, LocalPort =&gt; $PORT, Listen =&gt; SOMAXCONN, Reuse =&gt; 1, ) or die(&#8220;Cannot create socket: $!\n&#8221;);</p>
+my $serverSocket = IO::Socket::INET->new(
+    Proto => 'tcp',
+    LocalHost => $IP,
+    LocalPort => $PORT,
+    Listen => SOMAXCONN,
+    Reuse => 1,
+) or die("Cannot create socket: $!\n");
 
-<p>while (my $clientSocket = $serverSocket-&gt;accept()) { $clientSocket-&gt;autoflush(1); while (&lt;$clientSocket&gt;) { <code>/path/to/tk/script/showMessage.pl &quot;$_&quot;</code>; } close($clientSocket); } &lt;/pre&gt; This Perl script listens in the background for incoming connections and passes any data it receives to a Perl TK script that displays this data in the form of a simple window on display 0:0. Here&#8217;s the code for th Perl Tk srcript: <pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
-&lt;pre class=&quot;brush:perl&quot;&gt;
+while (my $clientSocket = $serverSocket->accept())
+{
+    $clientSocket->autoflush(1);
+    while (<$clientSocket>)
+    {
+        `/path/to/tk/script/showMessage.pl "$_"`;
+    }
+    close($clientSocket);
+}
+</pre>
+
+
+<p>This Perl script listens in the background for incoming connections and passes any data it receives to a Perl TK script that displays this data in the form of a simple window on display 0:0.  Here's the code for th Perl Tk srcript:</p>
+
+<pre class="brush:perl">
 use strict;
 use Tk;
-use Tk::Font;</pre></p>
+use Tk::Font;
 
-<p>my $message = $ARGV<span>0</span>;</p>
+my $message = $ARGV[0];
 
-<p>my $mainWindow = MainWindow-&gt;new(); $mainWindow-&gt;minsize(qw(500 200)); $mainWindow-&gt;title(&#8220;Incoming Call&#8221;); $mainWindow-&gt;configure(-background =&gt; &#8216;white&#8217;);</p>
+my $mainWindow = MainWindow->new();
+$mainWindow->minsize(qw(500 200));
+$mainWindow->title("Incoming Call");
+$mainWindow->configure(-background => 'white');
 
-<p>my $font = $mainWindow-&gt;Font( -family =&gt; &#8216;Arial&#8217;, -size =&gt; &#8216;24&#8217;, );</p>
+my $font = $mainWindow->Font(
+    -family => 'Arial',
+    -size => '24',
+);
 
-<p>my $acceptButton = $mainWindow-&gt;Button( -text =&gt; $message, -background =&gt; &#8216;red&#8217;, -command =&gt; \&#38;exit, -foreground =&gt; &#8216;white&#8217;, -font =&gt; $font, );</p>
+my $acceptButton = $mainWindow->Button(
+    -text => $message,
+    -background => 'red',
+    -command => \&amp;exit,
+    -foreground => 'white',
+    -font => $font,
+);
 
-<p>$acceptButton-&gt;pack( -side =&gt; &#8216;bottom&#8217;, -expand =&gt; 1, -fill =&gt; &#8216;both&#8217; );</p>
+$acceptButton->pack(
+    -side => 'bottom',
+    -expand => 1,
+    -fill => 'both'
+);
 
-<p>$mainWindow-&gt;withdraw(); $mainWindow-&gt;update(); my $winXPos = int(($mainWindow-&gt;screenwidth - $mainWindow-&gt;width) / 2); my $winYPos = int(($mainWindow-&gt;screenheight - $mainWindow-&gt;height) / 2); $mainWindow-&gt;geometry(&#8220;+$winXPos+$winYPos&#8221;); $mainWindow-&gt;deiconify();</p>
+$mainWindow->withdraw();
+$mainWindow->update();
+my $winXPos = int(($mainWindow->screenwidth - $mainWindow->width) / 2);
+my $winYPos = int(($mainWindow->screenheight - $mainWindow->height) / 2);
+$mainWindow->geometry("+$winXPos+$winYPos");
+$mainWindow->deiconify();
 
-<p>MainLoop(); &lt;/pre&gt; There&#8217;s no doubt about it, this combination of scripts is crude, insecure, and really more of a proof of concept. Nonetheless, it serves my purposes and hopefully can tidy it up as time allows.</p></p>
+MainLoop();
+</pre>
+
+
+<p>There's no doubt about it, this combination of scripts is crude, insecure, and really more of a proof of concept.  Nonetheless, it serves my purposes and hopefully can tidy it up as time allows.</p>
+</p>
   </div>
 </article>
 <div id="categories">

@@ -53,16 +53,47 @@
     <div class="main">
       
   <article class="post">
+  <h3 class="post-title"><a href="/2007/11/20/rdiff-run-diff-on-remote-files.html" title="rdiff - Run diff on remote files">rdiff - Run diff on remote files</a></h3>
+  <span class="post-date"><abbr class="published-on">November 20, 2007</abbr></span>
+  <div class="post-content">
+    <p><p>A simple shell script that can be used to run a diff between local <em>and</em> remote files using scp.</p>
+
+<pre lang="bash">
+# A simple script that runs diff remotely using scp.
+# Parameters should use scp syntax, i.e.
+# [[user@][host:]]/path/to/file
+#
+
+#!/bin/sh
+
+if [ "$1" = "" -o "$2" = "" ]; then
+    echo "Usage: `basename $0` file1 file2"
+    exit 1
+fi
+
+scp $1 rdiff.1 >&amp; /dev/null
+scp $2 rdiff.2 >&amp; /dev/null
+diff -b rdiff.1 rdiff.2
+rm -f rdiff.1 rdiff.2</pre>
+
+</p>
+    <a href="/2007/11/20/rdiff-run-diff-on-remote-files.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
   <h3 class="post-title"><a href="/2007/11/19/orange-do-you-really-want-to-lose-my-custom.html" title="Orange... do you really want to lose my custom?">Orange... do you really want to lose my custom?</a></h3>
   <span class="post-date"><abbr class="published-on">November 19, 2007</abbr></span>
   <div class="post-content">
-    <p><p>By my reckoning, my current contract is nearly up which means I should be eligible for a free phone upgrade.&#194;&#160; I phoned a week ago to find out if that was the case and was told that yes, my contract was due for renewal in a few months so I could renew it and get a free phone upgrade on 15 November.</p>
+    <p><p>By my reckoning, my current contract is nearly up which means I should be eligible for a free phone upgrade.&Acirc;&nbsp; I phoned a week ago to find out if that was the case and was told that yes, my contract was due for renewal in a few months so I could renew it and get a free phone upgrade on 15 November.</p>
 
-<p>I phoned up earlier today to try and arrange this, and was told that I would have to pay &#194;&#163;150 for the phone I wanted (the Nokia N95) since my contract was apparently due for renewal in August of next year.&#194;&#160; Contrary to my memory and my phone bill, Orange insisted that my contract was for two years.&#194;&#160; In order to get out of this I would need to buy out the contract or go back to the shop I originally purchased the phone from and get written confirmation of my contract period.</p>
+<p>I phoned up earlier today to try and arrange this, and was told that I would have to pay &Acirc;&pound;150 for the phone I wanted (the Nokia N95) since my contract was apparently due for renewal in August of next year.&Acirc;&nbsp; Contrary to my memory and my phone bill, Orange insisted that my contract was for two years.&Acirc;&nbsp; In order to get out of this I would need to buy out the contract or go back to the shop I originally purchased the phone from and get written confirmation of my contract period.</p>
 
-<p>This would be pointless.&#194;&#160; The only signed document I have was for the initial 12 month contract over three years ago.&#194;&#160; Since then all renewals and upgrades have been done through the Orange web site.&#194;&#160; Two of the three representatives I spoke to were most unhelpful and bordering on being down right rude.&#194;&#160; However, I have been a loyal Orange customer (both PAYG and contract) for over five years now and for the most part the customer service has been fine.&#194;&#160; After 40 minutes of what seemed like haggling on the phone we eventually reached a compromise.</p>
+<p>This would be pointless.&Acirc;&nbsp; The only signed document I have was for the initial 12 month contract over three years ago.&Acirc;&nbsp; Since then all renewals and upgrades have been done through the Orange web site.&Acirc;&nbsp; Two of the three representatives I spoke to were most unhelpful and bordering on being down right rude.&Acirc;&nbsp; However, I have been a loyal Orange customer (both PAYG and contract) for over five years now and for the most part the customer service has been fine.&Acirc;&nbsp; After 40 minutes of what seemed like haggling on the phone we eventually reached a compromise.</p>
 
-<p>Unfortunately this experience has left me disappointed with Orange and I shall have to seriously consider switching providers should this performance be repeated in the future.</p></p>
+<p>Unfortunately this experience has left me disappointed with Orange and I shall have to seriously consider switching providers should this performance be repeated in the future.</p>
+</p>
     <a href="/2007/11/19/orange-do-you-really-want-to-lose-my-custom.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
@@ -72,11 +103,12 @@
   <h3 class="post-title"><a href="/2007/11/19/the-new-pornographers-at-oran-mor.html" title="The New Pornographers at Oran Mor">The New Pornographers at Oran Mor</a></h3>
   <span class="post-date"><abbr class="published-on">November 19, 2007</abbr></span>
   <div class="post-content">
-    <p><p>As part of my birthday present to my Jo, I took her to see <a href='http://www.thenewpornographers.com/' title='The New Pornographers website'>The New Pornographers</a> at <a href='http://www.oran-mor.co.uk/' title='Oran Mor, Glasgow'>Oran Mor</a> in Glasgow on Sunday night.&#194;&#160; I saw Neko Case there last year on Jo&#8217;s birthday and it is a fantastic venue.&#194;&#160; It&#8217;s not too large and the sounds is brilliant.</p>
+    <p><p>As part of my birthday present to my Jo, I took her to see <a href="http://www.thenewpornographers.com/" title="The New Pornographers website">The New Pornographers</a> at <a href="http://www.oran-mor.co.uk/" title="Oran Mor, Glasgow">Oran Mor</a> in Glasgow on Sunday night.&Acirc;&nbsp; I saw Neko Case there last year on Jo's birthday and it is a fantastic venue.&Acirc;&nbsp; It's not too large and the sounds is brilliant.</p>
 
-<p>This was my first time seeing The New Pornographers live and I certainly wasn&#8217;t disappointed.&#194;&#160; Jo saw them a few years ago, but unfortunately Neko didn&#8217;t join the band on either occasion.&#194;&#160; This meant they didn&#8217;t perform &#8220;Fail Safe&#8221;, one of my favourite tracks from the new <a href='http://www.amazon.co.uk/Challengers-New-Pornographers/dp/B000S9KSC8/ref=pd_bbs_sr_1?ie=UTF8&amp;s=music&amp;qid=1195504846&amp;sr=8-1' title='Challenger at Amazon.co.uk'>Challengers</a> album (as Neko and Kathryn perform wonderful harmonies on this track).&#194;&#160; Nonetheless I enjoyed the concert very much!</p>
+<p>This was my first time seeing The New Pornographers live and I certainly wasn't disappointed.&Acirc;&nbsp; Jo saw them a few years ago, but unfortunately Neko didn't join the band on either occasion.&Acirc;&nbsp; This meant they didn't perform "Fail Safe", one of my favourite tracks from the new <a href="http://www.amazon.co.uk/Challengers-New-Pornographers/dp/B000S9KSC8/ref=pd_bbs_sr_1?ie=UTF8&amp;s=music&amp;qid=1195504846&amp;sr=8-1" title="Challenger at Amazon.co.uk">Challengers</a> album (as Neko and Kathryn perform wonderful harmonies on this track).&Acirc;&nbsp; Nonetheless I enjoyed the concert very much!</p>
 
-<p>There was a good mix of the old and new, although no sneak previews of upcoming material.&#194;&#160; They performed a number of tracks from their latest album, as well as a great selection from previous albums: &#8220;Sing Me Spanish Techno&#8221;; &#8220;Bleeding Hearts Show&#8221; and &#8220;The Laws Have Changed&#8221; to name but a few.&#194;&#160; And just when we thought it was over, they came back on stage to do a good few songs for the encore.&#194;&#160; All in all, a brilliant concert even if Neko didn&#8217;t make an appearance!</p></p>
+<p>There was a good mix of the old and new, although no sneak previews of upcoming material.&Acirc;&nbsp; They performed a number of tracks from their latest album, as well as a great selection from previous albums: "Sing Me Spanish Techno"; "Bleeding Hearts Show" and "The Laws Have Changed" to name but a few.&Acirc;&nbsp; And just when we thought it was over, they came back on stage to do a good few songs for the encore.&Acirc;&nbsp; All in all, a brilliant concert even if Neko didn't make an appearance!</p>
+</p>
     <a href="/2007/11/19/the-new-pornographers-at-oran-mor.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
@@ -86,7 +118,8 @@
   <h3 class="post-title"><a href="/2007/11/04/i-can-haz-preacher-kat.html" title="I Can Haz Preacher Kat">I Can Haz Preacher Kat</a></h3>
   <span class="post-date"><abbr class="published-on">November 04, 2007</abbr></span>
   <div class="post-content">
-    <p><a href='http://icanhascheezburger.com/2007/10/12/hallelujah-praise-the-lawd/'></a></p>
+    <p><p><a href="http://icanhascheezburger.com/2007/10/12/hallelujah-praise-the-lawd/"></a></p>
+</p>
     <a href="/2007/11/04/i-can-haz-preacher-kat.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
@@ -96,22 +129,13 @@
   <h3 class="post-title"><a href="/2007/11/03/edlug-talk-an-introduction-to-openid.html" title="EdLUG Talk - An Introduction to OpenID">EdLUG Talk - An Introduction to OpenID</a></h3>
   <span class="post-date"><abbr class="published-on">November 03, 2007</abbr></span>
   <div class="post-content">
-    <p><p>On Thursday 01 November I gave a brief talk titled &#8220;An Introduction to OpenID&#8221; at the monthly EdLUG meeting.&#194;&#160; The <a href='http://www.slideshare.net/maxmanders/an-introduction-to-openid' title='An Introduction to OpenID (Slides).'>slides for the talk</a> are available on Slideshare.&#194;&#160; It seemed to go well despite my fear of public speaking.&#194;&#160; A few questions were put to me; some of which I could answer.</p>
+    <p><p>On Thursday 01 November I gave a brief talk titled "An Introduction to OpenID" at the monthly EdLUG meeting.&Acirc;&nbsp; The <a href="http://www.slideshare.net/maxmanders/an-introduction-to-openid" title="An Introduction to OpenID (Slides).">slides for the talk</a> are available on Slideshare.&Acirc;&nbsp; It seemed to go well despite my fear of public speaking.&Acirc;&nbsp; A few questions were put to me; some of which I could answer.</p>
 
-<p>The few I couldn&#8217;t answer were mainly regarding the specifics of the OpenID authentication process.&#194;&#160; Perhaps it was nerves, but in hindsight I realise I knew the answer all along.&#194;&#160; I was asked if OpenID could tie into Kerberos or PAM.&#194;&#160; This is really down to how one chooses to implement the standard.</p>
+<p>The few I couldn't answer were mainly regarding the specifics of the OpenID authentication process.&Acirc;&nbsp; Perhaps it was nerves, but in hindsight I realise I knew the answer all along.&Acirc;&nbsp; I was asked if OpenID could tie into Kerberos or PAM.&Acirc;&nbsp; This is really down to how one chooses to implement the standard.</p>
 
-<p>The OpenID specifications state that at at some point authentication must be performed with the Identity Provider.&#194;&#160; However, the details of how this authentication must be performed are purposefully not specified and instead left up to the implementor.&#194;&#160; So in answer to the questions, yes you can use Kerberos or PAM in the authentication process, but it&#8217;s up to&#194;&#160; you to tie it all together.&#194;&#160; In fact, traditional username/password combinations need not be used.&#194;&#160; If one so chooses secure fobs or biometrics could indeed be used; it&#8217;s up to you!</p></p>
+<p>The OpenID specifications state that at at some point authentication must be performed with the Identity Provider.&Acirc;&nbsp; However, the details of how this authentication must be performed are purposefully not specified and instead left up to the implementor.&Acirc;&nbsp; So in answer to the questions, yes you can use Kerberos or PAM in the authentication process, but it's up to&Acirc;&nbsp; you to tie it all together.&Acirc;&nbsp; In fact, traditional username/password combinations need not be used.&Acirc;&nbsp; If one so chooses secure fobs or biometrics could indeed be used; it's up to you!</p>
+</p>
     <a href="/2007/11/03/edlug-talk-an-introduction-to-openid.html" class="more">Continue reading &raquo;</a>
-  </div>
-</article>
-
-
-  <article class="post">
-  <h3 class="post-title"><a href="/2007/10/27/new-job-with-valley-technology.html" title="New Job With Valley Technology">New Job With Valley Technology</a></h3>
-  <span class="post-date"><abbr class="published-on">October 27, 2007</abbr></span>
-  <div class="post-content">
-    <p><p>It&#8217;s official; on Thursday 01 November, I will start my new job with Edinburgh based Valley Technology.&#194;&#160; Unfortunately that means saying goodbye to my friends at the Crown Office but with any luck I&#8217;ll still see them now and again.&#194;&#160; And talk about jumping in at the deep end&#8230; on my first day I&#8217;ll be giving a brief five minute talk on OpenID at the EdLUG meeting that evening.&#194;&#160; As crazy as it sounds I&#8217;m doing it mainly for my self-confidence; I&#8217;ve never been a fan of public speaking but with any luck this will help me improve.&#194;&#160; I&#8217;ll post the slides up when I&#8217;m done.</p></p>
-    <a href="/2007/10/27/new-job-with-valley-technology.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
 

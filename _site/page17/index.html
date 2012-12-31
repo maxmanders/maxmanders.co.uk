@@ -53,10 +53,25 @@
     <div class="main">
       
   <article class="post">
+  <h3 class="post-title"><a href="/2007/08/21/scrubs-musical.html" title="Scrubs Musical">Scrubs Musical</a></h3>
+  <span class="post-date"><abbr class="published-on">August 21, 2007</abbr></span>
+  <div class="post-content">
+    <p><p>Every time I see this clip it makes me laugh out loud, so thought I'd share the laughs.</p>
+
+<p>[youtube lL4L4Uv5rf0]</p>
+</p>
+    <a href="/2007/08/21/scrubs-musical.html" class="more">Continue reading &raquo;</a>
+  </div>
+</article>
+
+
+  <article class="post">
   <h3 class="post-title"><a href="/2007/08/21/pasta-with-tomato-and-basil-sauce.html" title="Pasta with Tomato and Basil Sauce">Pasta with Tomato and Basil Sauce</a></h3>
   <span class="post-date"><abbr class="published-on">August 21, 2007</abbr></span>
   <div class="post-content">
-    <p>
+    <p><p><strong>Ingredients</strong></p>
+
+
 200g fusilli pasta.
 1 large onion.
 2 cloves of garlic.
@@ -66,7 +81,12 @@ Pinch of sugar.
 Pinch of chilli powder.
 Small handful of fresh basil.
 (serves 2)
-<strong>Method</strong><ol>
+
+
+
+<p><strong>Method</strong></p>
+
+<ol>
 Finely chop the onion and garlic.
 Add a little olive oil in a pan and add the garlic.
 When the garlic begins to sizzle add the onion and saute until soft.
@@ -78,7 +98,9 @@ When the pasta is almost ready, tair a small handfull of fresh basil into the sa
 Drain the cooked pasta.
 Serve the sauce on top of the piping hot pasta and grate a generous amount of paramesan on top.
 Season with salt and pepper, and enjoy.
-</ol></p>
+</ol>
+
+</p>
     <a href="/2007/08/21/pasta-with-tomato-and-basil-sauce.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
@@ -88,11 +110,42 @@ Season with salt and pepper, and enjoy.
   <h3 class="post-title"><a href="/2007/08/16/java-this-and-that.html" title="Java - this and that">Java - this and that</a></h3>
   <span class="post-date"><abbr class="published-on">August 16, 2007</abbr></span>
   <div class="post-content">
-    <p><p>My work has recently taken a departure from the usual web development as I&#8217;ve been &#8220;borrowed&#8221; by the other development team to help out with a Java project. Now, my Java is reasonable sound but yesterday I came across a curious situation involving passing about the current object.</p>
+    <p><p>My work has recently taken a departure from the usual web development as I've been "borrowed" by the other development team to help out with a Java project.  Now, my Java is reasonable sound but yesterday I came across a curious situation involving passing about the current object.</p>
 
-<p>In common with a lot of languages, the current object is represented by the &#8216;this&#8217; keyword. I wanted to pass &#8216;this&#8217; to a static method of another class. Of course, I can&#8217;t refer to the object as &#8216;this&#8217; in the static method context as that would be ambiguous insofar as it could refer to the class with the static method I&#8217;m working with. This pattern is often used with callbacks where for example you might want to register a class with a particular listener objcet. To avoid confusion, I named the actual parameter in the static method <pre lang='Java'>that</pre> I assumed that I would reference the fields and methods of the object using <pre lang='Java'>that.someMethod()</pre> rather than <pre lang='Java'>this.someMethod()</pre> This is where the fun begins. Let&#8217;s call the original object <pre lang='Java'>SomeObject theObject</pre> and I want to call the static method <pre lang='Java'>SomeClass.doStaticMethod(SomeObject that)</pre> I would call that method, from within theObject, using <pre lang='Java'>SomeClass.doStaticMethod(this)</pre> When in theObject, I have access to private fields and methods since private fields and methods are within scope. I assumed the same would be true when I passed &#8220;theObject&#8221; as &#8220;this&#8221; to &#8220;SomeClass.doStaticMethod(SomeObject that)&#8221;. However, when I actually try to access private fields such as &#8220;that.privateField&#8221;, it would appear that I no longer have access. I could create appropriate accessor methods, but that would defeat the idea of encapsulation.</p>
+<p>In common with a lot of languages, the current object is represented by the 'this' keyword.  I wanted to pass 'this' to a static method of another class.  Of course, I can't refer to the object as 'this' in the static method context as that would be ambiguous insofar as it could refer to the class with the static method I'm working with.  This pattern is often used with callbacks where for example you might want to register a class with a particular listener objcet.  To avoid confusion, I named the actual parameter in the static method</p>
 
-<p>Does anyone have any ideas? Am I missing some fundamental (and so obvious I missed it) rule of scope or object passing?</p></p>
+<pre lang="Java">that</pre>
+
+
+<p>I assumed that I would reference the fields and methods of the object using</p>
+
+<pre lang="Java">that.someMethod()</pre>
+
+
+<p>rather than</p>
+
+<pre lang="Java">this.someMethod()</pre>
+
+
+<p>This is where the fun begins.  Let's call the original object</p>
+
+<pre lang="Java">SomeObject theObject</pre>
+
+
+<p>and I want to call the static method</p>
+
+<pre lang="Java">SomeClass.doStaticMethod(SomeObject that)</pre>
+
+
+<p>I would call that method, from within theObject, using</p>
+
+<pre lang="Java">SomeClass.doStaticMethod(this)</pre>
+
+
+<p>When in theObject, I have access to private fields and methods since private fields and methods are within scope.  I assumed the same would be true when I passed "theObject" as "this" to "SomeClass.doStaticMethod(SomeObject that)".  However, when I actually try to access private fields such as "that.privateField", it would appear that I no longer have access.  I could create appropriate accessor methods, but that would defeat the idea of encapsulation.</p>
+
+<p>Does anyone have any ideas?  Am I missing some fundamental (and so obvious I missed it) rule of scope or object passing?</p>
+</p>
     <a href="/2007/08/16/java-this-and-that.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
@@ -102,14 +155,14 @@ Season with salt and pepper, and enjoy.
   <h3 class="post-title"><a href="/2007/08/15/symfony-woes.html" title="Symfony Woes">Symfony Woes</a></h3>
   <span class="post-date"><abbr class="published-on">August 15, 2007</abbr></span>
   <div class="post-content">
-    <p><p>I&#8217;ve finally found time to start investigating some other PHP frameworks, and after some brief research I decided to start off with <a href='http://www.symfony-project.com'>Symfony</a>. All is going well and so far I&#8217;m impressed with what Symfony can do compared with CakePHP&#8230; with a few exceptions.</p>
+    <p><p>I've finally found time to start investigating some other PHP frameworks, and after some brief research I decided to start off with <a href="http://www.symfony-project.com">Symfony</a>.  All is going well and so far I'm impressed with what Symfony can do compared with CakePHP... with a few exceptions.</p>
 
-<p>I initially tried following the My First Project tutorial, but hit problems pretty quickly. It would seem that there was a problem with the PHP SQLite extension. The phpinfo() function verified that SQLite was indeed installed, but I couldn&#8217;t get any further on that trail. After reading a number of forum posts on the issue, it became apparent I should recompile Apache and PHP. I&#8217;m still not that confident with Linux to do that so I left it at that.</p>
+<p>I initially tried following the My First Project tutorial, but hit problems pretty quickly.  It would seem that there was a problem with the PHP SQLite extension.  The phpinfo() function verified that SQLite was indeed installed, but I couldn't get any further on that trail.  After reading a number of forum posts on the issue, it became apparent I should recompile Apache and PHP.  I'm still not that confident with Linux to do that so I left it at that.</p>
 
-<p>Then I followed the Askeet tutorial with more success as this tutorial uses MySQL rather than SQLite. However, I can&#8217;t get the URL rewriting to work as it should. I&#8217;ve checked my Apache configuration, the .htacces file and still no luck. If I load http://<pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
-&lt;project&gt;/question I get a 404 error.  If I load http://&lt;project&gt;/index.php/question or http://&lt;project&gt;/frontend_dev.php/question all is well.  I&apos;ll press on with this tutorial until I hit a road block, but this is really bugging me.  Again, a few forum posts suggest recompiling Apache and PHP.  However, the extensions that should be included in the new build are already present according to phpinfo().</pre></p>
+<p>Then I followed the Askeet tutorial with more success as this tutorial uses MySQL rather than SQLite.  However, I can't get the URL rewriting to work as it should.  I've checked my Apache configuration, the .htacces file and still no luck. If I load http://<project>/question I get a 404 error.  If I load http://<project>/index.php/question or http://<project>/frontend_dev.php/question all is well.  I'll press on with this tutorial until I hit a road block, but this is really bugging me.  Again, a few forum posts suggest recompiling Apache and PHP.  However, the extensions that should be included in the new build are already present according to phpinfo().</p>
 
-<p>I&#8217;m currently running Fedora 7 which installs Apache and PHP in its own odd way. Perhaps I should start from scratch by removing Apache and PHP with yum and compiling both from source. Although as I said I&#8217;m kind of reluctant to do that. If anyone has any ideas - let me know!</p></p>
+<p>I'm currently running Fedora 7 which installs Apache and PHP in its own odd way.  Perhaps I should start from scratch by  removing Apache and PHP with yum and compiling both from source.  Although as I said I'm kind of reluctant to do that.  If anyone has any ideas - let me know!</p>
+</p>
     <a href="/2007/08/15/symfony-woes.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
@@ -119,20 +172,8 @@ Season with salt and pepper, and enjoy.
   <h3 class="post-title"><a href="/2007/05/19/hosting-with-hostgator.html" title="Hosting With Hostgator">Hosting With Hostgator</a></h3>
   <span class="post-date"><abbr class="published-on">May 19, 2007</abbr></span>
   <div class="post-content">
-    <p><p>Up until recently my hosting was provided by Fasthosts. For reasons that have nothing to do with the experience I have had with Fasthosts I have had to move to an alternative hosting provider. After some research I opted to go with Hostgator&#8217;s Baby plan. The features included with this hosting plan are excellent for the small fee of &#194;&#163;5.00 per month. And the technical support is brilliant. I initially had problems getting SSH access, but after raising the issue via the ticket system, I had SSH access within a few emails! </p>
+    <p><p>Up until recently my hosting was provided by Fasthosts.  For reasons that have nothing to do with the experience I have had with Fasthosts I have had to move to an alternative hosting provider.  After some research I opted to go with Hostgator's Baby plan. The features included with this hosting plan are excellent for the small fee of &Acirc;&pound;5.00 per month.   And the technical support is brilliant.  I initially had problems getting SSH access, but after raising the issue via the ticket system, I had SSH access within a few emails! </p>
     <a href="/2007/05/19/hosting-with-hostgator.html" class="more">Continue reading &raquo;</a>
-  </div>
-</article>
-
-
-  <article class="post">
-  <h3 class="post-title"><a href="/2007/05/07/rip-honey.html" title="R.I.P. Honey">R.I.P. Honey</a></h3>
-  <span class="post-date"><abbr class="published-on">May 07, 2007</abbr></span>
-  <div class="post-content">
-    <p><p>It is with great sadness today that I say goodbye to our dog Honey. She lived a long and full life but ultimately her age and the poor health that accompanies a dog of her years got the better of her; this afternoon she was put to sleep.? I hope that she and Flint are together again in the doggy afterlife.</p>
-
-<p>In Loving Memory of Honey and Flint.</p></p>
-    <a href="/2007/05/07/rip-honey.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
 

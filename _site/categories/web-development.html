@@ -60,7 +60,7 @@
   <h3 class="post-title"><a href="/2012/03/13/whisky-web-2012.html" title="Whisky Web 2012">Whisky Web 2012</a></h3>
   <span class="post-date"><abbr class="published-on">March 13, 2012</abbr></span>
   <div class="post-content">
-    <p><p>Scotland has a thriving and diverse tech community, reflected in such events and organisations as&#160;<a href='http://techmeetup.co.uk/' title='Tech Meetup'>Tech Meetup</a>; various&#160;<a href='http://www.scotlug.org.uk/' title='ScotLUG'>Linux User Groups</a>; the annual&#160;<a href='http://thehighlandfling.com/' title='Highland Fling'>Highland Fling</a>&#160;web conference;&#160;<a href='http://www.welcometosync.com/hack/' title='Culture Hack Scotland'>Culture Hack Scotland</a>;&#160;<a href='http://www.turingfestival.com/' title='Turing Festival'>The Turing Festival</a>&#160;and the&#160;<a href='http://www.sciencefestival.co.uk/' title='Edinburgh International Science Festival'>Edinburgh International Science Festival</a>&#160;to name but a few. &#160;I have been fortunate enough to attend previous Highland Flings, and I know others in the web industry who have had fun and positive experiences at other tech events hosted in Scotland.</p>
+    <p><p>Scotland has a thriving and diverse tech community, reflected in such events and organisations as&nbsp;<a title="Tech Meetup" href="http://techmeetup.co.uk/">Tech Meetup</a>; various&nbsp;<a title="ScotLUG" href="http://www.scotlug.org.uk/">Linux User Groups</a>; the annual&nbsp;<a title="Highland Fling" href="http://thehighlandfling.com/">Highland Fling</a>&nbsp;web conference;&nbsp;<a title="Culture Hack Scotland" href="http://www.welcometosync.com/hack/">Culture Hack Scotland</a>;&nbsp;<a title="Turing Festival" href="http://www.turingfestival.com/">The Turing Festival</a>&nbsp;and the&nbsp;<a title="Edinburgh International Science Festival" href="http://www.sciencefestival.co.uk/">Edinburgh International Science Festival</a>&nbsp;to name but a few. &nbsp;I have been fortunate enough to attend previous Highland Flings, and I know others in the web industry who have had fun and positive experiences at other tech events hosted in Scotland.</p>
     <a href="/2012/03/13/whisky-web-2012.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
@@ -70,7 +70,7 @@
   <h3 class="post-title"><a href="/2011/07/13/the-highland-fling-2011-web-standard-in-scotland.html" title="The Highland Fling 2011 - Web Standard In Scotland">The Highland Fling 2011 - Web Standard In Scotland</a></h3>
   <span class="post-date"><abbr class="published-on">July 13, 2011</abbr></span>
   <div class="post-content">
-    <p><p>July 8th 2011 saw the welcome and eagerly anticipated return of <a href='http://thehighlandfling.com/'>"The Highland Fling -- Web Standards in Scotland"</a>. &#160;Set up and organised by <a href='http://www.azcazandco.com/'>Alan White</a> in 2007 to increase awareness of web standards and best practice, it&#8217;s the only conference of it&#8217;s kind in Scotland. &#160;I&#8217;ve been fortunate enough to have been able to attend each conference, although there was a hiatus in 2009/2010. &#160;The inaugural event really set the bar high for what could be achieved by a dedicated developer passionate about his work.</p>
+    <p><p>July 8th 2011 saw the welcome and eagerly anticipated return of <a href="http://thehighlandfling.com/">"The Highland Fling -- Web Standards in Scotland"</a>. &nbsp;Set up and organised by <a href="http://www.azcazandco.com/">Alan White</a> in 2007 to increase awareness of web standards and best practice, it's the only conference of it's kind in Scotland. &nbsp;I've been fortunate enough to have been able to attend each conference, although there was a hiatus in 2009/2010. &nbsp;The inaugural event really set the bar high for what could be achieved by a dedicated developer passionate about his work.</p>
     <a href="/2011/07/13/the-highland-fling-2011-web-standard-in-scotland.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
@@ -80,17 +80,42 @@
   <h3 class="post-title"><a href="/2010/04/30/revert-to-php-5-2-in-ubuntu-10-04-lucid-lynx.html" title="Revert to PHP 5.2 in Ubuntu 10.04 (Lucid Lynx)">Revert to PHP 5.2 in Ubuntu 10.04 (Lucid Lynx)</a></h3>
   <span class="post-date"><abbr class="published-on">April 30, 2010</abbr></span>
   <div class="post-content">
-    <p><p>Despite suppressing updates of my LAMP stack, the upgrade to Ubuntu 10.04 ignored that, and as such I now have PHP 5.3.X installed.&#160; Ordinarilly this woud be fine, but one of the open source web applications I work with doesn&#8217;t play well with PHP 5.3.X.&#160; I needed a simple way to revert to a previous 5.2.X version of PHP.&#160; The version in the Ubuntu 9.10 (Karmic) repositories would do the trick, so it was jsut a case of forcing Ubuntu to honour the 9.10 versions of various PHP packages over the 10.04 versions.</p>
+    <p><p>Despite suppressing updates of my LAMP stack, the upgrade to Ubuntu 10.04 ignored that, and as such I now have PHP 5.3.X installed.&nbsp; Ordinarilly this woud be fine, but one of the open source web applications I work with doesn't play well with PHP 5.3.X.&nbsp; I needed a simple way to revert to a previous 5.2.X version of PHP.&nbsp; The version in the Ubuntu 9.10 (Karmic) repositories would do the trick, so it was jsut a case of forcing Ubuntu to honour the 9.10 versions of various PHP packages over the 10.04 versions.</p>
 
-<p>First, we get a list of all the currently installed PHP packages: <pre class='brush:bash'>sudo dpkg -l | grep php > /tmp/php.packages
-</pre> Next we remove the currently installed PHP packages: <pre class='brush:bash'>sudo apt-get remove --purge $(dpkg -l | grep php)
-</pre> Now we need to create an alternative sources list: <pre class='brush:bash'>sed s/lucid/karmic/g /etc/apt/sources.list |\
+<p>First, we get a list of all the currently installed PHP packages:</p>
+
+<pre class="brush:bash">sudo dpkg -l | grep php > /tmp/php.packages
+</pre>
+
+
+<p>Next we remove the currently installed PHP packages:</p>
+
+<pre class="brush:bash">sudo apt-get remove --purge $(dpkg -l | grep php)
+</pre>
+
+
+<p>Now we need to create an alternative sources list:</p>
+
+<pre class="brush:bash">sed s/lucid/karmic/g /etc/apt/sources.list |\
 sudo tee /etc/apt/sources.list.d/karmic.list
-</pre> Having done that, we need to generate an aptitude preferences file for PHP: <pre class='brush:bash'>awk '{print "Package: " $0; print "Pin: release a=karmic\nPin-Priority: 991\n"}' /tmp/php.packages |\
+</pre>
+
+
+<p>Having done that, we need to generate an aptitude preferences file for PHP:</p>
+
+<pre class="brush:bash">awk '{print "Package: " $0; print "Pin: release a=karmic\nPin-Priority: 991\n"}' /tmp/php.packages |\
 sudo tee /etc/apt/preferences.d/php
-</pre> This preferences file tells aptitude that for each listed package, we want to pin down the installation candidate to that from the Karmic repositories. We can now install the packages that we previously removed, but this time the versions from the Karmic repositories: <pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
-&lt;pre class=&quot;brush:bash&quot;&gt;sudo apt-get update &amp;&amp; apt-get install $(cat /tmp/php.packages | tr &quot;\n&quot; &quot; &quot;)
-&lt;/pre&gt;</pre> A quick restart of Apache and everything seems to be working with the older version of PHP!</p></p>
+</pre>
+
+
+<p>This preferences file tells aptitude that for each listed package, we want to pin down the installation candidate to that from the Karmic repositories.  We can now install the packages that we previously removed, but this time the versions from the Karmic repositories:</p>
+
+<pre class="brush:bash">sudo apt-get update && apt-get install $(cat /tmp/php.packages | tr "\n" " ")
+</pre>
+
+
+<p>A quick restart of Apache and everything seems to be working with the older version of PHP!</p>
+</p>
     <a href="/2010/04/30/revert-to-php-5-2-in-ubuntu-10-04-lucid-lynx.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
@@ -100,7 +125,8 @@ sudo tee /etc/apt/preferences.d/php
   <h3 class="post-title"><a href="/2010/04/11/uk-geocoding-update.html" title="UK Geocoding - Update">UK Geocoding - Update</a></h3>
   <span class="post-date"><abbr class="published-on">April 11, 2010</abbr></span>
   <div class="post-content">
-    <p><p>I&#8217;ve updated the <a href='http://ukgeocode.maxmanders.co.uk/'>UK Geocoding site</a> to provide better documentation, and a UI for geocoding, in addition to the XML API.</p></p>
+    <p><p>I've updated the <a href="http://ukgeocode.maxmanders.co.uk/">UK Geocoding site</a> to provide better documentation, and a UI for geocoding, in addition to the XML API.</p>
+</p>
     <a href="/2010/04/11/uk-geocoding-update.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>
@@ -110,7 +136,8 @@ sudo tee /etc/apt/preferences.d/php
   <h3 class="post-title"><a href="/2010/04/10/uk-geocoding.html" title="UK Geocoding">UK Geocoding</a></h3>
   <span class="post-date"><abbr class="published-on">April 10, 2010</abbr></span>
   <div class="post-content">
-    <p><p>After a little hard work, I&#8217;m releasing my attempt to address the shortfall in accurate UK geocoding services.&#160; Courtesy of open data provided by Ordnance Survey Open Click-Point, some sed, SQLite, PHP and YQL I&#8217;ve produced a REST API, and a YQL datatable.&#160; I&#8217;ve also written <a href='http://maxmanders.co.uk/uk-geocode/' title='UK Geocoding'>a more thorough account</a> of this by way of documenation.</p></p>
+    <p><p>After a little hard work, I'm releasing my attempt to address the shortfall in accurate UK geocoding services.&nbsp; Courtesy of open data provided by Ordnance Survey Open Click-Point, some sed, SQLite, PHP and YQL I've produced a REST API, and a YQL datatable.&nbsp; I've also written <a title="UK Geocoding" href="http://maxmanders.co.uk/uk-geocode/">a more thorough account</a> of this by way of documenation.</p>
+</p>
     <a href="/2010/04/10/uk-geocoding.html" class="more">Continue reading &raquo;</a>
   </div>
 </article>

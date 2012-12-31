@@ -55,101 +55,108 @@
   <h3 class="post-title"><a href="/2007/08/22/analysing-oracle-application-server-9i-webcache-logs.html" title="Analysing Oracle Application Server 9i Webcache Logs">Analysing Oracle Application Server 9i Webcache Logs</a></h3>
   <span class="post-date"><abbr class="published-on">August 22, 2007</abbr></span>
   <div class="post-content">
-    <p><p>Recently I had cause to report on the usage staff at work made of the corporate intranet. This would ordinarily be a simple enough task if the logs were plain standard Apache logs. However, I was dealing with Oracle9iAS, a very different beast indeed. Oracle9iAS is built on top of a customised version of Apache and incorporates a caching proxy server, the so-called Webcache; an implementation of J2EE called OC4J (Oracle Containers for Java) and various other bells and whistles, making it something of a behamoth.<!--more--></p>
+    <p><p>Recently I had cause to report on the usage staff at work made of the corporate intranet. This would ordinarily be a simple enough task if the logs were plain standard Apache logs. However, I was dealing with Oracle9iAS, a very different beast indeed.  Oracle9iAS is built on top of a customised version of Apache and incorporates a caching proxy server, the so-called Webcache; an implementation of J2EE called OC4J (Oracle Containers for Java) and various other bells and whistles, making it something of a behamoth.<!--more--></p>
 
-<p>Because we use the Webcache, I would need to analyse the Webcache access logs for a representative picture of what people are requesting. However, the Webcache does not use a single log file; it uses rolling log files for each day named <pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
-&lt;access_log.YYYYMMDD&gt;.  Also, Webcache does not use a standardised logfile format, it uses a format unique (as far as I know) to Oracle.</pre></p>
+<p>Because we use the Webcache, I would need to analyse the Webcache access logs for a representative picture of what people are requesting.  However, the Webcache does not use a single log file; it uses rolling log files for each day named &lt;access_log.YYYYMMDD>.  Also, Webcache does not use a standardised logfile format, it uses a format unique (as far as I know) to Oracle.</p>
 
-<p>My task was to extract the relevant data from the various logfiles. I was only interested in &#8220;pages&#8221; from Oracle Portal. In this case, a page is a specific Oracle Portal entity, rather than a more genereal web page as you might think. I wrote a small Perl script to grab the necessary lines from each logfile and write them to a file that I would later process with Analog. <pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
-&lt;pre lang=&quot;Perl&quot;&gt;</pre></p>
+<p>My task was to extract the relevant data from the various logfiles. I was only interested in "pages" from Oracle Portal.  In this case, a page is a specific Oracle Portal entity, rather than a more genereal web page as you might think.  I wrote a small Perl script to grab the necessary lines from each logfile and write them to a file that I would later process with Analog.</p>
 
-<h1 id='usrbinperlcode'>!/usr/bin/perl&lt;/code&gt;</h1>
+<pre lang="Perl">
+#!/usr/bin/perl</code>
 
-<h1 id='use_directives'>USE directives</h1>
+# USE directives
+use Time::Local;
+use File::Find;
+use Cwd;
 
-<p>use Time::Local; use File::Find; use Cwd;</p>
+# -----------------------------------------------
 
-<h1 id='id1'>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</h1>
+# Get elements of the current datetime
+my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = gmtime(time);
+my $cwd = getcwd();
+my $extension;
+my $regex;
+my $line;
+my $pause;
+my $thisfile;
 
-<h1 id='get_elements_of_the_current_datetime'>Get elements of the current datetime</h1>
+# Convert year to four digit YYYY format rather than 'year - 1900'
+$year = $year + 1900;
 
-<p>my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = gmtime(time); my $cwd = getcwd(); my $extension; my $regex; my $line; my $pause; my $thisfile;</p>
-
-<h1 id='convert_year_to_four_digit_yyyy_format_rather_than_year__1900'>Convert year to four digit YYYY format rather than &#8216;year - 1900&#8217;</h1>
-
-<p>$year = $year + 1900;</p>
-
-<h1 id='if_the_month_is_january_ie_mon__0_then_we_need_to_process_log_files'>If the month is January, i.e. $mon == 0, then we need to process log files</h1>
-
-<h1 id='from_the_previous_year_as_well_as_the_previous_month_ie_december_or'>from the previous year as well as the previous month, i.e. December or</h1>
-
-<h1 id='mon__12'>$mon == 12.</h1>
-
-<p>if ($mon == 0) { $mon = 12; $year -= 1; }</p>
-
-<h1 id='construct_logfile_extension_as_yyyymm_where_mm_is_previous_mm'>Construct logfile extension as YYYYMM where MM is previous MM.</h1>
-
-<p>$extension = length($mon) == 1 ? &#8220;$year&#8221; . &#8220;0&#8221; . $mon : &#8220;$year&#8221; . $mon;</p>
-
-<h1 id='file_to_output_results_to'>File to output results to.</h1>
-
-<p>$outfile = &#8220;input.log&#8221;;</p>
-
-<h1 id='regex_to_match_portal_page_uris'>Regex to match Portal page URIs.</h1>
-
-<p>$regex = &#8216;^.<em>\t/portal/page\?_pageid.</em>$&#8217;;</p>
-
-<h1 id='run_filefindfind_against_each_file_in_the_current_directory'>Run File::Find::find() against each file in the current directory.</h1>
-
-<p>find(\&#38;get_date, $cwd);</p>
-
-<h1 id='id2'>#</h1>
-
-<h1 id='callback_function_for_filefind'>Callback function for File::Find</h1>
-
-<h1 id='this_function_is_called_for_every_file_found_in_cwd'>This function is called for every file found in $cwd</h1>
-
-<h1 id='id3'>#</h1>
-
-<p>sub get_date { my $line; my @output_list; my @input_list;</p>
-
-<p># only read log files for previous month if ($File::Find::name =~ /access_log.$extension.<em>$/) { $thisfile = $File::Find::name;</em></p>
-
-<pre><code># test whether the file we are looking at is a compressed
-# file or not
-if ((substr($File::Find::name, -1)) eq &quot;Z&quot;)
+# If the month is January, i.e. $mon == 0, then we need to process log files
+# from the previous year as well as the previous month, i.e. December or
+# $mon == 12.
+if ($mon == 0)
 {
-  # if it is compressed, uncompress it and
-  # take name of file without .Z as the file
-  # to operate on afterwards
-  print &quot;Uncompressing $File::Find::name...&quot;;
-  system(&quot;uncompress $File::Find::name&quot;);
-  $thisfile = substr($File::Find::name, 0, -2);
+  $mon = 12;
+  $year -= 1;
 }
-print &quot;$thisfile\n&quot;;
-open(IN_FILE, $thisfile) or die (&quot;Cannot Open File: $!\n&quot;);
-open(OUT_FILE, &quot;&gt;&gt;$outfile&quot;) or die (&quot;Cannot Open File: $!\n&quot;);
-while ($line = &lt;in_file&gt;)
+
+# Construct logfile extension as YYYYMM where MM is previous MM.
+$extension = length($mon) == 1 ? "$year" . "0" . $mon : "$year" . $mon;
+
+# File to output results to.
+$outfile = "input.log";
+
+# Regex to match Portal page URIs.
+$regex = '^.*\t/portal/page\?_pageid.*$';
+
+# Run File::Find::find() against each file in the current directory.
+find(\&amp;get_date, $cwd);
+
+##
+# Callback function for File::Find
+# This function is called for every file found in $cwd
+##
+sub get_date
 {
-  if ($line =~ $regex)
+  my $line;
+  my @output_list;
+  my @input_list;
+
+  # only read log files for previous month
+  if ($File::Find::name =~ /access_log\.$extension.*$/)
   {
-    print $line;
-    print OUT_FILE ($line);
+    $thisfile = $File::Find::name;
+
+    # test whether the file we are looking at is a compressed
+    # file or not
+    if ((substr($File::Find::name, -1)) eq "Z")
+    {
+      # if it is compressed, uncompress it and
+      # take name of file without .Z as the file
+      # to operate on afterwards
+      print "Uncompressing $File::Find::name...";
+      system("uncompress $File::Find::name");
+      $thisfile = substr($File::Find::name, 0, -2);
+    }
+    print "$thisfile\n";
+    open(IN_FILE, $thisfile) or die ("Cannot Open File: $!\n");
+    open(OUT_FILE, ">>$outfile") or die ("Cannot Open File: $!\n");
+    while ($line = <in_file>)
+    {
+      if ($line =~ $regex)
+      {
+        print $line;
+        print OUT_FILE ($line);
+      }
+    }
+    close(IN_FILE);
+    close(OUT_FILE);</in_file>
+    
+    if ((substr($File::Find::name, -1)) eq "Z")
+    {
+      # If we uncompressed a compressed file then
+      # we must now recompress it.
+      $zipfile = substr($File::Find::name, 0, -2);
+      print "Compressing $zipfile...";
+     system("compress $zipfile");
+    }
   }
 }
-close(IN_FILE);
-close(OUT_FILE);&lt;/in_file&gt;
+</pre>
 
-if ((substr($File::Find::name, -1)) eq &quot;Z&quot;)
-{
-  # If we uncompressed a compressed file then
-  # we must now recompress it.
-  $zipfile = substr($File::Find::name, 0, -2);
-  print &quot;Compressing $zipfile...&quot;;
- system(&quot;compress $zipfile&quot;);
-}</code></pre>
-
-<p>} } &lt;/pre&gt;</p></p>
+</p>
   </div>
 </article>
 <div id="categories">
