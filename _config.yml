@@ -2,5 +2,4 @@ pygments: true
 paginate: 5
 permalink: /:year/:month/:day/:title.html
 markdown: rdiscount
-
-
+exclude: rakefile
