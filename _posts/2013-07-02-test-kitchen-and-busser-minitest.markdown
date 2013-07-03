@@ -53,7 +53,7 @@ In my example, I've defined three recipes: default, foo and bar.  Each of these 
 copies a simple text file to a location defined by an attribute.
 
 Continuing the culinary nomenclature, the various *providers* that can be use to run the 
-tests are called *Busser*.  You can use multiple *Bussers* in each suite of tests by
+tests are called *Bussers*.  You can use multiple *Bussers* in each suite of tests by
 saving your tests in an appropriate directory structure.
 
       test
