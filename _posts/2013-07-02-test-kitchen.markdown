@@ -114,3 +114,8 @@ a contrived example.
 Note that in order for the tests to be picked up, they must either be named with a
 leading ``test_`` in the filename, or with a trailing ``_spec`` in the filename.  In both
 cases, since these are Ruby files, they should have a ``.rb`` extension.
+
+In order to run the tests, simply run ``kitchen test``.  If your tests pass, a nice
+summary will be displayed in the output at the concusion of each test suite run.  If your
+tests fail, the `kitchen` process will terminate, with logs being written to the terminal
+and in ``.kitchen/logs``!
