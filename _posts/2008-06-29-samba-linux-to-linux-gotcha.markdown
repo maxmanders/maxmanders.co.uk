@@ -23,6 +23,6 @@ On windows, this works fine: you specify a username, a password, and the share y
 
 The solution was to use CIFS rather than the outdate smbfs, and to use the extra uid option:
 
-<pre class="brush:bash">$ sudo mount -t cifs -o username=user,password=pass,uid=1000 //server/share /local/mount/point</pre>
+    $ sudo mount -t cifs -o username=user,password=pass,uid=1000 //server/share /local/mount/point
 
 This makes sure that the share you mount is owned by the local user.

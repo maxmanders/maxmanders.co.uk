@@ -220,7 +220,7 @@ module Jekyll
     def fill_location(site, page_or_post)
       loc = REXML::Element.new "loc"
       url = site.config['sitemap']['url'] if site.config['sitemap']
-      url ||= site.config['url'] || MY_URL
+      url = MY_URL
       loc.text = page_or_post.location_on_server(url)
 
       loc

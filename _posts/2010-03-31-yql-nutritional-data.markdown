@@ -22,5 +22,5 @@ My todo list has been telling me to play with Yahoo's <a title="YQL on YDN" href
 That's exactly what I did last night.&nbsp; I did some digging and found the UK government's data source for nutritional information, the <a title="Composition of Foods" href="http://www.food.gov.uk/science/dietarysurveys/dietsurveys/">"Composition of Foods" report</a>.&nbsp; To use the data, I had to apply for a free <a title="OPSI Click Use Licensing" href="http://www.opsi.gov.uk/click-use/index">Click-Use license</a>.&nbsp; I didn't have to specify what data I was using or how I was going to use it; it seemed more the case that I had to have my name added to a list of people who use government data in some way, shape or form.&nbsp; Once I'd munged the data a bit, I created a CSV, and corresponding XML file as described by the DataTables documentation.
 
 You can use my DataTable by querying YQL (or in the YQL-console) like this for example:
-<pre class="brush:sql">use "http://maxmanders.co.uk/lab/nutritionals/nutritionals.xml";
-select * from nutritionals where name = 'banana';</pre>
+      use "http://maxmanders.co.uk/lab/nutritionals/nutritionals.xml";
+      select * from nutritionals where name = 'banana';

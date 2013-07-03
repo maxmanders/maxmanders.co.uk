@@ -19,4 +19,4 @@ author_email: max@maxmanders.co.uk
 ---
 A collection of some really great cat video clips. Enjoy!
 
-[youtube b11R7wiaTvU]
+\[youtube b11R7wiaTvU\]

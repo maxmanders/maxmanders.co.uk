@@ -49,20 +49,25 @@ author_email: max@maxmanders.co.uk
 Despite suppressing updates of my LAMP stack, the upgrade to Ubuntu 10.04 ignored that, and as such I now have PHP 5.3.X installed.&nbsp; Ordinarilly this woud be fine, but one of the open source web applications I work with doesn't play well with PHP 5.3.X.&nbsp; I needed a simple way to revert to a previous 5.2.X version of PHP.&nbsp; The version in the Ubuntu 9.10 (Karmic) repositories would do the trick, so it was jsut a case of forcing Ubuntu to honour the 9.10 versions of various PHP packages over the 10.04 versions.
 
 First, we get a list of all the currently installed PHP packages:
-<pre class="brush:bash">sudo dpkg -l | grep php > /tmp/php.packages
-</pre>
+
+      sudo dpkg -l | grep php > /tmp/php.packages
+
 Next we remove the currently installed PHP packages:
-<pre class="brush:bash">sudo apt-get remove --purge $(dpkg -l | grep php)
-</pre>
+
+      sudo apt-get remove --purge $(dpkg -l | grep php)
+
 Now we need to create an alternative sources list:
-<pre class="brush:bash">sed s/lucid/karmic/g /etc/apt/sources.list |\
-sudo tee /etc/apt/sources.list.d/karmic.list
-</pre>
+
+      sed s/lucid/karmic/g /etc/apt/sources.list |\
+      sudo tee /etc/apt/sources.list.d/karmic.list
+
 Having done that, we need to generate an aptitude preferences file for PHP:
-<pre class="brush:bash">awk '{print "Package: " $0; print "Pin: release a=karmic\nPin-Priority: 991\n"}' /tmp/php.packages |\
-sudo tee /etc/apt/preferences.d/php
-</pre>
+
+      awk '{print "Package: " $0; print "Pin: release a=karmic\nPin-Priority: 991\n"}' /tmp/php.packages |\
+      sudo tee /etc/apt/preferences.d/php
+
 This preferences file tells aptitude that for each listed package, we want to pin down the installation candidate to that from the Karmic repositories.  We can now install the packages that we previously removed, but this time the versions from the Karmic repositories:
-<pre class="brush:bash">sudo apt-get update && apt-get install $(cat /tmp/php.packages | tr "\n" " ")
-</pre>
+
+      sudo apt-get update && apt-get install $(cat /tmp/php.packages | tr "\n" " ")
+
 A quick restart of Apache and everything seems to be working with the older version of PHP!

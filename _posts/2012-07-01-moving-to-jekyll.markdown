@@ -131,7 +131,6 @@ This removes anything that's currently live and clones a fresh copy that include
 added content. 
 
 ### Summary ###
-I use a [https://github.com/kinnetica/jekyll-plugins](Sitemap Generator
-plugin) that is called when I run Jekyll, and updates my `sitemap.xml` file.
+I use a [Sitemap Generate plugin](https://github.com/kinnetica/jekyll-plugins) that is called when I run Jekyll, and updates my `sitemap.xml` file.
 Draft posts are created using Git branches.  While there may be more succinct
 or efficient methods for managing it all, this works for me.

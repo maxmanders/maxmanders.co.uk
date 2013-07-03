@@ -18,4 +18,4 @@ comments: []
 author_email: max@maxmanders.co.uk
 ---
 <p>This has got to be the most original piece of advertising I've seen.  It had me in hysterics.  What do you think?</p>
-<p>[youtube CbLr2NEV_7o]</p>
+<p>\[youtube CbLr2NEV_7o\]</p>

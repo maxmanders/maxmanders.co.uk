@@ -80,10 +80,11 @@ comments:
   id: 1350
 author_email: max@maxmanders.co.uk
 ---
-I've finally found time to start investigating some other PHP frameworks, and after some brief research I decided to start off with <a href="http://www.symfony-project.com">Symfony</a>.  All is going well and so far I'm impressed with what Symfony can do compared with CakePHP... with a few exceptions.
+I've finally found time to start investigating some other PHP frameworks, and after some brief research I decided to start off with <a href="http://www.symfony-project.com">Symfony</a>.
+All is going well and so far I'm impressed with what Symfony can do compared with CakePHP... with a few exceptions.
 
 I initially tried following the My First Project tutorial, but hit problems pretty quickly.  It would seem that there was a problem with the PHP SQLite extension.  The phpinfo() function verified that SQLite was indeed installed, but I couldn't get any further on that trail.  After reading a number of forum posts on the issue, it became apparent I should recompile Apache and PHP.  I'm still not that confident with Linux to do that so I left it at that.
 
-Then I followed the Askeet tutorial with more success as this tutorial uses MySQL rather than SQLite.  However, I can't get the URL rewriting to work as it should.  I've checked my Apache configuration, the .htacces file and still no luck. If I load http://<project>/question I get a 404 error.  If I load http://<project>/index.php/question or http://<project>/frontend_dev.php/question all is well.  I'll press on with this tutorial until I hit a road block, but this is really bugging me.  Again, a few forum posts suggest recompiling Apache and PHP.  However, the extensions that should be included in the new build are already present according to phpinfo().
+Then I followed the Askeet tutorial with more success as this tutorial uses MySQL rather than SQLite.  However, I can't get the URL rewriting to work as it should.  I've checked my Apache configuration, the .htacces file and still no luck. If I load http://project/question I get a 404 error.  If I load http://project/index.php/question or http://project/frontend_dev.php/question all is well.  I'll press on with this tutorial until I hit a road block, but this is really bugging me.  Again, a few forum posts suggest recompiling Apache and PHP.  However, the extensions that should be included in the new build are already present according to phpinfo().
 
 I'm currently running Fedora 7 which installs Apache and PHP in its own odd way.  Perhaps I should start from scratch by  removing Apache and PHP with yum and compiling both from source.  Although as I said I'm kind of reluctant to do that.  If anyone has any ideas - let me know!

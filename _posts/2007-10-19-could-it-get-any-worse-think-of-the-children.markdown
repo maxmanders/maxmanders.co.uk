@@ -24,4 +24,4 @@ comments:
   id: 1500
 author_email: max@maxmanders.co.uk
 ---
-[youtube o2Z6tDSb6c8]
+\[youtube o2Z6tDSb6c8\]

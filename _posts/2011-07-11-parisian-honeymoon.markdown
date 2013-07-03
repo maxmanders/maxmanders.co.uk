@@ -99,6 +99,5 @@ Took the Batobus the entire route and saw some beautiful sites from the river un
 </ul>
 If you've made it this far, Jo and I commend your dedication and probable insomnia. &nbsp;This was more a personal record of the fun times Jo and I had on our honeymoon. &nbsp;But since you've stuck around, please leave us a comment so we know who the true stalkers are!
 
-[flickr-gallery mode="photoset" photoset="72157626878266546"]
 
 &nbsp;

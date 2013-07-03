@@ -34,4 +34,3 @@ We had a lovely meal with the rest of our wedding guests before the evening gues
 
 The party continued in to the early hours, but was thankfully briefly punctuated by some gratefully received bacon and sausage rolls, and some delicious and beautifully decorated cupcakes; the hard work courtesy of my wife and her bridesmaids. &nbsp;We both owe a big thanks to Sue and the rest of the staff at The Police Club. &nbsp;We were fortunate enough to be given many generous gifts by our family and friends, which have since been put toward a nice long break to Nice in October. &nbsp;After the wedding, we took a day to relax and recuperate before our honeymoon in Paris. &nbsp;There'll be more about that in another post soon.
 
-[flickr-gallery mode="photoset" photoset="72157626806660017"]

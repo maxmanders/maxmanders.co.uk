@@ -27,21 +27,33 @@ With master<->master replication, replication happens in both directions.  If we
 The following instructions are meant only for a development environment where absolute data integrity isn't crucial - very hacky; the priority is to get the replication going again.  Depending on our set up, we need to pick one of the masters to consider authoritative; restoring replication requires that both master databases be identical.
 
 First we need to make sure replication is stopped on both servers
-<pre class="brush: sql">mysql>STOP SLAVE;</pre>
+
+      mysql>STOP SLAVE;
+
 Next we need to get a dump of the database(s) from one of the servers, <code>scp</code> it to the other server and import it.
-<pre class="brush: bash">mysqldump -u root --all-databases --lock-all-tables --master-data >dbdump.db</pre>
+
+      mysqldump -u root --all-databases --lock-all-tables --master-data >dbdump.db
+
 The <em>--master-data</em> switch <em>should</em> make sure that sequence numbers are in sync so both servers know where to start sync'ing from.
 
 Now we pick one server and run
-<pre class="brush: sql">myqsl> SHOW SLAVE STATUS\G</pre>
+
+      myqsl> SHOW SLAVE STATUS\G
+
 and on the other server we run
-<pre class="brush: sql">mysql> SHOW MASTER STATUS;</pre>
+
+      mysql> SHOW MASTER STATUS;
+
 If everything is okay, the master status file and position number should match those of the slave.  Now we run the same commands but swapping which servers we run them on.  Again, the master status file and position number should match those of the slave.
 
 If there are mismatches, we need to fix this by running on the master server
-<pre class="brush: sql">mysql>CHANGE MASTER to master_log_file='file_from_slave',master_log_pos='log_position_from_slave';</pre>
+
+      mysql>CHANGE MASTER to master_log_file='file_from_slave',master_log_pos='log_position_from_slave';
+
 And vice-versa on the other master server if necessary.  We can then cross our fingers and start replication again by running the following on each server.
-<pre class="brush: sql">mysql> START SLAVE;</pre>
+
+      mysql> START SLAVE;
+
 To test everything is working make an update on each server, and it should appear on the other server!
 
 <em>Disclaimer: This is probably in no way accurate and is purely here to jog my memory and that of anyone else in multi-master replication hell.  There are probably glaring omissions in the above, and this information should in no way EVER EVER EVER be used in a production environment - that's what the clever proper sysadmins are for! You have been warned, here be dragons etc.</em>

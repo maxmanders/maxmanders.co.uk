@@ -26,35 +26,47 @@ I'm often jumping on and off of a number of different servers where I use a vari
 I'm sure there are better ways to do this, such as having the entire home directory in subversion, and automatically updated on login.&nbsp; Perhaps you could use SVN externals to provide a modular approach to managing your configuration.&nbsp; The great thing about SVN, and more generally Linux is that there are plenty of different ways to achieve your goal.
 
 Before I go on, I've made a few assumptions based on my server configuration - Ubuntu 10.04 with Apache 2.2.14 and Subversion already installed.&nbsp; The first thing we need to do is enable SVN over HTTP.
-<pre class="brush: bash">sudo apt-get install libapache2-svn</pre>
+
+      sudo apt-get install libapache2-svn
+
 Once installed, we need to configure the module in <em>/etc/apache2/mods-enabled/dav_svn.conf
 </em>
-<pre class="brush: bash">
-DAV svn
-SVNParentPath /var/lib/svn
-AuthType Basic
-AuthName "Subversion Repository"
-AuthUserFile /etc/apache2/dav_svn.passwd
-Require valid-user</pre>
-This configuration will allow you to refer to your repositories via e.g. http://example.com/svn, where the actual location of your repositories on the filesystem is <em>/var/lib/svn</em>.&nbsp; We're also using basic authentication here, so we'll need to add a valid user.
-<pre class="brush: bash">sudo htpasswd -c /etc/apache2/dav_svn.passwd username</pre>
-Next, we need to create our SVN directory and create a first repository
-<pre class="brush: bash">sudo mkdir -p /var/lib/svn
-sudo svnadmin create /var/lib/svn/homedir
-sudo chown -R :www-data /var/lib/svn
-sudo chmod 700 /var/lib/svn
-sudo chmod -R 755 /var/lib/svn/homedir
 
-</pre>
+      DAV svn
+      SVNParentPath /var/lib/svn
+      AuthType Basic
+      AuthName "Subversion Repository"
+      AuthUserFile /etc/apache2/dav_svn.passwd
+      Require valid-user
+
+This configuration will allow you to refer to your repositories via e.g. http://example.com/svn, where the actual location of your repositories on the filesystem is <em>/var/lib/svn</em>.&nbsp; We're also using basic authentication here, so we'll need to add a valid user.
+
+      sudo htpasswd -c /etc/apache2/dav_svn.passwd username
+
+Next, we need to create our SVN directory and create a first repository
+
+      sudo mkdir -p /var/lib/svn
+      sudo svnadmin create /var/lib/svn/homedir
+      sudo chown -R :www-data /var/lib/svn
+      sudo chmod 700 /var/lib/svn
+      sudo chmod -R 755 /var/lib/svn/homedir
+      
+
 Now, on a server that has a good baseline set of configuration files, we can check out a working copy
-<pre class="brush: bash">svn co http://example.com/svn/homedir .</pre>
+
+      svn co http://example.com/svn/homedir .
+
 Add some configuration files
-<pre class="brush: bash">cp ~/.bashrc ~/.vimrc ~/.vimrc ~/homedir
-cd ~/homedir
-svn st | awk '/\?/ {print $2}' | xargs svn add
-svn commit -m "Initial Commit"</pre>
+
+      cp ~/.bashrc ~/.vimrc ~/.vimrc ~/homedir
+      cd ~/homedir
+      svn st | awk '/\?/ {print $2}' | xargs svn add
+      svn commit -m "Initial Commit"
+
 We can now symlink our files to those in the working copy
-<pre class="brush: bash">ln -sf ~/homedir/.bashrc ~/.bashrc
-ln -sf ~/homedir/.vimrc ~/.vimrc
-ln -sf ~/homedir/.screenrc ~/.screenrc</pre>
+
+      ln -sf ~/homedir/.bashrc ~/.bashrc
+      ln -sf ~/homedir/.vimrc ~/.vimrc
+      ln -sf ~/homedir/.screenrc ~/.screenrc
+
 If we do this on all the servers we use, we can make a change in one place, commit it to SVN, and then update our working copy somewhere else to get the most up-to-date version of the files.&nbsp; As I said before, I'm sure this can be enhanced and tweaked to be more efficient, but this serves my needs for now.

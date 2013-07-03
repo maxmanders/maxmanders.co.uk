@@ -23,7 +23,9 @@ comments:
   id: 1346
 author_email: max@maxmanders.co.uk
 ---
-<img src="/media/dscn0977.JPG" title="Pasta with Tomato and Basil Sauce" alt="Pasta with Tomato and Basil Sauce" align="right" hspace="20" vspace="20" width="250" /><strong>Ingredients</strong>
+<img src="/media/dscn0977.JPG" title="Pasta with Tomato and Basil Sauce" alt="Pasta with Tomato and Basil Sauce" align="right" hspace="20" vspace="20" width="250" />
+<strong>Ingredients</strong>
+
 <ul id="ingredients">
 <li class="ingredient">200g fusilli pasta.</li>
 <li class="ingredient">1 large onion.</li>
