@@ -18,7 +18,7 @@ been asked.  This post will offer a brief introduction to test-kitchen, with a
 focus on writing tests using the Minitest Busser.  I'd also like to extend a
 big thank you to [Fletcher Nichol](https://twitter.com/fnichol) and the rest of
 the Opscode team and contributors who are making test-kitchen and related tools
-such exciting projects to follow.
+such exciting projects to follow.<!--more-->
 
 To get started, you'll need the following Gems installed (I've listed the versions I'm
 using; I had a few issues resolving dependencies, so this is left as an excersise for the
