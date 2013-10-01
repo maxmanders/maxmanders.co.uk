@@ -34,7 +34,7 @@ comments:
   author_url: ""
   author: Trace
   content: Spiffy. Can't wait to try it, and I'll look forward to any continued developments :-)
-  author_email: NatePMartin@Gmail.com
+  author_email: 
   id: 17964
 author_email: max@maxmanders.co.uk
 ---
