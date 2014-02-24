@@ -24,4 +24,4 @@ I continued to learn and here I am today. I use (X)HTML and CSS to markup and de
 
 When I'm not designing or developing websites, I enjoy writing and talking about them. I also enjoy playing the guitar and <a title="Trombone on Wikipedia" href="http://en.wikipedia.org/wiki/Trombones">trombone</a>. I've recently taken up photography to some extent. I try to keep my digital camera with me when I'm out and about so I can snap anything that catches my eye... a work in progress so far! I'm no gourmet chef, but I enjoy cooking and am reasonably capable around the kitchen.
 
-I keep a <a href="/media/cv-2012-06.pdf">copy of my CV </a> here as well.
+I keep a <a href="/media/cv.pdf">copy of my CV </a> here as well.
