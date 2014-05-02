@@ -6,7 +6,7 @@ module Jekyll
     def description(str, splitstr = '<!--more-->')
       return Maruku.new(str.split(splitstr)[0]).to_html.gsub(/<\/?[^>]*>/, "").strip
     end
-    def _strip_html(str, allowed = ['a','p','img','strong','em','br','i','b','u','ul','li'])
+    def _strip_html(str, allowed = ['h1','h2','h3','h4','a','p','img','strong','em','br','i','b','u','ul','li'])
       unless str.nil?
         return str.gsub(/<(\/|\s)*[^(#{allowed.join('|') << '|\/'})][^>]*>/,'')
       end
