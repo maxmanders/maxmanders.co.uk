@@ -77,7 +77,7 @@ their permissions are missing.
 We can get a list of all user and host combinations with
 
 {% highlight bash %}
-mysql -h <host> -uroot -B -N -e "select user, host FROM user” mysql
+mysql -h <host> -uroot -B -N -e "select user, host FROM user" mysql
 {% endhighlight %}
 
 Then for each of these combinations, we can extract the grants and append them to a file
