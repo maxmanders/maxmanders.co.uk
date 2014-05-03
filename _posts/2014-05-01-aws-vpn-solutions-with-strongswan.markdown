@@ -2,7 +2,7 @@
 layout: post
 title: "AWS VPN Solutions with StrongSWAN"
 date: 2014-05-01 15:35:03 +0100
-published: true
+published: false
 author: Max Manders
 tags:
 - aws
