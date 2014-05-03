@@ -98,7 +98,7 @@ module Jekyll
       # Generate resized images
       generated_thumb = generate_image(instance, site.source, site.dest, settings['source'], settings['output'])
 
-      html_markup = "<a href=\"/#{settings['source']}/#{instance[:src]}\" "
+      html_markup = "<a class=\"lightbox-link\" href=\"/#{settings['source']}/#{instance[:src]}\" "
       html_markup << "title=#{caption} " if caption
       if group
        html_markup << "data-lightbox=#{group} "

@@ -1,8 +1,8 @@
-<article class="post">
+<article class="post clearfix">
   <h3 class="post-title"><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h3>
   <span class="post-date"><abbr class="published-on">{{ post.date | date: "%B %d, %Y" }}</abbr></span>
   <div class="post-content">
     <p>{{ post.content | summarize }}</p>
-    <a href="{{ post.url }}" class="more">Continue reading &raquo;</a>
+    <a href="{{ post.url }}" class="pull-right more">Continue reading &raquo;</a>
   </div>
 </article>
