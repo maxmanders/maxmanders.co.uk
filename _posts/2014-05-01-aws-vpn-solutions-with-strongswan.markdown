@@ -68,7 +68,12 @@ network block of `172.50.0.0/16`.
     workstation.  _We'll need to reconfigure them later once both endpoints have been
     created_.
   * Attach a new EIP to the instance
+  * Right-click the instance and disable the source/destination check to allow this server
+    to act as a router
 2. Install StrongSWAN and its dependencies: `sudo apt-get install strongswan*`
+3. Enable IP forwarding by doing the following as root `echo 1 >
+/proc/sys/net/ipv4/ip_forward && sudo sysctl -p`
+
 
 ##### Step 2: Create AWS VPN in VPC_2
 Having created a StrongSWAN instance with a known public IP address, it's time to create
