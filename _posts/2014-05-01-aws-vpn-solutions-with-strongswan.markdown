@@ -141,8 +141,8 @@ private subnets, while the third row will only be present for public subnets.
 | Destination | Target   |
 | ----------- | -------- |
 | VPC CIDR    | local    |
-| 0.0.0.0/0   | igw-XXX  |
 | 0.0.0.0/0   | eni-XXX  |
+| 0.0.0.0/0   | igw-XXX  |
 
 We need to add one more route to our routing tables in each region to say how to hop
 across the tunnel into the other network.  For VPC_1, which has the StrongSWAN instance,
