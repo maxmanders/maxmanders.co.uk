@@ -14,13 +14,12 @@ timezone:    nil
 
 future:      true
 show_drafts: nil
-pygments:    true
 
 relative_permalinks: true
 
 paginate_path: 'page:num'
 
-markdown:      maruku
+markdown:      kramdown
 markdown_ext:  markdown,mkd,mkdn,md
 textile_ext:   textile
 
