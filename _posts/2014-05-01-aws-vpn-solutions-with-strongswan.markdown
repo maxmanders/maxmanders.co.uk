@@ -38,12 +38,12 @@ options
 * run a software based IPSec solution on an instance in each region and connect the two
   instances
 
-The two most popular software based IPSec solutions for Linux seem to be OpenSWAN and its
-fork StrongSWAN.  I've opted for StrongSWAN on the basis of what I believe to be better
+The two most popular software based IPSec solutions for Linux seem to be FreeS/WAN and its
+fork strongSwan.  I've opted for strongSwan on the basis of what I believe to be better
 documentation, and the fact that it is still under active development.  In order to
-terminate a tunnel to an AWS VPN, I found that StrongSWAN 5.1 is required.  If you're
+terminate a tunnel to an AWS VPN, I found that strongSwan 5.1 is required.  If you're
 using Ubuntu, you'll either need to upgrade to Ubuntu 14.04, or use an appropriate
-backports repository; versions of Ubuntu prior to 14.04 only provide StrongSWAN 4.5.
+backports repository; versions of Ubuntu prior to 14.04 only provide strongSwan 4.5.
 
 #### Assumptions
 This article assumes a certain familiarity with AWS.  Specifically I assume that you have
@@ -55,10 +55,10 @@ two VPCs in different regions, with the following configurations
 * a public NAT instance
 * appropriate security groups and attachments
 
-#### Scenario 1: Connect VPC_1 with VPC_2 using StrongSWAN and AWS VPN
+#### Scenario 1: Connect VPC_1 with VPC_2 using strongSwan and AWS VPN
 {% lightbox diagram vpn-scenario-1.png caption:"Scenario 1" alt="Scenario 1" %}
 
-##### Step 1: Configure a StrongSWAN server in VPC_1
+##### Step 1: Configure a strongSwan server in VPC_1
 For this discussion, we shall assume that VPC_1 is located in _us-west-1_ and has a
 network block of `172.50.0.0/16`.
 
@@ -70,13 +70,13 @@ network block of `172.50.0.0/16`.
   * Attach a new EIP to the instance
   * Right-click the instance and disable the source/destination check to allow this server
     to act as a router
-2. Install StrongSWAN and its dependencies: `sudo apt-get install strongswan*`
+2. Install strongSwan and its dependencies: `sudo apt-get install strongswan`
 3. Enable IP forwarding by doing the following as root `echo 1 >
 /proc/sys/net/ipv4/ip_forward && sudo sysctl -p`
 
 
 ##### Step 2: Create AWS VPN in VPC_2
-Having created a StrongSWAN instance with a known public IP address, it's time to create
+Having created a strongSwan instance with a known public IP address, it's time to create
 the other end of our tunnel in another VPC.  For this discussion, we shall assume that
 VPC_2 is located in _eu-west-1_ and has a network block of `172.60.0.0/16`.
 
@@ -93,7 +93,7 @@ VPC_2 is located in _eu-west-1_ and has a network block of `172.60.0.0/16`.
   * Give your CGW a name
   * Set routing to _Static_
   * Set the public IP address of the remote end of the VPN connection, i.e. the EIP of the
-    StrongSWAN instance.
+    strongSwan instance.
 9. Click 'Yes, Create'
 10. Select the 'VPN Connections' menu item
 11. Click 'Create VPN Connection'
@@ -108,13 +108,13 @@ VPC_2 is located in _eu-west-1_ and has a network block of `172.60.0.0/16`.
 Once the VPN has been created, right-click on the entry and select the option to download
 the configuration file.  Select the generic configuration option.  This will save a text
 file to your local workstation with the information that will be needed to configure the
-StrongSWAN instance in the other region.
+strongSwan instance in the other region.
 
-##### Step 3: Update StrongSWAN Security Groups
+##### Step 3: Update strongSwan Security Groups
 Now that we have both ends of the tunnel created, we need to ensure that they can talk
 to each other.  At this stage, you should have the public IP addresses for the AWS VPN
 from the configuration file you downloaded earlier.  You should also have the public IP
-address of the StrongSWAN instance.  Now, we'll create a Security Group (or modify an
+address of the strongSwan instance.  Now, we'll create a Security Group (or modify an
 existing one) to contain rules to permit the public traffic necessary to set up the IPSec
 tunnel.  Configure your security group as per the table below.
 
@@ -145,9 +145,9 @@ private subnets, while the third row will only be present for public subnets.
 | 0.0.0.0/0   | igw-XXX  |
 
 We need to add one more route to our routing tables in each region to say how to hop
-across the tunnel into the other network.  For VPC_1, which has the StrongSWAN instance,
+across the tunnel into the other network.  For VPC_1, which has the strongSwan instance,
 adding the new route will result in the table below, substituting the ENI ID of the
-StrongSWAN instance's primary ethernet adapter.
+strongSwan instance's primary ethernet adapter.
 
 | Destination | Target   |
 | ----------- | -------- |
@@ -162,12 +162,12 @@ substituting the VGW ID of the VGW you created earlier.
 | &#8942;     | &#8942;  |
 | VPC_1 CIDR  | vgw-XXX  |
 
-##### Step 5: Configure StrongSWAN
+##### Step 5: Configure strongSwan
 At this point, we have an endpoint in each region, between which we can connect our IPSec
 tunnel.  We have configured Security Groups to permit the passing of IPSec along the
 tunnel.  Lastly, we have configured our routing table so that each VPC knows how to direct
 traffic destined for the other network.  The AWS VPN is configured and ready to go, we
-just need to configure IPSec on the StrongSWAN instance.
+just need to configure IPSec on the strongSwan instance.
 
 Firstly, we'll need to edit `/var/lib/strongswan/ipsec.conf.inc` to add a pre-shared key.
 This key can be found in the AWS VPN config file we downloaded earlier.  Look under the
@@ -207,7 +207,7 @@ include /var/lib/strongswan/ipsec.conf.inc
 {% endhighlight %}
 
 ##### Step 6: Start the Tunnel
-You should now be able to restart the IPSec service (`service ipsec restart`)
+You should now be able to restart the IPSec service (`service strongswan restart`)
 and send traffic over the tunnel to the remote VPC, and vice versa.  You can
 look at the tunnel status in both the AWS console, as well as using the `ipsec
 status name_of_connection` command.
@@ -219,9 +219,9 @@ noticed that AWS VPNs provide two tunnels for redundancy.  AWS may perform
 maintenance on one of the tunnels from time to time, and having two established
 tunnels allows you to keep communicating over the VPN during these maintenance
 windows.  Unfortunately I have had trouble implementing two tunnels via
-StrongSWAN, but I'm working on it.  I'll post back when I have more
+strongSwan, but I'm working on it.  I'll post back when I have more
 information.
 
 In the next post, we'll look at a few small changes that can be made that will
-allow you to create an IPSec tunnel between two StrongSWAN instances, without
+allow you to create an IPSec tunnel between two strongSwan instances, without
 the need for an AWS VPN tunnel.
