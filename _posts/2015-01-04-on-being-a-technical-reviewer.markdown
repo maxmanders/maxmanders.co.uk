@@ -51,7 +51,7 @@ of the chapter been explained clearly enough for the intended audience?_ etc.
 
 After the book had been reviewed in its entirety, I was asked to submit my bio for
 inclusion in the front matter.  It really was quite exciting when the publishers sent that
-section over for review and approval!  The book has now bee published, and I'm hoping to
+section over for review and approval!  The book has now been published, and I'm hoping to
 get my copy any day now!  Being a technical reviewer may not be a paying gig, but it's
 definitely worth doing - it's rewarding, and I feel like it gave me the opportunity to
 contribute something back to the community that has been so giving over the years, helping
