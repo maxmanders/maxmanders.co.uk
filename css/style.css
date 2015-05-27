@@ -1,33 +1,77 @@
+html { font-size: 62.5% }
+
+body {
+  font-family: Merriweather, 'PT Serif', Georgia, 'Times New Roman', serif;
+  color: #333;
+}
+
+body {
+  line-height: 1.4em;
+  font-size: 1.4rem
+}
+
+h1 {
+  font-size: 4rem;
+  text-decoration: none;
+  font-family: Lato, 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+h2 {
+  font-size: 2.4rem;
+}
+
+h3 {
+  font-size: 1.8rem;
+}
+
+h4 {
+  font-size: 1.4rem;
+}
+
 p {
-  font-size: 16px;
-  font-family: Helvetica, Arial, sans-serif;
+  font-size: 2.0rem;
+  line-height: 3.6rem;
 }
 
 h1,h2,h3,h4,h5,h6 {
-  font-family: 'Bree Serif', serif;
   color: #333;
+  font-weight: bold;
 }
 
 h1 a,h2 a,h3 a,h4 a,h5 a,h6 a {
-  color: #333
-  text-decoration: underline;
+  color: #333;
+  text-decoration: none;
 }
 
-h3.post-title {
-  color: #b22222;
-  text-decoration: underline;
+h1.post-title {
+  color: #336699;
 }
 
-h3.post-title a {
+h1.post-title a {
   color: #333;
 }
  
-h3.post-title a:hover {
+h1.post-title a:hover {
   background: inherit;  
-  color: #b22222;
+  color: #336699;
 }
 
-span.post-date,
+code {
+    padding: 2px 4px;
+    color: #336699;
+    background-color: #c8e3ff;
+    white-space: nowrap;
+    border-radius: 4px
+}
+
+span.post-date {
+  color: #7a7a7a;
+  text-decoration: none;
+  font-size: 1.5em;
+  font-style: italic;
+  margin-bottom: 1.5em;
+}
+
 a.more,
 a.nav-next,
 a.nav-previous {
@@ -53,19 +97,19 @@ a.lightbox-link:hover {
 a.more:hover,
 a.nav-next:hover,
 a.nav-previous:hover {
-  background: #b22222;
+  background: #336699;
   color: #fff;
   padding: 5px;
   text-decoration: none;
 }
 
 a {
-  color: #b22222;
+  color: #336699;
   text-decoration: underline;
 }
 
 a:hover {
-  background: #b22222;
+  background: #336699;
   color: #fff;
   text-decoration: none;
 }
@@ -76,7 +120,7 @@ div#pagination {
 }
 
 div#header {
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid #7a7a7a;
 }
 
 div#header h1, 
