@@ -157,7 +157,7 @@ div.hr {
 article,
 div#article {
   padding-bottom: 5px;
-  border-bottom: 1px dotted #333;
+  border-bottom: 1px solid #f3f3f3;
 }
 
 @media (min-width: 1200px) {
