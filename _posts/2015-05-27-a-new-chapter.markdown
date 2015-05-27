@@ -10,10 +10,10 @@ categories:
 ---
 The cat's out of the bag and the dust has settled.  I'm moving on from
 [Cloudreach](http://www.cloudreach.com); though not for any particularly negative reasons,
-it was just the right time for me, for a number of reasons.  Cloudreach are continuing to
-grow and are actively recruiting for a number of roles, so if you're interested in an
-exciting, fast-paced operations role in an AWS certified Managed Services Partner, then
-[look no further](https://boards.greenhouse.io/cloudreach/).
+it was just the right time for me, for a number of reasons.<!--more-->  Cloudreach are
+continuing to grow and are actively recruiting for a number of roles, so if you're
+interested in an exciting, fast-paced operations role in an AWS certified Managed Services
+Partner, then [look no further](https://boards.greenhouse.io/cloudreach/).
 
 I've spent the last two and a half years with Cloudreach, both as an operations engineer,
 and a *Cloud Leader* helping my colleagues Shona and Alberto, and our boss Jon, run an
