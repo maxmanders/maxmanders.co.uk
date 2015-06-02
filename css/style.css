@@ -21,14 +21,14 @@ h2 {
 }
 
 h3 {
-  font-size: 1.8rem;
+  font-size: 2rem;
 }
 
 h4 {
-  font-size: 1.4rem;
+  font-size: 1.8rem;
 }
 
-p {
+p, li {
   font-size: 2.0rem;
   line-height: 3.6rem;
 }
@@ -54,6 +54,22 @@ h1.post-title a {
 h1.post-title a:hover {
   background: inherit;  
   color: #336699;
+}
+
+ul#markdown-toc {
+  float: left;
+  background: #fafafa;
+  border-right: 1px solid #f3f3f3;
+  padding-right: 3em;
+  margin-right: 3em;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  margin-bottom: 2em;
+}
+
+ul#markdown-toc li {
+  font-size: 1.8rem;
+  line-height: 3rem;
 }
 
 code {
