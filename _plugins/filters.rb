@@ -11,7 +11,7 @@ module Jekyll
     def _strip_html(str, allowed = ['h1','h2','h3','h4','a','p','img','strong','em','br','i','b','u','ul','li'])
       unless str.nil?
         s = Nokogiri::HTML(str)
-        %w(h1 h2 h3 h4).each do |heading|
+        %w(ul h1 h2 h3 h4).each do |heading|
           s.search("//#{heading}").remove
         end
         return s.inner_html.gsub(/<(\/|\s)*[^(#{allowed.join('|') << '|\/'})][^>]*>/,'')
