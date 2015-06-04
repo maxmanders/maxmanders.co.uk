@@ -158,6 +158,7 @@ With this in place, we can connect to e.g. `db.private.example.com` or `www2.pri
 {% endhighlight %}
 
 ## Miscellaneous
+
 ### Removing A Bad Host
 If you try to connect to a host, and the server signature differs to that recorded in the known hosts file, you may need to remove the offending signature from the known hosts file.  You should do this with caution, and only when you know the server you are connecting to is legitimate: for example if you’ve relaunched an AWS EC2 instance with the same hostname.
 
