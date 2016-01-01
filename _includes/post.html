@@ -2,7 +2,7 @@
   <h1 class="post-title"><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h1>
   <span class="post-date"><abbr class="published-on">{{ post.date | date: "%B %d, %Y" }}</abbr></span>
   <div class="post-content">
-    <p>{{ post.content | summarize }}</p>
+    <p>{{ post.excerpt }}</p>
     <a href="{{ post.url }}" class="pull-right more">[ &hellip; ]</a>
   </div>
 </article>
