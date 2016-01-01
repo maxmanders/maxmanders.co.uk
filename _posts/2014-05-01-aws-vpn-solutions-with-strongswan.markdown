@@ -57,7 +57,7 @@ two VPCs in different regions, with the following configurations
 * appropriate security groups and attachments
 
 #### Scenario 1: Connect VPC_1 with VPC_2 using strongSwan and AWS VPN
-{% image 500xAUTO img/vpn-scenario-1.png alt="Scenario 1" %}
+![Scenario 1](/img/vpn-scenario-1.png)
 
 ##### Step 1: Configure a strongSwan server in VPC_1
 For this discussion, we shall assume that VPC_1 is located in _us-west-1_ and has a
