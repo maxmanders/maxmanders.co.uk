@@ -48,6 +48,7 @@ backports repository; versions of Ubuntu prior to 14.04 only provide strongSwan 
 #### Assumptions
 This article assumes a certain familiarity with AWS.  Specifically I assume that you have
 two VPCs in different regions, with the following configurations
+
 * non-overlapping networks in each VPC
 * public (and optionally private) subnets
 * a routing table to route internet traffic for your public subnets via an Internet Gateway
@@ -56,7 +57,7 @@ two VPCs in different regions, with the following configurations
 * appropriate security groups and attachments
 
 #### Scenario 1: Connect VPC_1 with VPC_2 using strongSwan and AWS VPN
-{% lightbox diagram vpn-scenario-1.png caption:"Scenario 1" alt="Scenario 1" %}
+{% image 500xAUTO img/vpn-scenario-1.png alt="Scenario 1" %}
 
 ##### Step 1: Configure a strongSwan server in VPC_1
 For this discussion, we shall assume that VPC_1 is located in _us-west-1_ and has a
