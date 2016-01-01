@@ -68,3 +68,16 @@ kramdown:
 
 redcloth:
   hard_breaks: true
+
+image:
+  source: 
+  output: generated
+  presets:
+    users:
+      attr:
+        class: user-portrait
+        itemprop: image
+      width: 350
+    half:
+      width: 400
+      height: 400
