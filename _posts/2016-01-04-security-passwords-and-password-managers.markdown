@@ -87,6 +87,20 @@ There are a lot of password managers out there, but I'd recommend
 Windows, or KeePassX for Linux (and OSX).  There are also web based services such as
 [LastPass](http://www.lastpass.com) or [Dashlane](https://www.dashlane.com/)
 
+You can also further enhance your security online by taking advantage of Multi Factor
+Authentication (MFA) or Two Factor Authentication (2FA) on services that offer this
+feature.  The idea of MFA is to increase security by requiring two pieces of information
+to sign in (in addition to a username): something you know, and something you have.  In
+this case the thing you know, is your password.  The thing you _have_ is a special
+time-limited code that is generated, on a per-account basis, by an application on your
+phone.  Such applications are Google Authenticator and Authy.  When you enable MFA, you
+often scan a QR code with your phone.  This code (which changes usually every minute)
+allows your phone to synchronise some secret bits of information with the website you're
+accessing.  From that point forward, your phone can generate codes that the website you're
+accessing can check, in addition to your password.  If an attacker compromised your
+password, it would be very difficult for them to also compromise your phone and the
+time-limited codes on it.
+
 So as part of your New Year's Resolutions, please resolve to be more security conscious
 online.  Start using a password manager.  Start changing all your passwords to something
-complex and unique, for each account you use.
+complex and unique, for each account you use.  And where possible, use MFA!
