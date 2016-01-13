@@ -27,6 +27,7 @@ au BufNewFile,BufRead *.pp setlocal shiftwidth=2
 au BufNewFile,BufRead *.pp setlocal noexpandtab
 au FileType puppet setlocal isk+=:
 au FileType puppet nnoremap <c-]> :exe "tag " . substitute(expand("<cword>"), "^::", "", "")<CR>  
+au FileType puppet nnoremap <c-w><c-]> :tab split<CR>:exe "tag " . substitute(expand("<cword>"), "^::", "", "")<CR>
 let g:syntastic_mode_map = { 'passive_filetypes': ['puppet']  }
 let g:tagbar_type_puppet = {
     \ 'ctagstype': 'puppet',
@@ -58,12 +59,13 @@ I use *[ctags](https://en.wikipedia.org/wiki/Ctags)* extensively in Vim to let m
 of identifiers in code, and the files where those identifiers are defined.  With a proper tags file, I can use `Ctrl+]` on an identifier, and Vim
 will open up the current buffer with the file and location where that identifier is defined.  The problem is, for top-scoped puppet identifiers,
 the identifier doesn't map to a file location directly, because of the leading '::'.  The key binding defined on
-line 10 (courtesy of Marius Gedminas, [@mgedmin](https://twitter.com/mgedmin)) remaps the default tag movement key, to first strip any leading
-'::' from the identifier under my cursor, before trying to locate and move to the corresponding definition.
+lines 10 and 11 (courtesy of Marius Gedminas, [@mgedmin](https://twitter.com/mgedmin)) remaps the default tag movement key, to first strip any leading
+'::' from the identifier under my cursor, before trying to locate and move to the corresponding definition.  Line 10 follows the tag in the current
+buffer, and line 11 opens the tag in a new tab.
 
-Line 11 disables active [Syntastic](https://github.com/scrooloose/syntastic) syntax checking.  Puppet syntax checking can be done by shelling
+Line 12 disables active [Syntastic](https://github.com/scrooloose/syntastic) syntax checking.  Puppet syntax checking can be done by shelling
 out to the Puppet parser, but that's quite an expensive operation.  I prefer to just do an explicit syntax check before I commit changes to Git.
 If anybody knows of a non-expensive way to leave active syntax checking turned on without causing Vim to run like a snail, let me know!
 
-Line 12 onwards makes sure that when [Tagbar](https://majutsushi.github.io/tagbar/) is toggled, I can see, and navigate using any tags available for
+Line 13 onwards makes sure that when [Tagbar](https://majutsushi.github.io/tagbar/) is toggled, I can see, and navigate using any tags available for
 the Puppet file I'm editing.
