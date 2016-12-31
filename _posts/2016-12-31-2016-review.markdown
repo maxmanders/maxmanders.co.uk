@@ -1,0 +1,41 @@
+---
+layout: post
+title: "2016 Review"
+date: 2016-12-31 21:25:48 +0000
+published: true
+author: Max Manders
+tags:
+categories:
+---
+With another year almost over, it's time for a review of what 2016 has meant for me. I think it's generally accepted that 2016 has been a pretty horrendous year for many. There have been a lot of celebrity deaths, brexit, and even Donald Trump winning the US Presidential election, and so much more besides. I get to share my birthday on January 20th with the inauguration of the aforementioned fucktrumpet. Each of these could be the subject of their own blog posts. While 2016 has seemed largely negative, there have been a lot of positive aspects too! I'll not dwell on these larger issues here though. This post is more of a journal of my journey through 2016.
+
+I turned 32 in January, and as I'm writing this, I'll be turning 33 in a little over three weeks. Adding to my tattoo collection has become a bit of a birthday tradition. I have four so far. Last January, I had a monospaced *Linux* [fork bomb](https://en.m.wikipedia.org/wiki/Fork_bomb "fork bomb") tattooed on my right inner forearm.
+
+Each of my tattoos in some way, reflects some facet of who I am. This January, I want to get something to represent the musical aspect of my personality - something involving a bass and treble clef to represent trombone/trumpet, maybe with a music stave somewhere - I've not quite decided yet.
+
+With my parents, and a lot of my extended family living in England, I don't have as much opportunity to visit as I'd like. I usually manage to get down there once a year. I visited my dad and step mum in March. It was great to catch up, and to generally relax and get away. Unfortunately, a little after I returned, I got into a bit of a protracted medical ordeal.
+
+There was a time I might be a bit shy or awkward about discussing this sort of thing, something of a personal and sensitive nature. But after several operations, and being exposed to quite a lot of medical professionals, being coy about it all seems a bit redundant. I'll spare you all the gory details, but this would see me having developed quite a common condition, most likely as a result of an ingrowing hair, a perianal abscess. After returning from visiting my parents, I noticed a lump where lumps do not belong. Within a day, I was quite feverish, and in excruciating pain. My GP made a referral to the Western General hospital, where I naively had wrongly understood an outpatient appointment would sort me out. I was very wrong... and I'm so glad Jo, and my family and friends took such good care of me.
+
+I was admitted that evening for emergency surgery. Shortly after 01:00, having been on intravenous liquids and three different antibiotics, I went under for the first surgery of my life. It was all quite scary for me, and my wife Jo. I've never had surgery, or really spent any time in hospital. After I came around, I was more excited than I expected, to be offered a corned beef sandwich! Unfortunately, the surgeon wasn't able to complete the surgery successfully. I went under again a little later, where another surgeon completed the first part of the procedure. A lot of lymphatic inflammation meant being catheterised, and spending another week in hospital to finish the course of three different IV antibiotics. I was incredibly close to having septicaemia, had I left it much longer before going to the doctor, I would have been in serious trouble. I can't thank the NHS enough for the amazing care I received while in hospital. I hope future governments only make the NHS better, and recognise and support what a great healthcare system we have in this country.
+
+Walking was quite difficult when I was discharged, and I needed regular home visits from the district nurse team to dress my wounds and make sure they were healing okay. Close to three months of that sort of attention makes you get over being self-conscious! I was using a walking stick for a couple of months, and lost count of the number of times people made reference to the TV show, House. About two months after my initial surgery, I had a final operation with some more recovery time. Thankfully though, I'm now back to to normal!
+
+I'm fortunate to work for a company like FanDuel, who were so incredibly understanding about my recuperation needs. Once I was fit enough to work again, I was able to work remotely, from home. Despite the reasons why I was working from home, I learnt to appreciate the pros and cons, and all in all, I look back on it in as positive a light as I can.
+
+Despite recovery, I managed to have a great time with Jo for our fifth wedding anniversary. We joined Louise and Steve for their wedding reception later in the year, and I even manage a sorta-dance with Jo, walking stick in hand!
+
+I saw the Hot8 Brass Band twice, once in Glasgow, and once in Edinburgh. The second time was happy chance, I hadn't realised they were playing in Edinburgh as part of the Edinburgh Jazz Festival at La Belle Angele. Both times were amazing. So full of energy. Despite propping myself up with my stick the first time around, I still had an amazing time! Jo wasn't sure what to expect, and she even liked them enough to go twice! If you want a loud, funky, energetic live New Orleans band, I can't recommend Hot8 enough.
+
+
+In the summer, I became Senior DevOps Engineer at FanDuel, which was lovely! I hope I can continue to support and mentor my little team of engineers in 2017! I'm so blessed to work with such a great team of ops engineers.
+
+I also spoke with my colleague, James, at the AWS Summit in London. It was quite a packed room, I think about 400 folk, with quite a few standing. We spoke about AWS Aurora, how FanDuel use it, and our iterative approach to moving from EC2 hosted MySQL to Aurora. I was quite nervous and anxious. Counter-intuitively though, I like to look for opportunities to speak, and put myself in that sort of situation, to improve on my public speaking, and hopefully help overcome anxiety in some way. After the talk, we all imbibed quite liberally!
+
+I [posted earlier this year](https://www.maxmanders.co.uk/2016/09/05/-on-being-generally-anxious.html) about Generalised Anxiety Disorder, and how I've been dealing with it. There's far less stigma these days about mental health issues in general, and GAD is really quite common. As this year comes to and end, and we enter 2017, I'd like to encourage anybody who might be struggling to talk to someone, to go see their GP, and to not be afraid of who they are, even if that means dealing with mental illness. I've been taking 20mg of Paroxetine daily since September. I'm more focussed, less anxious, and generally a more balanced Max. I do have off days, and I'm sure that some CBT or other form of counselling may compliment the medication. But for now, it's a step in the right direction. I'd rather take the odd bad day, and take medication, if it means that I can function better than I did before.
+
+I've been trying hard to stick to my electronic cigarette / vaporiser, and kick the cigarettes, and this is the first Hogmanay where I don't have any cigarettes in the house, and I'm quite happy vaping. Sure, it's not quitting all together. But many medical bodies recognise vaping as a favourable form of harm-reduction, when compared to cigarettes. The long term effects may not be altogether understood, but I don't plan on living forever! It's a step in the right direction, and if I can stick to it, I'm not going to beat myself up about that.
+
+While I'll continue to play trombone, I've recently taken up trumpet, and I'm hoping to regularly practise this coming year. I'm looking forward to my next tattoo. Jo and I are planning to get away for a sun soaked holiday in Greece for our anniversary. I'm going to try very hard to lose some weight, and eat healthier. I'm not going to make any traditional resolutions this year, to change. I'm just going to be happy as often as I can. I'm going to be relaxed as often as I can. I'm going to watch less bullshit news about the misery in this world. I hope I continue to enjoy my job as much as I have this last year.
+
+I wish everyone health and happiness in 2017!
