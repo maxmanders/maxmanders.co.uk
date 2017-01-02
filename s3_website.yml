@@ -1,0 +1,12 @@
+s3_id: <%= ENV['ACCESS_KEY_ID'] %>
+s3_secret: <%= ENV['SECRET_ACCESS_KEY'] %>
+s3_bucket: <%= ENV['S3_BUCKET'] %>
+
+site: public/
+max_age:
+  "css/*": 604800
+  "img/*": 604800
+  "js/*":  604800
+  "*": 300
+
+gzip: true
