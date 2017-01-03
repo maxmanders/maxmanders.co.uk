@@ -4,7 +4,7 @@ cache:
   paths: 
     - vendor/
 
-before_script
+before_script:
   - apt get update && apt-get install nodejs
   - bundle install --path vendor
   
