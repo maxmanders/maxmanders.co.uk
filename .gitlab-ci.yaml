@@ -1,0 +1,49 @@
+image: ruby:2.3
+
+cache:
+  paths: 
+    - vendor/
+
+before_script:
+  - bundle install --path vendor
+  
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  script:
+    - JEKYLL_ENV=production bundle exec jekyll build -d public/
+  artifacts:
+    paths:
+      - public
+
+vars:
+  stage: test
+  script:
+    - 'export S3_ID="$(echo "$ACCESS_KEY_ID")" >> s3_deploy_vars'
+    - 'export S3_SECRET="$(echo "$SECRET_ACCESS_KEY")" > s3_deploy_vars'
+    - 'export S3_BUCKET="$(echo "$S3_BUCKET")" > s3_deploy_vars'
+  artifacts:
+    paths:
+      - s3_deploy_vars
+
+deploy:
+  stage: deploy
+  script:
+    - echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" >> /etc/apt/sources.list.d/java-8-debian.list
+    - echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" >> /etc/apt/sources.list.d/java-8-debian.list
+    - apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
+    - apt-get update
+    - echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections
+    - apt-get install -y oracle-java8-installer
+    - apt-get install -y oracle-java8-set-default
+    - source s3_deploy_vars
+    - bundle exec s3_website push
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
