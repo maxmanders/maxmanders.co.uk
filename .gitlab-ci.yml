@@ -1,4 +1,4 @@
-image: jekyll/builder:latest
+image: minn/jekyll-gen
 
 cache:
   paths: 
@@ -33,13 +33,6 @@ vars:
 deploy:
   stage: deploy
   script:
-    - echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" >> /etc/apt/sources.list.d/java-8-debian.list
-    - echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" >> /etc/apt/sources.list.d/java-8-debian.list
-    - apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
-    - apt-get update
-    - echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections
-    - apt-get install -y oracle-java8-installer
-    - apt-get install -y oracle-java8-set-default
     - source s3_deploy_vars
     - bundle exec s3_website push
   artifacts:
