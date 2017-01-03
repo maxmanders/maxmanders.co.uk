@@ -5,7 +5,7 @@ cache:
     - vendor/
 
 before_script:
-  - bundle install
+  - bundle install --path=vendor
   
 stages:
   - build
