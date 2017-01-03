@@ -1,6 +1,6 @@
 paginate: 5
 permalink: /:year/:month/:day/:title.html
-exclude: [rakefile]
+exclude: [rakefile, vendor, Gemfile, Gemfile.lock, rakefile, s3_website.yml]
 
 highlighter: pygments
 
