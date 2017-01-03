@@ -5,12 +5,12 @@ cache:
     - vendor/
 
 before_script:
-  - bundle install --no-deployment --path=vendor
   - apt-get update
   - apt-get install libmagickwand-dev imagemagick
+  - bundle install
   
 stages:
-  - build
+  - buil
   - test
   - deploy
 
