@@ -1,4 +1,4 @@
-images: registry.gitlab.com/maxmanders/maxmanders.co.uk:latest
+image: registry.gitlab.com/maxmanders/maxmanders.co.uk:latest
 
 cache:
   paths: 
