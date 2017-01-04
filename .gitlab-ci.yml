@@ -3,10 +3,10 @@ image: registry.gitlab.com/maxmanders/maxmanders.co.uk:latest
 
 cache:
   paths:
-    - /cache
+    - vendor
 
 before_script:
-  - bundle install --path /cache
+  - bundle install --path vendor
 
 stages:
   - build

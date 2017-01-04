@@ -9,11 +9,12 @@ RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" >> /
        build-essential \
        nodejs
 
-ENV APP_HOME /maxmanders.co.uk
-RUN mkdir $APP_HOME
-WORKDIR $APP_HOME
+ENV CI_PROJECT_DIR /builds/maxmanders/maxmanders.co.uk
+ENV CI_CACHE_DIR /builds/maxmanders/maxmanders.co.uk/vendor
+RUN mkdir -p $CI_PROJECT_DIR $CI_CACHE_DIR
+WORKDIR $CI_PROJECT_DIR
 
-ADD Gemfile* $APP_HOME/
-RUN bundle install
+ADD Gemfile* $CI_PROJECT_DIR/
+RUN bundle install --path $CI_CACHE_DIR
 
-ADD . $APP_HOME
+ADD . $CI_PROJECT_DIR
