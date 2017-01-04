@@ -10,7 +10,7 @@ RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" >> /
        nodejs
 
 ENV CI_PROJECT_DIR /builds/maxmanders/maxmanders.co.uk
-ENV CI_CACHE_DIR /builds/maxmanders/maxmanders.co.uk/vendor
+ENV CI_CACHE_DIR /cache
 RUN mkdir -p $CI_PROJECT_DIR $CI_CACHE_DIR
 WORKDIR $CI_PROJECT_DIR
 
