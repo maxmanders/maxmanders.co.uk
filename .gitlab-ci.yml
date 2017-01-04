@@ -1,5 +1,13 @@
 image: registry.gitlab.com/maxmanders/maxmanders.co.uk:latest
 
+
+cache:
+  paths:
+    - vendor/
+
+before_script:
+  - bundle install --path vendor
+
 stages:
   - build
   - test
