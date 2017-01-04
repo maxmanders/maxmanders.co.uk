@@ -1,6 +1,7 @@
 s3_id: <%= ENV['ACCESS_KEY_ID'] %>
 s3_secret: <%= ENV['SECRET_ACCESS_KEY'] %>
 s3_bucket: <%= ENV['S3_BUCKET'] %>
+s3_reduced_redundancy: true
 
 site: public/
 max_age:
