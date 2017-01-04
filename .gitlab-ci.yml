@@ -35,7 +35,7 @@ deploy:
   stage: deploy
   script:
     - source s3_deploy_vars
-    - bundle exec s3_website push --force
+    - bundle exec s3_website push
   artifacts:
     paths:
       - public
