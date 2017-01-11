@@ -27,6 +27,7 @@ vars:
     - 'export S3_ID="$(echo "$ACCESS_KEY_ID")" >> s3_deploy_vars'
     - 'export S3_SECRET="$(echo "$SECRET_ACCESS_KEY")" > s3_deploy_vars'
     - 'export S3_BUCKET="$(echo "$S3_BUCKET")" > s3_deploy_vars'
+    - 'export CLOUDFRONT_DISTRIBUTION_ID="$(echo "$CLOUDFRONT_DISTRIBUTION_ID")" > s3_deploy_vars'
   artifacts:
     paths:
       - s3_deploy_vars
@@ -35,7 +36,7 @@ deploy:
   stage: deploy
   script:
     - source s3_deploy_vars
-    - bundle exec s3_website push
+    - bundle exec s3_website push --force
   artifacts:
     paths:
       - public
