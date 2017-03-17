@@ -136,7 +136,7 @@ master branch represents the current deployed version of this site. I firstly so
 `s3_deploy_vars` file that was written in the test stage. With these variables available in the environment, I can use
 the s3\_website tool to push my site, using the config in `s3_website.yml`.
 
- {% highlight yaml linenos %}
+{% highlight yaml linenos %}
 image: registry.gitlab.com/maxmanders/maxmanders.co.uk:latest
 
 cache:
@@ -220,4 +220,4 @@ ADD Gemfile* $CI_PROJECT_DIR/
 RUN bundle install --path $CI_CACHE_DIR
 
 ADD . $CI_PROJECT_DIR
-{% endhighlight }
+{% endhighlight %}
