@@ -11,4 +11,5 @@ gem 'therubyracer'
 gem 's3_website'
 group :jekyll_plugins do
   gem 'jekyll-picture-tag', '~> 0.2.3'
+  gem 'jekyll-sitemap'
 end
