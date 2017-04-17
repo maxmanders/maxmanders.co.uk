@@ -35,15 +35,15 @@ bottom status line. The tmuxline plugin allows me to apply the same theme to my 
 `:TmuxlineSnapshot /path/to/output` command in Vim, will generate a config file that can be sourced by tmux to apply a
 consistent style to the tmux status line. This can be sourced in my `tmux.conf` with the `source-file` option.
 
-![tmux vim screenshot]({{ site.url }}/img/tmux-vim-screenshot.png){:height="600px"}
-![tmux vim screenshot light]({{ site.url }}/img/tmux-vim-screenshot-light.png){:height="600px"}
+![tmux vim screenshot](/img/tmux-vim-screenshot.png){:height="600px"}
+![tmux vim screenshot light](/img/tmux-vim-screenshot-light.png){:height="600px"}
 
 I can switch between the dark and light versions of the Solarized theme with a key binding, which you can see in the
 snippet below: `<Leader>bg`. This looks pretty ugly if I haven't changed the iTerm theme to match. Some parts of the
 screen have changed, including the tab and status lines. But the iTerm theme is still affecting some of the window. To
 get around this, I can use the keyboard shortcuts I mentioned earlier to flip my iTerm profile to match.
 
-![tmux vim screenshot with inconsistent colours]({{ site.url }}/img/tmux-vim-screenshot-yuck.png){:height="600px"}
+![tmux vim screenshot with inconsistent colours](/img/tmux-vim-screenshot-yuck.png){:height="600px"}
 
 The specific bits of Vim config I use can be seen below.
 
