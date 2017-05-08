@@ -84,3 +84,4 @@ image:
       height: 400
 gems:
   - jekyll-sitemap
+  - jekyll-redirect-from

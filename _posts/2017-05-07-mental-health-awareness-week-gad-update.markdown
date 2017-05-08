@@ -1,11 +1,13 @@
 ---
 layout: post
-title: "Mental Health Awareness Week 2017 - A GED Update"
+title: "Mental Health Awareness Week 2017 - A GAD Update"
 date: 2017-05-07 22:09:17 +0100
 published: true
 author: Max Manders
 tags:
 categories:
+redirect_from:
+  - /2017/05/07/mental-health-awareness-week-ged-update.html
 ---
 It's the [Mental Health Foundation's](https://www.mentalhealth.org.uk/) [Mental
 Health Awareness
@@ -32,7 +34,7 @@ days, but the good far outnumber the bad. The bad days see me being more
 indecisive and distracted; irritable; self-critical and lacking in self
 confidence. Thankfully those around me, who care about me, recognise this.
 
-Being able to talk about GED without stigma or prejudice has helped so much.
+Being able to talk about GAD without stigma or prejudice has helped so much.
 Were I not able to, I don't think I'd be doing as well as I am. Perhaps counter
 intuitively, talking about it makes it less of a big deal: just one facet of
 who I am, rather than a defining characteristic.
