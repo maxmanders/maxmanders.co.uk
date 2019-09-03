@@ -6,7 +6,7 @@ exclude: [License.md, Makefile, Dockerfile, README.md, rakefile, vendor, Gemfile
 
 title: Max Manders
 tagline: 'Thoughts on DevOps'
-description: 'My thoughts on software deveopment, operations and infrastructure.'
+description: 'Thoughts on dev, ops and other things.'
 url: http://maxmanders.co.uk
 baseurl: /
 timezone: nil
