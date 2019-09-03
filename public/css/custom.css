@@ -1,0 +1,9 @@
+div.social a {
+  float: left;
+  padding-right: 0.4rem;
+}
+
+div#license {
+  clear: both;
+  font-size: 0.5rem;
+}
