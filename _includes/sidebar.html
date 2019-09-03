@@ -28,9 +28,11 @@
     </nav>
 
     <div class="social">
+      <ul>
     {% for item in site.social %}
-      <a href="{{ item.url }}"><img src="/public/images/{{ item.title }}.svg" alt="{{ item.title }}" /></a>
+        <li><a href="{{ item.url }}"><img src="/public/images/{{ item.title }}.svg" alt="{{ item.title }}" /></a></li>
     {% endfor %}
+      </ul>
     </div>
 
     <div class="row" id="license">

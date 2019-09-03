@@ -2,6 +2,7 @@
 title: Better Work Time Balance
 layout: post
 ---
+
 I kinda suck at time management. Well, maybe that’s not entirely accurate. I’m easily distracted, and rubbish at saying
 “No.”. I try to manage tasks and my time, with [Bear](http://www.bear-writer.com/) and
 [Things3](https://culturedcode.com/things/). My work can sometimes be project based. By that I mean structured, long

@@ -1,5 +1,14 @@
+div.social ul {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+div.social ul li {
+  display: inline-block
+}
+
 div.social a {
-  float: left;
   padding-right: 0.4rem;
 }
 

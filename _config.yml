@@ -2,7 +2,7 @@
 markdown: kramdown
 highlighter: rouge
 
-exclude: [rakefile, vendor, Gemfile, Gemfile.lock, rakefile, s3_website.yml]
+exclude: [License.md, Makefile, Dockerfile, README.md, rakefile, vendor, Gemfile, Gemfile.lock, rakefile, s3_website.yml]
 
 title: Max Manders
 tagline: 'Thoughts on DevOps'
@@ -13,7 +13,7 @@ timezone: nil
 excerpt_separator: <!--more-->
 paginate: 5
 paginate_path: 'page:num'
-permalink: /:year/:month/:day/:title
+permalink: /:year/:month/:day/:title:output_ext
 
 author:
   name: 'Max Manders'
