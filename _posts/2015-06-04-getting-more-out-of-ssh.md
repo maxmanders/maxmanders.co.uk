@@ -32,8 +32,8 @@ To generate your key pair, you can run
 ssh-keygen -t rsa
 ```
 
-This will create two files, by default, in your `~/.ssh/` directory. You can change the location by adding a `-f
-<pathname>` to the `ssh-keygen` command above. This will create `~/.ssh/id_rsa` and `~/.ssh/id_rsa.pub` as your private
+This will create two files, by default, in your `~/.ssh/` directory. You can change the location by adding a `-f <pathname>`
+to the `ssh-keygen` command above. This will create `~/.ssh/id_rsa` and `~/.ssh/id_rsa.pub` as your private
 and public keys respectively.
 
 Now, you need to append the contents of `~/.ssh/id_rsa.pub` to `~/.ssh/authorized_keys` on the remote server.
