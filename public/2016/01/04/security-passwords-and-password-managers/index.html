@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.87.0" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Security, Passwords and Password Managers &middot; Max Manders</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://maxmanders.co.uk"><h1>Max Manders</h1></a>
+      <p class="lead">
+       a bit of dev / a bit of ops 
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://maxmanders.co.uk">Home</a> </li>
+        <li><a href="https://github.com/maxmanders/"> Github </a></li><li><a href="https://www.linkedin.com/in/maxmanders/"> LinkedIn </a></li><li><a href="https://www.twitter.com/maxmanders"> Twitter </a></li>
+      </ul>
+    </nav>
+
+    <p>&copy; 2021. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>Security, Passwords and Password Managers</h1>
+  <time datetime=2016-01-04T00:00:00Z class="post-date">January 4, 2016</time>
+  <p>In this post, I want to talk about staying secure online. This is a less technical post that those I often write. It&rsquo;s
+aimed at my family and non-technical friends, who perhaps don&rsquo;t appreciate why security online is so important; why
+choosing unique, strong passwords is important; and why password managers are for everyone, and not just
+socially-awkward sysadmin code monkeys like me. If you think <em>&quot;… nobody&rsquo;s going to be trying to hack my Gmail
+account …&quot;</em> then read on!</p>
+<p>A lot of people make the same mistake when it comes to their online security: reusing the same password (or a similar
+password) with all of their online accounts. To keep your accounts and your data safe online, you should use long,
+complicated, and unique passwords for every account. But how is the average person meant to remember all of those
+passwords?  The short answer is you don&rsquo;t, you let a password manager do that for you. I use a password manager, and
+other than a few special cases, I couldn&rsquo;t tell you what any of my passwords are!  But what I could tell you is that
+most of them are over 16 characters long (that&rsquo;s a letter, a number, or some other punctuation symbol), don&rsquo;t actually
+make any real words, and are a combination of lower- and upper-case letters, numbers and other symbols.</p>
+<p>I think there are a few misconceptions about the various security breaches you may have heard about. It&rsquo;s possible that
+someone close to you may want to compromise e.g. your Gmail account. For that reason, you should make sure any
+passwords you use don&rsquo;t contain words or phrases that mean something to you: your pet&rsquo;s name; your spouse&rsquo;s birthday or
+your wedding anniversary; your mother&rsquo;s maiden name etc. However, while that&rsquo;s generally good advice, it&rsquo;s actually
+incredibly unlikely that someone close to you would try to to compromise your online security. In fact, it&rsquo;s incredibly
+unlikely that anybody would specifically target <em>you</em>!</p>
+<p>What is far more likely to happen is that a computer program is written or acquired by some miscreant, or ill-informed
+<em>script kiddy</em> , and an attack is orchestrated against a site from a hijacked computer somewhere. The details of how
+that may happen are outside the scope of this post. In this case the attacker may simply automate the process of trying
+to log in to some site by cycling through combinations of words, making incremental <em>guesses</em> at user names and
+passwords. This sort of attack is often referred to as <em>brute force</em>: there&rsquo;s no sophistication or informed guesswork
+involved, it&rsquo;s just a matter of trial and error. Crucial to avoiding being the victim of this sort of random attack is
+the use of long, complicated and unique passwords. Attackers often use dictionaries of words. The longer the password,
+the more <em>expensive</em> in terms of time and computer resources it is to <em>guess</em> the password. Avoiding common dictionary
+words makes this even harder because whole sections of a password can&rsquo;t be tried.</p>
+<p>Great, so armed with this information, why not just come up with a really long, complicated password that you can
+remember, and use that with all of your online accounts?  If an attacker has compromised one account, they can
+potentially compromise others: it doesn&rsquo;t matter how complicated your password is if you use the same password
+everywhere, and it&rsquo;s been compromised. As I said before, an attacker probably hasn&rsquo;t targeted you specifically, but if
+they have managed to find e.g. an email address and password that gives them access to an account, they&rsquo;ll likely try to
+use those same credentials on other popular web sites.</p>
+<p>So in conclusion, we need long, complicated <em>and</em> unique passwords for all of your online accounts. So we need a tool
+to store those passwords securely for us, and ideally, to generate those passwords. If we don&rsquo;t need to memorise such
+strong passwords, why not generate password that aren&rsquo;t particularly memorable!  That&rsquo;s where a password manager comes
+in. There are quite a few of them on the market: some of them free and open-source, some of them come with a small
+financial outlay. The ones you should consider have a few common characteristics though.</p>
+<ul>
+<li>a master password is used to unlock your password <em>vault</em></li>
+<li>your password vault is <em>encrypted</em> with that master password; without the master
+password, the <em>vault</em> is just meaningless gibberish</li>
+<li>the password manager can generate passwords of different lengths and complexity</li>
+<li>the password manager can auto-fill websites once unlocked</li>
+<li>the password <em>vault</em> can be shared with your other devices like your phone or tablet</li>
+</ul>
+<p>But isn&rsquo;t this putting all my eggs in one basket?  Sure, you&rsquo;re securing all of your complicated, unique passwords with
+a single password. But that single password, the one you remember, can and should be very complex, but you only need
+remember that one password. You should also change that password regularly to minimise the risk of your <em>vault</em> being
+compromised. Your password <em>vault</em> is also not sitting there, publicly available as a popular website that would be
+targeted by attackers. You might use an online service to sync your encrypted password database between devices, but
+that service doesn&rsquo;t know your master password. Attackers are far more likely to compromise any number of websites than
+your password vault.</p>
+<p>There are a lot of password managers out there, but I&rsquo;d recommend <a href="https://agilebits.com/onepassword">1Password</a> for OSX
+and iOS devices; KeePass for Windows, or KeePassX for Linux (and OSX). There are also web based services such as
+<a href="http://www.lastpass.com">LastPass</a> or <a href="https://www.dashlane.com/">Dashlane</a></p>
+<p>You can also further enhance your security online by taking advantage of Multi Factor Authentication (MFA) or Two Factor
+Authentication (2FA) on services that offer this feature. The idea of MFA is to increase security by requiring two
+pieces of information to sign in (in addition to a username): something you know, and something you have. In this case
+the thing you know, is your password. The thing you <em>have</em> is a special time-limited code that is generated, on a
+per-account basis, by an application on your phone. Such applications are Google Authenticator and Authy. When you
+enable MFA, you often scan a QR code with your phone. This code (which changes usually every minute) allows your phone
+to synchronise some secret bits of information with the website you&rsquo;re accessing. From that point forward, your phone
+can generate codes that the website you&rsquo;re accessing can check, in addition to your password. If an attacker
+compromised your password, it would be very difficult for them to also compromise your phone and the time-limited codes
+on it.</p>
+<p>So as part of your New Year&rsquo;s Resolutions, please resolve to be more security conscious online. Start using a password
+manager. Start changing all your passwords to something complex and unique, for each account you use. And where
+possible, use MFA!</p>
+
+</div>
+
+<h2>Comments</h2>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "maxmanders" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </main>
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1652642-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    
+  </body>
+</html>

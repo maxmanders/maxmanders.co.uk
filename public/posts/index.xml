@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Max Manders</title>
+    <link>https://maxmanders.co.uk/posts/</link>
+    <description>Recent content in Posts on Max Manders</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sun, 22 Jul 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://maxmanders.co.uk/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Better Work Time Balance</title>
+      <link>https://maxmanders.co.uk/2018/07/22/better-work-time-balance/</link>
+      <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2018/07/22/better-work-time-balance/</guid>
+      <description>I kinda suck at time management. Well, maybe that’s not entirely accurate. I’m easily distracted, and rubbish at saying “No.”. I try to manage tasks and my time, with Bear and Things3. My work can sometimes be project based. By that I mean structured, long running, and not interrupt driven. In contrast, a lot of my work is interrupt driven. Disparate tasks with different deadlines and changing priorities. This can mean deferring something in progress, in order to pick up some higher priority task.</description>
+    </item>
+    
+    <item>
+      <title>S3 Browser Upload And S3 Signed URLs</title>
+      <link>https://maxmanders.co.uk/2017/07/28/s3-browser-upload-and-s3-signed-urls/</link>
+      <pubDate>Fri, 28 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2017/07/28/s3-browser-upload-and-s3-signed-urls/</guid>
+      <description>If you want to distribute content for a limited period of time, or allow users to upload content, S3 signed URLs are an ideal solution. Any AWS IAM principal can generate a signed URL, but in order for that signed URL to be useful, the principal that generated the URL must have the necessary permissions to use it. For example, if you would like Joanne to upload a file to an object in an S3 bucket you own, using a signed URL, the principal that generated the signed URL must have permissions to upload to that object key.</description>
+    </item>
+    
+    <item>
+      <title>Mental Health Awareness Week 2017 - A GAD Update</title>
+      <link>https://maxmanders.co.uk/2017/05/07/mental-health-awareness-week-2017-a-gad-update/</link>
+      <pubDate>Sun, 07 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2017/05/07/mental-health-awareness-week-2017-a-gad-update/</guid>
+      <description>It&amp;rsquo;s the Mental Health Foundation&amp;rsquo;s Mental Health Awareness Week next week, and I&amp;rsquo;m glad to see campaigns trying to raise wider awareness of mental health issues. FanDuel, my employer, are doing their part internally, by arranging activities and information sharing forums throughout the week. I&amp;rsquo;d like to contribute to these efforts by talking briefly about my experience of, and progress with, Generalised Anxiety Disorder. I wrote last year about my diagnosis.</description>
+    </item>
+    
+    <item>
+      <title>GitLabCI With Jekyll And S3</title>
+      <link>https://maxmanders.co.uk/2017/03/17/gitlabci-with-jekyll-and-s3/</link>
+      <pubDate>Fri, 17 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2017/03/17/gitlabci-with-jekyll-and-s3/</guid>
+      <description>This site is built using Jekyll. The markdown, and other content, is committed to a Git repository. The Git repository has its origin remote connected to GitLab, with another remote connected to GitHub for redundancy. The Jekyll site is built, and the resulting static content is pushed to an AWS S3 bucket. The S3 objects are stored using the reduced redundancy storage module. All of the content can be readily generated from the Git repository, so I can save money by choosing the lower redundancy storage model.</description>
+    </item>
+    
+    <item>
+      <title>On Being Generally Anxious</title>
+      <link>https://maxmanders.co.uk/2016/09/05/on-being-generally-anxious/</link>
+      <pubDate>Mon, 05 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2016/09/05/on-being-generally-anxious/</guid>
+      <description>I have Generalized Anxiety Disorder, or GAD as it&amp;rsquo;s often known. I can learn to cope better with it. I can take medication to help with the symptoms. It&amp;rsquo;s part of who I am. I&amp;rsquo;m no different now that I&amp;rsquo;ve written this, than I was before. Though now I&amp;rsquo;m able to put a label on it. Being able to label myself in that manner, is both a relief, and itself a source of anxiety.</description>
+    </item>
+    
+    <item>
+      <title>My Puppet VimRC</title>
+      <link>https://maxmanders.co.uk/2016/01/12/my-puppet-vimrc/</link>
+      <pubDate>Tue, 12 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2016/01/12/my-puppet-vimrc/</guid>
+      <description>Those who know me, know that I&amp;rsquo;m a Vim user. I&amp;rsquo;ve been using Vim exclusively for over ten years. I&amp;rsquo;ve tried different editors, and this isn&amp;rsquo;t the place to start the editor-holy-war-debate, but I&amp;rsquo;ve always found myself drawn back to Vim for its extensibility, flexibility and power. When I started at FanDuel, I left behind configuration management with Chef and began my journey to understanding Puppet. The excerpt below comes from my ~/.</description>
+    </item>
+    
+    <item>
+      <title>Security, Passwords and Password Managers</title>
+      <link>https://maxmanders.co.uk/2016/01/04/security-passwords-and-password-managers/</link>
+      <pubDate>Mon, 04 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2016/01/04/security-passwords-and-password-managers/</guid>
+      <description>In this post, I want to talk about staying secure online. This is a less technical post that those I often write. It&amp;rsquo;s aimed at my family and non-technical friends, who perhaps don&amp;rsquo;t appreciate why security online is so important; why choosing unique, strong passwords is important; and why password managers are for everyone, and not just socially-awkward sysadmin code monkeys like me. If you think &amp;quot;… nobody&amp;rsquo;s going to be trying to hack my Gmail account …&amp;quot; then read on!</description>
+    </item>
+    
+    <item>
+      <title>CloudFormation Gotcha With RDS Read Replicas</title>
+      <link>https://maxmanders.co.uk/2015/07/17/cloudformation-gotcha-with-rds-read-replicas/</link>
+      <pubDate>Fri, 17 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2015/07/17/cloudformation-gotcha-with-rds-read-replicas/</guid>
+      <description>I&amp;rsquo;ve spent more time than I&amp;rsquo;d like this week being perplexed by spurious behaviour in creating a replicated MySQL environment in RDS, with CloudFormation. RDS supports creating up to five MySQL read-replicas to slave off of a running MySQL master. Configuring this using the web console involves selecting a master RDS instance and selecting the option to create a read-replica. Before the read-replica is created, a configuration page allows various parameters to be reviewed and updated.</description>
+    </item>
+    
+    <item>
+      <title>Getting More Out Of SSH</title>
+      <link>https://maxmanders.co.uk/2015/06/04/getting-more-out-of-ssh/</link>
+      <pubDate>Thu, 04 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2015/06/04/getting-more-out-of-ssh/</guid>
+      <description>If you&amp;rsquo;ve been working with Linux servers for any length of time then you&amp;rsquo;ve used SSH to connect to a server. Though the way you use SSH and the features you use may vary, SSH is incredibly powerful and has a lot of features the average user may not be aware of, or use. I don&amp;rsquo;t want to say this is a post about power user features, or a list of hidden tips and tricks; the more you use something, the more you understand it, and more efficiently use it.</description>
+    </item>
+    
+    <item>
+      <title>My Mac Tools And Config</title>
+      <link>https://maxmanders.co.uk/2015/05/30/my-mac-tools-and-config/</link>
+      <pubDate>Sat, 30 May 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2015/05/30/my-mac-tools-and-config/</guid>
+      <description>This is necessarily quite a long article with many sections. The goal of this post is to share the tools I use on a daily basis to get the job done, and where appropriate, give some insight into how I use them. It may prove useful to others who have asked about the tools I use in the past, or it may prove an interesting retrospective on how things have changed in years to come.</description>
+    </item>
+    
+    <item>
+      <title>Working With Multiple Chef Orgs</title>
+      <link>https://maxmanders.co.uk/2015/04/06/working-with-multiple-chef-orgs/</link>
+      <pubDate>Mon, 06 Apr 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2015/04/06/working-with-multiple-chef-orgs/</guid>
+      <description>The Problem It&amp;rsquo;s probably quite common that a lot of developers or operations engineers will typically work with a couple of Chef organisations. These organisations might represent the infrastructure configurations for different products; or perhaps a development and production environment, though this scenario is more often accomplished through the use of different Chef environments. But what if the nature of your work means you&amp;rsquo;re dealing with many Chef organisations at a time?</description>
+    </item>
+    
+    <item>
+      <title>On Being A Technical Reviewer</title>
+      <link>https://maxmanders.co.uk/2015/01/04/on-being-a-technical-reviewer/</link>
+      <pubDate>Sun, 04 Jan 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2015/01/04/on-being-a-technical-reviewer/</guid>
+      <description>While I don&amp;rsquo;t read as much fiction as I&amp;rsquo;d like, often favouring audio books from Amazon&amp;rsquo;s Audible while on the bus, I&amp;rsquo;m a bit of a sponge for non-fiction (number theory; the history of mathematics; quantum mechanics; web development; cloud computing and DevOps) and hoovering up everything interesting in my RSS reader. One day I&amp;rsquo;ll get around to writing my own book (perhaps on Amazon Web Services or something development/operations related), but until I manage to make more time and stop procrastinating, being a technical reviewer is a pretty good compromise.</description>
+    </item>
+    
+    <item>
+      <title>AWS VPN Solutions with StrongSWAN</title>
+      <link>https://maxmanders.co.uk/2014/05/01/aws-vpn-solutions-with-strongswan/</link>
+      <pubDate>Thu, 01 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2014/05/01/aws-vpn-solutions-with-strongswan/</guid>
+      <description>In this article, I&amp;rsquo;ll discuss how to connect two or more VPCs which are in different AWS regions. Using static routing, routes cannot be re-advertised and as such it&amp;rsquo;s not possible to write routing tables that allow a packet to traverse from one VPC to another via an intermediary VPC, where all VPCs are connected by IPSec tunnels. Because of this limitation, if you want complete connectivity between all peered regions, there must exist an IPSec tunnel between each and every region.</description>
+    </item>
+    
+    <item>
+      <title>Restoring A MySQL Dump To RDS</title>
+      <link>https://maxmanders.co.uk/2014/03/25/restoring-a-mysql-dump-to-rds/</link>
+      <pubDate>Tue, 25 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2014/03/25/restoring-a-mysql-dump-to-rds/</guid>
+      <description>I&amp;rsquo;ve spent some of today migrating a MySQL database instance into RDS from another RDS instance in a separate AWS account as part of a larger piece of work. However, there were a few gotchas that caught me out, so it&amp;rsquo;s worth keeping the following in mind if you&amp;rsquo;re having issues.
+To avoid needing to keep typing the MySQL password, it&amp;rsquo;s a good idea to
+export MYSQL_PWD=&amp;lt;your password&amp;gt; A first attempt might be a standard mysqldump command such as the following:</description>
+    </item>
+    
+    <item>
+      <title>Using Test Kitchen</title>
+      <link>https://maxmanders.co.uk/2013/07/02/using-test-kitchen/</link>
+      <pubDate>Tue, 02 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2013/07/02/using-test-kitchen/</guid>
+      <description>I&amp;rsquo;ve been keenly watching the evolution of the test-kitchen project and I&amp;rsquo;ve recently spent some time using it with the minitest busser to validate that my cookbooks do what I intended them to do. Remember, Chef is already well covered by tests to ensure that e.g. its various resources do what they say they&amp;rsquo;ll do. With that in mind, the key to using test-kitchen is to write tests that validate your intentions, rather than testing that Chef is doing what it&amp;rsquo;s been asked.</description>
+    </item>
+    
+    <item>
+      <title>Whisky Web - On Organising A Conference</title>
+      <link>https://maxmanders.co.uk/2012/05/20/whisky-web-on-organising-a-conference/</link>
+      <pubDate>Sun, 20 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2012/05/20/whisky-web-on-organising-a-conference/</guid>
+      <description>It&amp;rsquo;s been a little over a month since the inaugural Whisky Web conference was held in Scotland&amp;rsquo;s beautiful capital city of Edinburgh. By all accounts, our first endeavour into organising a conference was a roaring success. I&amp;rsquo;ve procrastinated enough, so I think it&amp;rsquo;s time to write up a review of the event from an organisers perspective, and present a SWOT-analysis of sorts.
+It goes without saying that Whisky Web 2012 wouldn&amp;rsquo;t have been possible without the speakers and delegates that made it the brilliant event that it was.</description>
+    </item>
+    
+    <item>
+      <title>Whisky Web 2012</title>
+      <link>https://maxmanders.co.uk/2012/03/13/whisky-web-2012/</link>
+      <pubDate>Tue, 13 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2012/03/13/whisky-web-2012/</guid>
+      <description>Scotland has a thriving and diverse tech community, reflected in such events and organisations as Tech Meetup; various Linux User Groups; the annual Highland Fling web conference; Culture Hack Scotland; The Turing Festival and the Edinburgh International Science Festival to name but a few. I have been fortunate enough to attend previous Highland Flings, and I know others in the web industry who have had fun and positive experiences at other tech events hosted in Scotland.</description>
+    </item>
+    
+    <item>
+      <title>SSMTP Local MTA Using Google Apps Account</title>
+      <link>https://maxmanders.co.uk/2011/09/22/ssmtp-local-mta-using-google-apps-account/</link>
+      <pubDate>Thu, 22 Sep 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2011/09/22/ssmtp-local-mta-using-google-apps-account/</guid>
+      <description>While there are plenty of MTAs out there, I find it quite handy to have SSMTP installed locally; it&amp;rsquo;s quick to install and configure and lacks some of the overhead of a more enterprise MTA such as Sendmail, Postfix, Exim etc. The following assumes you have a &amp;ldquo;Google Apps for Domains&amp;rdquo; user account, e.g. ssmtp_user@domain.com, through which you will relay all email. Additionally, the steps below work on Ubuntu 10.10, similar steps should work on other distributions.</description>
+    </item>
+    
+    <item>
+      <title>Parisian Honeymoon</title>
+      <link>https://maxmanders.co.uk/2011/07/11/parisian-honeymoon/</link>
+      <pubDate>Mon, 11 Jul 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2011/07/11/parisian-honeymoon/</guid>
+      <description>As much as for us, as for others, I wanted to document our honeymoon to Paris.
+Monday 30 May 2011 Our flight was scheduled to leave Edinburgh at 13:50 BST, arriving at Paris Charles de Gaulle at 16:40 GMT+1. It was my first flight abroad, and Jo hadn&amp;rsquo;t been abroad since she was a lot younger. We were a little nervous about getting things right at the airports, and unfortunately things didn&amp;rsquo;t go quite as smoothly as we had hoped; neither the airport signs nor staff were particularly helpful for the first-time traveller.</description>
+    </item>
+    
+    <item>
+      <title>Our Wedding</title>
+      <link>https://maxmanders.co.uk/2011/06/26/our-wedding/</link>
+      <pubDate>Sun, 26 Jun 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2011/06/26/our-wedding/</guid>
+      <description>May 28th 2011. A day I&amp;rsquo;ll never forget; the day Jo and I got married. It&amp;rsquo;s always difficult finding the time to write new posts, but I&amp;rsquo;d be remiss if I didn&amp;rsquo;t at the very least make sure I wrote something about, cliché as it may be, the happiest day of my life. We&amp;rsquo;d originally planned the wedding for 10th October 2010: of course that date was nothing to do with the fact that 10-10-10 is easy to remember; not was it in any way related to the fact that 101010 in binary represents 42 in decimal &amp;ndash; &amp;ldquo;the answer to life, the universe, and everything&amp;rdquo;!</description>
+    </item>
+    
+    <item>
+      <title>Subversion And The Entropy Pool</title>
+      <link>https://maxmanders.co.uk/2010/10/04/subversion-and-the-entropy-pool/</link>
+      <pubDate>Mon, 04 Oct 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2010/10/04/subversion-and-the-entropy-pool/</guid>
+      <description>I ran into an interesting little subversion problem earlier. I was trying to commit a change, and the commit just seemed to hang indefinitely. I couldn&amp;rsquo;t sent an interrupt, and eventually resorted to killing the process. I tried all sorts of command line options in case there was an authentication problem - with no luck. I then thought I had made a mistake when switching my working copy to a different branch.</description>
+    </item>
+    
+    <item>
+      <title>Fixing MySQL Multi-Master Replication</title>
+      <link>https://maxmanders.co.uk/2010/09/23/fixing-mysql-multi-master-replication/</link>
+      <pubDate>Thu, 23 Sep 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2010/09/23/fixing-mysql-multi-master-replication/</guid>
+      <description>I&amp;rsquo;ve had some exposure to database replication through PostgreSQL/Slony. I&amp;rsquo;m reasonably familiar with master/slave replication but in the last few days I&amp;rsquo;ve had to get my hands dirty and grok multi-master replication with MySQL, specifically with two MySQL servers in master&amp;lt;-&amp;gt;master mode. Although conceptually it&amp;rsquo;s not a significant leap from simple master/slave replication the added layer of replication in both directions made my brain melt a little bit at first. Now that I&amp;rsquo;ve got my head around as much as I need to, I&amp;rsquo;m writing this as a gentle reminder should replication screw up again!</description>
+    </item>
+    
+    <item>
+      <title>Display PostgreSQL Query Results Vertically</title>
+      <link>https://maxmanders.co.uk/2010/05/04/display-postgresql-query-results-vertically/</link>
+      <pubDate>Tue, 04 May 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxmanders.co.uk/2010/05/04/display-postgresql-query-results-vertically/</guid>
+      <description>Those who are familiar with MySQL may be used to terminating a query with \G to have the client output the query results vertically with each column/value pair a line at a time. There is in a equivalent in PostgreSQL too. The psql client uses \x to toggle vertical output, and \g to send the current buffer to the server for processing. To get the same effect in psql as \G in MySQL, just end your query with \x\g\x.</description>
+    </item>
+    
+  </channel>
+</rss>

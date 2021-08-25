@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.87.0" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SSMTP Local MTA Using Google Apps Account &middot; Max Manders</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://maxmanders.co.uk"><h1>Max Manders</h1></a>
+      <p class="lead">
+       a bit of dev / a bit of ops 
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://maxmanders.co.uk">Home</a> </li>
+        <li><a href="https://github.com/maxmanders/"> Github </a></li><li><a href="https://www.linkedin.com/in/maxmanders/"> LinkedIn </a></li><li><a href="https://www.twitter.com/maxmanders"> Twitter </a></li>
+      </ul>
+    </nav>
+
+    <p>&copy; 2021. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>SSMTP Local MTA Using Google Apps Account</h1>
+  <time datetime=2011-09-22T00:00:00Z class="post-date">September 22, 2011</time>
+  <p>While there are plenty of MTAs out there, I find it quite handy to have SSMTP installed locally; it&rsquo;s quick to install
+and configure and lacks some of the overhead of a more <em>enterprise</em> MTA such as Sendmail, Postfix, Exim etc. The
+following assumes you have a &ldquo;Google Apps for Domains&rdquo; user account, e.g. <code>ssmtp_user@domain.com</code>, through which you
+will relay all email. Additionally, the steps below work on Ubuntu 10.10, similar steps should work on other
+distributions.</p>
+<h3 id="install-ssmtp">Install SSMTP</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install ssmtp
+</code></pre></div><h3 id="edit-configuration-in-etcssmtpssmtpconf">Edit configuration in <code>/etc/ssmtp/ssmtp.conf</code></h3>
+<p>Backup the original first</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo cp /etc/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf.out
+</code></pre></div><h3 id="truncate-the-file-and-add-the-following">Truncate the file and add the following</h3>
+<pre><code>mailhub=smtp.gmail.com:587
+hostname=ssmtp_user@domain.com
+root=ssmtp_user@domain.com
+AuthUser=ssmtp_user@domain.com
+AuthPass=&lt;ssmtp_user_password&gt;
+UseSTARTTLS=yes
+UseTLS=yes
+FromLineOverride=yes
+</code></pre><h3 id="edit-revaliases-map-in-etcssmtprevaliasesconf">Edit revaliases map in <code>/etc/ssmtp/revaliases.conf</code></h3>
+<p>Add a line for each local user who should be able to send email</p>
+<pre><code>root:smtp_user@domain.com:smtp.gmail.com:587
+max:smtp_user@domain.com:smtp.gmail.com:587
+</code></pre><h3 id="send-email">Send email</h3>
+<p>You should now be able to send email, e.g. from the shell using</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#e6db74">&#34;Testing&#34;</span> | mail -s <span style="color:#e6db74">&#34;Test Email&#34;</span> someone@example.com
+</code></pre></div>
+</div>
+
+<h2>Comments</h2>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "maxmanders" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </main>
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1652642-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    
+  </body>
+</html>

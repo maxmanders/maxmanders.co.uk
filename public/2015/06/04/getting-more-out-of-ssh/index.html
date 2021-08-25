@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.87.0" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Getting More Out Of SSH &middot; Max Manders</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://maxmanders.co.uk"><h1>Max Manders</h1></a>
+      <p class="lead">
+       a bit of dev / a bit of ops 
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://maxmanders.co.uk">Home</a> </li>
+        <li><a href="https://github.com/maxmanders/"> Github </a></li><li><a href="https://www.linkedin.com/in/maxmanders/"> LinkedIn </a></li><li><a href="https://www.twitter.com/maxmanders"> Twitter </a></li>
+      </ul>
+    </nav>
+
+    <p>&copy; 2021. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>Getting More Out Of SSH</h1>
+  <time datetime=2015-06-04T00:00:00Z class="post-date">June 4, 2015</time>
+  <p>If you&rsquo;ve been working with Linux servers for any length of time  then you&rsquo;ve used SSH to connect to a server. Though
+the way you use SSH and the features you use may vary, SSH is incredibly powerful and has a lot of features the average
+user may not be aware of, or use. I don&rsquo;t want to say this is a post about <em>power user</em> features, or a list of hidden
+tips and tricks; the more you use something, the more you understand it, and more efficiently use it. This post is just
+a collection of features I use that others I&rsquo;ve seen don&rsquo;t, and may prove useful to others.</p>
+<h2 id="getting-started-fundamentals">Getting Started Fundamentals</h2>
+<p>The first few sections below outline how to generate a key pair and give a high level overview of what public key
+cryptography means in this context.</p>
+<h3 id="using-keys">Using Keys</h3>
+<p>I’d imagine you probably already use keys rather than plain password authentication. If you don’t, you should. And
+here’s how.</p>
+<p>First, you need to generate a new key pair. A key pair consists of a public key and a private key. The private key stays
+on your client machine. The public key is added to any server that you wish to access. A passphrase is used to secure
+the key pair, but successful authentication also depends upon using that password together with your local private key
+and the presence of your public key on the target server.</p>
+<p>To generate your key pair, you can run</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh-keygen -t rsa
+</code></pre></div><p>This will create two files, by default, in your <code>~/.ssh/</code> directory. You can change the location by adding a <code>-f &lt;pathname&gt;</code>
+to the <code>ssh-keygen</code> command above. This will create <code>~/.ssh/id_rsa</code> and <code>~/.ssh/id_rsa.pub</code> as your private
+and public keys respectively.</p>
+<p>Now, you need to append the contents of <code>~/.ssh/id_rsa.pub</code> to <code>~/.ssh/authorized_keys</code> on the remote server.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat /.ssh/id_rsa.pub | ssh user@remotehost <span style="color:#e6db74">&#39;cat &gt;&gt; /.ssh/authorized_keys&#39;</span>
+</code></pre></div><p>Now, when you try to connect to the remote host, you won’t be prompted for your password. You may be prompted for the
+passphrase to unlock the key, but you should only need to do that once (or e.g. whenever you restart your computer).</p>
+<h3 id="ssh-agent">SSH Agent</h3>
+<p>Most Operating Systems allow you to use an <em>agent</em> program with SSH. On Linux systems, this is typically <code>ssh-agent</code>. On
+windows, you can use Pageant with Putty. An SSH agent securely stored unlocked private keys in memory for the duration
+of a session, to avoid the need to always specify commonly used keys when using SSH. Note that SSH will attempt each key
+stored in the agent. If all of the keys are exhausted unsuccessfully the SSH server may return an authentication failure
+to avoid brute force attacks with many different keys.</p>
+<h3 id="private-keys-are-private">Private Keys Are Private</h3>
+<p>By way of an analogy, imagine you are Alice, and Bob wants to allow you access to his server. Key based authentication
+is like opening a door that’s padlocked. Bob could send Alice a key to unlock the padlock and gain access (a private
+key), but that means the private key is out in the open while it’s being sent, for any nefarious party to grab. Instead,
+imagine the door can be unlocked by Alice giving Bob her padlock (the public key); and that anybody with a key to their
+own padlock can unlock the door. In this way, you can give padlocks (public keys) to anybody who wants to give you
+access to their server, but you keep the key (private key) to yourself.</p>
+<p>For this reason, the private key should be kept very secure. For all intents and purposes, think of it as your password.
+You don’t just hand that out over email, right!</p>
+<h3 id="diagnosing-connection-issues">Diagnosing Connection Issues</h3>
+<p>If you’re having trouble connecting to a remote machine, and you’re not sure why, then you can increase the verbosity of
+the SSH command line. By default, adding <code>-v</code> to your SSH command will make things <em>a bit more verbose</em>. You can get
+ever more verbose output with <code>-vv</code> or <code>-vvv</code>. The verbose output can often quickly point you in the right direction.</p>
+<h3 id="every-day-usage">Every Day Usage</h3>
+<p>Connect to <code>remotehost</code> as the same user as your local user, optionally using non-standard port <code>port</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh remotehost <span style="color:#f92672">[</span>-p port<span style="color:#f92672">]</span>
+</code></pre></div><p>Connect to <code>remotehost</code> as user <code>user</code>, optionally using non-standard port <code>port</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh user@remotehost <span style="color:#f92672">[</span>-p port<span style="color:#f92672">]</span>
+</code></pre></div><p>Connect to <code>remotehost</code> as the same user as your local user, using the private key <code>/path/to/private-key</code>, optionally
+using non-standard port <code>port</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -i /path/to/private-key remotehost <span style="color:#f92672">[</span>-p port<span style="color:#f92672">]</span>
+</code></pre></div><p>Connect to ‘remotest’ as the user <code>user</code>, using the private key <code>/path/to/private-key</code>, optionally using the
+non-standard port <code>port</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -i /path/to/private-key user@remotehost <span style="color:#f92672">[</span>-p port<span style="color:#f92672">]</span>
+</code></pre></div><p>Note that if you don’t specify a private key, prior to attempting password authentication, an attempt will be made to
+use key-based authentication using any keys in your <code>ssh-agent</code>. This will typically contain any default keys such as
+<code>id_rsa</code> or <code>id_dsa</code>. You may need to unlock the key the first time you use it in a given session.</p>
+<h2 id="tunnelling">Tunnelling</h2>
+<p>SSH can be used for so much more than just connecting to a shell session on a remote server. If you have access to a remote server, you can do all manner of useful things involving port forwarding and tunnelling.</p>
+<h3 id="local-port-forwarding">Local Port Forwarding</h3>
+<p>If you need access to a port on a remote server that isn’t publicly exposed, for example a remote MySQL server that’s
+only listening to localhost, you can forward a local port to a remote port.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -f -N -L 4406:127.0.0.1:3306 user@remotehost
+</code></pre></div><p>This command will forward the local port 4406 to the remote port 3306. The <code>-f</code> flag puts the SSH command into the
+background; the <code>-N</code> option makes sure that no remote commands are executed; the <code>-L</code> flag is used to forward a local
+port to a port on a remote host, rather than forwarding traffic from a remote port to the local host.</p>
+<p>Note that you can also use other options, as described earlier, such as specifying a private key with <code>-i</code> or a
+non-standard port with <code>-p</code>.</p>
+<p>You could use the same local and remote port, provided you don’t have a local MySQL server that’s already listening on
+that port.</p>
+<p>Note that you don’t have to use localhost. In fact, you can forward any service that the remote machine you have access
+to, can see. If the MySQL database was hosted on a completely private machine that <code>remotehost</code> can route to and access,
+called <code>db-remotehost</code>, you could do the following.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -f -N -L 4406:db-remotehost:3306 user@remotehost
+</code></pre></div><h3 id="remote-port-forwarding">Remote Port Forwarding</h3>
+<p>Remote forwarding is useful in situations where you and another party both have access to a common machine, and you
+would like to use that machine to offer access to the other party, to a service running on your local machine.</p>
+<p>In this example, you might have a local web server listening on port 8080, and you’d like to allow a third part to
+access that local web server. You’d like the third party to be able to browse to the IP address of the common shared
+server, on port 9090, and have them access your local web server on port 8080. To do so, you’d use a command like the
+following.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -f -N -R 9090:localhost:8080 user@remotehost
+</code></pre></div><p>Note that in this example, we use the <code>-R</code> flag for remote forwarding, rather than the <code>-L</code> flag we used earlier. Also
+note that the order of the ports is reversed when compared to the earlier example: the remote port comes first, and the
+local port comes second.</p>
+<p>In order for this to work, you also need to enable the <code>GatewayPorts</code> option on the SSH daemon on the remote host.
+You’ll also need to ensure that any firewall running on the remote host permits access to port 9090.</p>
+<h2 id="ssh-config">SSH Config</h2>
+<p>All of the examples given thus far should prove useful, but may become a pain to use regularly, especially if you are
+administering a large number of Linux servers. To ease this pain, you can use an SSH config file to define common host
+aliases and sets of options. On a per-user basis, the config file is typically located at <code>~/.ssh/config</code>.</p>
+<p>The file is arranged in terms of a series of <code>Host</code> blocks. Each definition continues until the next <code>Host</code> block.
+Wildcards can also be used to broaden the scope of a match. The configuration file is parsed from top to bottom, looking
+for hosts that match the host used in the SSH command you run. The matching doesn’t immediately stop at the first match.
+Any later matches in the file can add to options previously defined, but only for options that have not yet been defined
+earlier.</p>
+<p>If we want to connect as user <code>bob</code> to <code>remotehost1.example.com</code> on port 2222 with a private key named <code>bob-key</code>, we
+could use a command line such as the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -i /path/to/bob-key -p <span style="color:#ae81ff">2222</span> bob@remotehost1.example.com
+</code></pre></div><p>We could also use the SSH config option names rather than the SSH command line options:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -o <span style="color:#e6db74">&#34;IdentityFile /path/to/bob-key&#34;</span> -o <span style="color:#e6db74">&#34;Port 2222&#34;</span> -o <span style="color:#e6db74">&#34;User bob&#34;</span> -o <span style="color:#e6db74">&#34;HostName remotehost1.example.com&#34;</span>
+</code></pre></div><p>But this would get pretty tiresome to type all the time. It would be nice if we could instead just type <code>ssh remotehost1</code>. We can achieve this by adding the following block to <code>~/.ssh/config</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">    Host remotehost1
+      IdentityFile /path/to/bob-key
+      Port <span style="color:#ae81ff">2222</span>
+      User bob
+      HostName remotehost1.example.com
+</code></pre></div><p>Because of the ordering described earlier, you can construct your file with less specific, shared options, toward the
+end of the file. You should think of such entries as “catch all” rather than “default” and always ensure they come last.
+For example, I use the following sensible options that will apply to all connections, unless override with more specific
+options earlier in the file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">    Host *
+      identitiesonly yes
+      cipher arcfour
+      compression yes
+      serveraliveinterval <span style="color:#ae81ff">60</span>
+      gssapiauthentication no
+</code></pre></div><h3 id="proxy-commands">Proxy Commands</h3>
+<p>You may require access to a large number of private servers, all of which can be accessed via an intermediary bastion
+host. However, you might not want to send your agent everywhere. In this case, you can use a <code>ProxyCommand</code> option in
+your SSH config file. In the example below, we use the netcat in a <code>ProxyCommand</code> to effectively tunnel onward to the
+target private host.</p>
+<p>With this in place, we can connect to e.g. <code>db.private.example.com</code> or <code>www2.private.example.com</code> and SSH will
+transparently connect firstly to the bastion host, and then set up a netcat tunnel to pass the SSH connection through to
+the destination host.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">    Host bastion.example.com
+      ProxyCommand none
+    Host *.private.example.com
+      ProxyCommand ssh bastion.example.com nc -q0 %h %p
+</code></pre></div><h2 id="miscellaneous">Miscellaneous</h2>
+<h3 id="removing-a-bad-host">Removing A Bad Host</h3>
+<p>If you try to connect to a host, and the server signature differs to that recorded in the known hosts file, you may need
+to remove the offending signature from the known hosts file. You should do this with caution, and only when you know the
+server you are connecting to is legitimate: for example if you’ve relaunched an AWS EC2 instance with the same hostname.</p>
+<p>You can either use <code>ssh-keygen</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh-keygen -R hostname
+</code></pre></div><p>Or you can use <code>sed</code>, since the error message will give the line number of the offending known hosts entry (line 25 in
+this example):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sed -i <span style="color:#e6db74">&#39;25d&#39;</span> ~/.ssh/known_hosts
+</code></pre></div><h3 id="forcing-password-login">Forcing Password Login</h3>
+<p>If you are working with a host that you know only accepts password authentication, and you want to quickly avoid the
+overhead of trying keys, you can use a command line such as the following.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -o <span style="color:#e6db74">&#34;PreferredAuthentications password&#34;</span> -o <span style="color:#e6db74">&#34;PubkeyAuthentication no&#34;</span> user@remotehost
+</code></pre></div><h3 id="skipping-known-hosts-checking">Skipping Known Hosts Checking</h3>
+<p>If you work with e.g. Amazon Web Services, or otherwise interact with a lot of short-lived and disposable or ephemeral
+servers, you may want to skip checking the known hosts file, since you expect server signatures to change for a given
+host quite frequently. This should be used with caution, and you wouldn’t want to globally  take this step for security
+reasons.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -o <span style="color:#e6db74">&#34;StrictHostKeyChecking no&#34;</span> -o <span style="color:#e6db74">&#34;UserKnownHostsFile /dev/null&#34;</span> user@remotehost
+</code></pre></div><p>This command will automatically add the host to the known hosts file, but also use /dev/null as that file.</p>
+<h3 id="check-if-host-key-exists">Check If Host Key Exists</h3>
+<p>You can check for the presence of a given host key in your known hosts file with the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh-keygen -F hostname-or-ip
+</code></pre></div><h3 id="diff-local-and-remote">Diff Local And Remote</h3>
+<p>You can quickly diff a remote file with your local copy with either of the following two examples.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh user@remotehost <span style="color:#e6db74">&#34;cat remote_file.txt&#34;</span> | diff - remote_file.txt
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">diff local_file.txt &lt;<span style="color:#66d9ef">$(</span>ssh user@remotehost <span style="color:#e6db74">&#39;cat remote_file.txt&#39;</span><span style="color:#66d9ef">)</span>
+</code></pre></div><h3 id="pseudo-tty-allocation">Pseudo TTY Allocation</h3>
+<p>You’ll find some commands, such as <code>sudo</code>, will give you an error when you try to run the command on a remote server via
+SSH. You may see an error about being unable to allocate a TTY. To overcome this issue, you use the <code>-t</code> flag to force
+allocation of a pseudo-tty.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -t user@remotehost sudo cat /etc/passwd
+</code></pre></div><h3 id="skipping-lastlog">Skipping Lastlog</h3>
+<p>Similarly to the above example, you can disable allocation of a pseudo-tty with the <code>-T</code> flag. This will mean your
+session doesn’t appear in the output of <code>who</code> or <code>lastlog</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -T user@remotehost
+</code></pre></div><h3 id="ssh-escape-sequences">SSH Escape Sequences</h3>
+<p>You’ve no doubt used telnet before, to diagnose network connectivity issues; to do some basic interaction with a web
+serve or an MTA etc. If you have, you’ll probably be aware of the <code>^]</code> escape sequence to hang up the session and drop
+you to the telnet shell. From there you can <code>^d</code> to get back to your regular shell. SSH comes with similar functionality
+via the <code>~</code> escape sequence. If you’re connected to a machine with SSH, you can type <code>~?&lt;enter&gt;</code> to see a list of
+supported options. You’ll most often use <code>~.</code> to kill a hung SSH session.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">    Supported escape sequences:
+    ~.  - terminate connection <span style="color:#f92672">(</span>and any multiplexed sessions<span style="color:#f92672">)</span>
+    ~B   - send a BREAK to the remote system
+    ~C   - open a command line
+    ~R   - request rekey
+    ~V/v - decrease/increase verbosity <span style="color:#f92672">(</span>LogLevel<span style="color:#f92672">)</span>
+    ~^Z  - suspend ssh
+    ~#   - list forwarded connections
+    ~&amp;   - background ssh <span style="color:#f92672">(</span>when waiting <span style="color:#66d9ef">for</span> connections to terminate<span style="color:#f92672">)</span>
+    ~?   - this message
+    ~~  - send the escape character by typing it twice
+</code></pre></div>
+</div>
+
+<h2>Comments</h2>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "maxmanders" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </main>
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1652642-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    
+  </body>
+</html>

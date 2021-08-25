@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.87.0" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Fixing MySQL Multi-Master Replication &middot; Max Manders</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://maxmanders.co.uk"><h1>Max Manders</h1></a>
+      <p class="lead">
+       a bit of dev / a bit of ops 
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://maxmanders.co.uk">Home</a> </li>
+        <li><a href="https://github.com/maxmanders/"> Github </a></li><li><a href="https://www.linkedin.com/in/maxmanders/"> LinkedIn </a></li><li><a href="https://www.twitter.com/maxmanders"> Twitter </a></li>
+      </ul>
+    </nav>
+
+    <p>&copy; 2021. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>Fixing MySQL Multi-Master Replication</h1>
+  <time datetime=2010-09-23T00:00:00Z class="post-date">September 23, 2010</time>
+  <p>I&rsquo;ve had some exposure to database replication through PostgreSQL/Slony. I&rsquo;m reasonably familiar with master/slave
+replication but in the last few days I&rsquo;ve had to get my hands dirty and grok multi-master replication with MySQL,
+specifically with two MySQL servers in master&lt;-&gt;master mode. Although conceptually it&rsquo;s not a significant leap from
+simple master/slave replication the added layer of replication in both directions made my brain melt a little bit at
+first. Now that I&rsquo;ve got my head around as much as I need to, I&rsquo;m writing this as a gentle reminder should replication
+screw up again!</p>
+<p>In master/slave replication, one server can be thought of as authoritative; all writes are done on the master and these
+writes are replicated to the slave. This replication model shouldn&rsquo;t be thought of as a backup solution as both DELETEs
+as well as INSERTs and UPDATEs are replicated. You should have a proper backup solution in place. Also, I&rsquo;m not going to
+be discussing how to set up MySQL to replicate in multi-master mode.</p>
+<p>With master-master replication, replication happens in both directions. If we have two servers - server_a and server_b -
+both servers are considered masters and authoritative. server_b is considered slave with respect to server_a, and
+server_a is considered slave with respect to server_b. Every write that happens on the server is logged in what are
+called the binary log files. The master server then replicates these writes to it&rsquo;s slave, where the statements are
+effectively <em>replayed</em> to reflect the change on the slave. To keep everything in order, each master keeps track of the
+current binary logfile being written to, and an integer representing the last statement that was executed against it.
+Each slave also keeps track of this data, and when things are running smoothly, the details on the master match that of
+it&rsquo;s slave. However, sometimes things go wrong&hellip;</p>
+<p>The following instructions are meant only for a development environment where absolute data integrity isn&rsquo;t crucial -
+very hacky; the priority is to get the replication going again. Depending on our set up, we need to pick one of the
+masters to consider authoritative; restoring replication requires that both master databases be identical.</p>
+<p>First we need to make sure replication is stopped on both servers</p>
+<pre><code>mysql&gt;STOP SLAVE;
+</code></pre><p>Next we need to get a dump of the database(s) from one of the servers, <!-- raw HTML omitted -->scp<!-- raw HTML omitted --> it to the other server and
+import it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysqldump -u root --all-databases --lock-all-tables --master-data &gt;dbdump.db
+</code></pre></div><p>The <code>--master-data</code> switch <em>should</em> make sure that sequence numbers are in sync so both servers know where
+to start sync&rsquo;ing from.</p>
+<p>Now we pick one server and run</p>
+<pre><code>myqsl&gt; SHOW SLAVE STATUS\G
+</code></pre><p>and on the other server we run</p>
+<pre><code>mysql&gt; SHOW MASTER STATUS;
+</code></pre><p>If everything is okay, the master status file and position number should match those of the slave. Now we run the same
+commands but swapping which servers we run them on. Again, the master status file and position number should match
+those of the slave.</p>
+<p>If there are mismatches, we need to fix this by running on the master server</p>
+<pre><code>mysql&gt;CHANGE MASTER to master_log_file='file_from_slave',master_log_pos='log_position_from_slave';
+</code></pre><p>And vice-versa on the other master server if necessary. We can then cross our fingers and start replication again by
+running the following on each server.</p>
+<pre><code>mysql&gt; START SLAVE;
+</code></pre><p>To test everything is working make an update on each server, and it should appear on the other server!</p>
+<p><strong>Disclaimer: This is probably in no way accurate and is purely here to jog my memory and that of anyone else in
+multi-master replication hell. There are probably glaring omissions in the above, and this information should in no way
+EVER EVER EVER be used in a production environment - that&rsquo;s what the clever proper sysadmins are for! You have been
+warned, here be dragons etc.</strong></p>
+
+</div>
+
+<h2>Comments</h2>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "maxmanders" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </main>
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1652642-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    
+  </body>
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.87.0" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>AWS VPN Solutions with StrongSWAN &middot; Max Manders</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://maxmanders.co.uk"><h1>Max Manders</h1></a>
+      <p class="lead">
+       a bit of dev / a bit of ops 
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://maxmanders.co.uk">Home</a> </li>
+        <li><a href="https://github.com/maxmanders/"> Github </a></li><li><a href="https://www.linkedin.com/in/maxmanders/"> LinkedIn </a></li><li><a href="https://www.twitter.com/maxmanders"> Twitter </a></li>
+      </ul>
+    </nav>
+
+    <p>&copy; 2021. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>AWS VPN Solutions with StrongSWAN</h1>
+  <time datetime=2014-05-01T00:00:00Z class="post-date">May 1, 2014</time>
+  <p>In this article, I&rsquo;ll discuss how to connect two or more VPCs which are in different AWS regions. Using static routing,
+routes cannot be re-advertised and as such it&rsquo;s not possible to write routing tables that allow a packet to traverse
+from one VPC to another via an intermediary VPC, where all VPCs are connected by IPSec tunnels. Because of this
+limitation, if you want complete connectivity between all peered regions, there must exist an IPSec tunnel between each
+and every region. Of course, if you want to join VPCs within the same region, you can use the recently released <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-peering.html">VPC
+Peering</a> feature. Pay particular attention to
+the documentation about <a href="http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html">unsupported
+configurations</a>.</p>
+<h3 id="introduction">Introduction</h3>
+<p>Connecting AWS VPCs across regions is not currently supported using the recently released VPC Peering feature. VPC
+Peering only allows you to connect VPCs within the <em>same</em> region. If you want to securely connect VPCs across different
+regions, you have two options</p>
+<ul>
+<li>run an AWS VPN in one VPC and connect it to a software based IPSec solution on an
+instance in another region</li>
+<li>run a software based IPSec solution on an instance in each region and connect the two
+instances</li>
+</ul>
+<p>The two most popular software based IPSec solutions for Linux seem to be FreeS/WAN and its fork strongSwan. I&rsquo;ve opted
+for strongSwan on the basis of what I believe to be better documentation, and the fact that it is still under active
+development. In order to terminate a tunnel to an AWS VPN, I found that strongSwan 5.1 is required. If you&rsquo;re using
+Ubuntu, you&rsquo;ll either need to upgrade to Ubuntu 14.04, or use an appropriate backports repository; versions of Ubuntu
+prior to 14.04 only provide strongSwan 4.5.</p>
+<h3 id="assumptions">Assumptions</h3>
+<p>This article assumes a certain familiarity with AWS. Specifically I assume that you have two VPCs in different regions,
+with the following configurations</p>
+<ul>
+<li>non-overlapping networks in each VPC</li>
+<li>public (and optionally private) subnets</li>
+<li>a routing table to route internet traffic for your public subnets via an Internet Gateway</li>
+<li>a routing table to route internet traffic for your private subnets via a public NAT instance</li>
+<li>a public NAT instance</li>
+<li>appropriate security groups and attachments</li>
+</ul>
+<h3 id="scenario-1-connect-vpc_1-with-vpc_2-using-strongswan-and-aws-vpn">Scenario 1: Connect VPC_1 with VPC_2 using strongSwan and AWS VPN</h3>
+<p><img src="/public/vpn-scenario-1.png" alt="Scenario 1"></p>
+<h4 id="step-1-configure-a-strongswan-server-in-vpc_1">Step 1: Configure a strongSwan server in VPC_1</h4>
+<p>For this discussion, we shall assume that VPC_1 is located in <em>us-west-1</em> and has a network block of <code>172.50.0.0/16</code>.</p>
+<ol>
+<li>Launch a new <code>m1.small</code> instance in a public subnet of your VPC</li>
+</ol>
+<ul>
+<li>Choose an Ubuntu 14.04 x86_64 AMI</li>
+<li>For now, ensure that your Security Groups are configured to permit SSH from your local
+workstation. <em>We&rsquo;ll need to reconfigure them later once both endpoints have been
+created</em>.</li>
+<li>Attach a new EIP to the instance</li>
+<li>Right-click the instance and disable the source/destination check to allow this server
+to act as a router</li>
+</ul>
+<ol start="2">
+<li>Install strongSwan and its dependencies: <code>sudo apt-get install strongswan</code></li>
+<li>Enable IP forwarding by doing the following as root <code>echo 1 &gt; /proc/sys/net/ipv4/ip_forward &amp;&amp; sudo sysctl -p</code></li>
+</ol>
+<h4 id="step-2-create-aws-vpn-in-vpc_2">Step 2: Create AWS VPN in VPC_2</h4>
+<p>Having created a strongSwan instance with a known public IP address, it&rsquo;s time to create the other end of our tunnel in
+another VPC. For this discussion, we shall assume that VPC_2 is located in <em>eu-west-1</em> and has a network block of
+<code>172.60.0.0/16</code>.</p>
+<ol>
+<li>Navigate to the VPC Dashboard in the AWS Console</li>
+<li>Make sure you are in the correct region</li>
+<li>Select the &lsquo;Virtual Private Gateways&rsquo; menu item</li>
+<li>Click &lsquo;Create Virtual Private Gateway&rsquo;</li>
+</ol>
+<ul>
+<li>Give your new VGW a name</li>
+</ul>
+<ol start="5">
+<li>Select &lsquo;Yes, Create&rsquo;</li>
+<li>Once your VGW has been created, select it, and then click &lsquo;Attach to VPC&rsquo;</li>
+</ol>
+<ul>
+<li>Select the target VPC from the VPC drop-down list</li>
+</ul>
+<ol start="7">
+<li>Select the &lsquo;Customer Gateways&rsquo; menu item</li>
+<li>Click &lsquo;Create Customer Gateway&rsquo;</li>
+</ol>
+<ul>
+<li>Give your CGW a name</li>
+<li>Set routing to <em>Static</em></li>
+<li>Set the public IP address of the remote end of the VPN connection, i.e. the EIP of the
+strongSwan instance.</li>
+</ul>
+<ol start="9">
+<li>Click &lsquo;Yes, Create&rsquo;</li>
+<li>Select the &lsquo;VPN Connections&rsquo; menu item</li>
+<li>Click &lsquo;Create VPN Connection&rsquo;</li>
+</ol>
+<ul>
+<li>Name: Give your VPN connection a name</li>
+<li>Virtual Private Gateway:  Select the VGW you created in step 4</li>
+<li>Customer Gateway: Select &lsquo;Existing&rsquo; and choose the CGW you created in step 8</li>
+<li>Routing Options: Static</li>
+<li>Static IP Prefixes: Set the CIDR block of your VPC you wish to make available over the
+VPN tunnel, e.g. 172.60.0.0/16 for the entire VPC network</li>
+</ul>
+<ol start="12">
+<li>Click &lsquo;Yes, Create&rsquo;</li>
+</ol>
+<p>Once the VPN has been created, right-click on the entry and select the option to download the configuration file. Select
+the generic configuration option. This will save a text file to your local workstation with the information that will be
+needed to configure the strongSwan instance in the other region.</p>
+<h4 id="step-3-update-strongswan-security-groups">Step 3: Update strongSwan Security Groups</h4>
+<p>Now that we have both ends of the tunnel created, we need to ensure that they can talk to each other. At this stage, you
+should have the public IP addresses for the AWS VPN from the configuration file you downloaded earlier. You should also
+have the public IP address of the strongSwan instance. Now, we&rsquo;ll create a Security Group (or modify an existing one) to
+contain rules to permit the public traffic necessary to set up the IPSec tunnel. Configure your security group as per
+the table below.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Protocol</th>
+<th>Port Range</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Custom UDP Rule</td>
+<td>UDP</td>
+<td>4500</td>
+<td>AWS VPN Tunnel 1 Public IP</td>
+</tr>
+<tr>
+<td>Custom UDP Rule</td>
+<td>UDP</td>
+<td>500</td>
+<td>AWS VPN Tunnel 1 Public IP</td>
+</tr>
+<tr>
+<td>All Traffic</td>
+<td>All</td>
+<td>All</td>
+<td>CIDR of Remote VPC</td>
+</tr>
+<tr>
+<td>All Traffic</td>
+<td>All</td>
+<td>All</td>
+<td>CIDR of Local VPC</td>
+</tr>
+</tbody>
+</table>
+<p>You don&rsquo;t need to do anything particular on the AWS side to permit traffic; this was addressed implicitly behind the
+scenes when you created the Customer Gateway earlier on. You&rsquo;ll just need to make sure that any security groups on
+either side of the tunnel explicitly allow traffic from the opposite network.</p>
+<h4 id="step-4-configure-routing">Step 4: Configure Routing</h4>
+<p>So, our tunnel end points can talk to each other from a Security Group perspective, but we need to tell our VPCs how to
+use the tunnel when it&rsquo;s up. That means changes to one or more routing tables. If you have a functioning VPC, as
+described in the assumptions section above, then you should have two different flavours of routing table. Both should
+have a routing table that like the one below; the second row will only be present for private subnets, while the third
+row will only be present for public subnets.</p>
+<table>
+<thead>
+<tr>
+<th>Destination</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VPC CIDR</td>
+<td>local</td>
+</tr>
+<tr>
+<td>0.0.0.0/0</td>
+<td>eni-XXX</td>
+</tr>
+<tr>
+<td>0.0.0.0/0</td>
+<td>igw-XXX</td>
+</tr>
+</tbody>
+</table>
+<p>We need to add one more route to our routing tables in each region to say how to hop across the tunnel into the other
+network. For VPC_1, which has the strongSwan instance, adding the new route will result in the table below, substituting
+the ENI ID of the strongSwan instance&rsquo;s primary ethernet adapter.</p>
+<table>
+<thead>
+<tr>
+<th>Destination</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⋮</td>
+<td>⋮</td>
+</tr>
+<tr>
+<td>VPC_2 CIDR</td>
+<td>eni-XXX</td>
+</tr>
+</tbody>
+</table>
+<p>For VPC_2, which has an AWS VPN, adding the new route will result in the table below, substituting the VGW ID of the VGW
+you created earlier.</p>
+<table>
+<thead>
+<tr>
+<th>Destination</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⋮</td>
+<td>⋮</td>
+</tr>
+<tr>
+<td>VPC_1 CIDR</td>
+<td>vgw-XXX</td>
+</tr>
+</tbody>
+</table>
+<h4 id="step-5-configure-strongswan">Step 5: Configure strongSwan</h4>
+<p>At this point, we have an endpoint in each region, between which we can connect our IPSec tunnel. We have configured
+Security Groups to permit the passing of IPSec along the tunnel. Lastly, we have configured our routing table so that
+each VPC knows how to direct traffic destined for the other network. The AWS VPN is configured and ready to go, we just
+need to configure IPSec on the strongSwan instance.</p>
+<p>Firstly, we&rsquo;ll need to edit <code>/var/lib/strongswan/ipsec.conf.inc</code> to add a pre-shared key.  This key can be found in the
+AWS VPN config file we downloaded earlier. Look under the IPSec Tunnel #1 heading for <em>Pre-Shared Key</em>. We&rsquo;ll also need
+the Outside IP Address for the Virtual Private Gateway. It&rsquo;s worth noting that within any region in the AWS network, the
+public Virtual Private Gateway IP addresses for the two tunnels are always the same.  For our purposes, the secrets file
+should look like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">87.238.85.42 : PSK <span style="color:#e6db74">&#34;put_your_psk_here&#34;</span>
+</code></pre></div><p>Now we need to configure the IPSec tunnel, by editing <code>/etc/ipsec.conf</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">config setup
+
+conn %default
+        ikelifetime<span style="color:#f92672">=</span>28800s
+        keylife<span style="color:#f92672">=</span>3600s
+        rekeymargin<span style="color:#f92672">=</span>3m
+        keyingtries<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
+        authby<span style="color:#f92672">=</span>secret
+        keyexchange<span style="color:#f92672">=</span>ikev2
+        mobike<span style="color:#f92672">=</span>no
+
+conn name_of_connection
+        left<span style="color:#f92672">={</span>private_ip_of_instance<span style="color:#f92672">}</span>
+        leftsubnet<span style="color:#f92672">={</span>local_vpc_CIDR<span style="color:#f92672">}</span>
+        leftid<span style="color:#f92672">=</span>name_of_connection
+        right<span style="color:#f92672">=</span>87.238.85.42
+        rightsubnet<span style="color:#f92672">={</span>remote_vpc_CIDR<span style="color:#f92672">}</span>
+        dpdaction<span style="color:#f92672">=</span>restart
+        auto<span style="color:#f92672">=</span>route
+
+include /var/lib/strongswan/ipsec.conf.inc
+</code></pre></div><h4 id="step-6-start-the-tunnel">Step 6: Start the Tunnel</h4>
+<p>You should now be able to restart the IPSec service (<code>service strongswan restart</code>) and send traffic over the tunnel to
+the remote VPC, and vice versa. You can look at the tunnel status in both the AWS console, as well as using the <code>ipsec status name_of_connection</code> command.</p>
+<h3 id="summary">Summary</h3>
+<p>Hopefully you have been able to follow the steps above to bring up your own IPSec tunnel between two different VPCs in
+two different regions. You may have noticed that AWS VPNs provide two tunnels for redundancy. AWS may perform
+maintenance on one of the tunnels from time to time, and having two established tunnels allows you to keep communicating
+over the VPN during these maintenance windows. Unfortunately I have had trouble implementing two tunnels via strongSwan,
+but I&rsquo;m working on it. I&rsquo;ll post back when I have more information.</p>
+<p>In the next post, we&rsquo;ll look at a few small changes that can be made that will allow you to create an IPSec tunnel
+between two strongSwan instances, without the need for an AWS VPN tunnel.</p>
+
+</div>
+
+<h2>Comments</h2>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "maxmanders" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </main>
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1652642-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    
+  </body>
+</html>

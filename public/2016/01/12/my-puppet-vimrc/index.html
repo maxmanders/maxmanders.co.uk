@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.87.0" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>My Puppet VimRC &middot; Max Manders</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://maxmanders.co.uk"><h1>Max Manders</h1></a>
+      <p class="lead">
+       a bit of dev / a bit of ops 
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://maxmanders.co.uk">Home</a> </li>
+        <li><a href="https://github.com/maxmanders/"> Github </a></li><li><a href="https://www.linkedin.com/in/maxmanders/"> LinkedIn </a></li><li><a href="https://www.twitter.com/maxmanders"> Twitter </a></li>
+      </ul>
+    </nav>
+
+    <p>&copy; 2021. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>My Puppet VimRC</h1>
+  <time datetime=2016-01-12T00:00:00Z class="post-date">January 12, 2016</time>
+  <p>Those who know me, know that I&rsquo;m a Vim user. I&rsquo;ve been using Vim exclusively for over ten years. I&rsquo;ve tried different
+editors, and this isn&rsquo;t the place to start the editor-holy-war-debate, but I&rsquo;ve always found myself drawn back to Vim
+for its extensibility, flexibility and power. When I started at FanDuel, I left behind configuration management with
+Chef and began my journey to understanding Puppet. The excerpt below comes from my <code>~/.vimrc</code> Vim configuration file,
+and defines the settings applied to Puppet <code>.pp</code> files.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">...<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">Plugin</span> <span style="color:#e6db74">&#39;rodjek/vim-puppet&#39;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>...<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">&#34;&#34;&#34; puppet files</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">au</span> <span style="color:#a6e22e">BufNewFile</span>,<span style="color:#a6e22e">BufRead</span> *.<span style="color:#a6e22e">pp</span> <span style="color:#a6e22e">set</span> <span style="color:#a6e22e">syntax</span>=<span style="color:#a6e22e">puppet</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">au</span> <span style="color:#a6e22e">BufNewFile</span>,<span style="color:#a6e22e">BufRead</span> *.<span style="color:#a6e22e">pp</span> <span style="color:#a6e22e">setlocal</span> <span style="color:#a6e22e">tabstop</span>=<span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">au</span> <span style="color:#a6e22e">BufNewFile</span>,<span style="color:#a6e22e">BufRead</span> *.<span style="color:#a6e22e">pp</span> <span style="color:#a6e22e">setlocal</span> <span style="color:#a6e22e">shiftwidth</span>=<span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">au</span> <span style="color:#a6e22e">BufNewFile</span>,<span style="color:#a6e22e">BufRead</span> *.<span style="color:#a6e22e">pp</span> <span style="color:#a6e22e">setlocal</span> <span style="color:#a6e22e">noexpandtab</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">au</span> <span style="color:#a6e22e">FileType</span> <span style="color:#a6e22e">puppet</span> <span style="color:#a6e22e">setlocal</span> <span style="color:#a6e22e">isk</span>+=:<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">au</span> <span style="color:#a6e22e">FileType</span> <span style="color:#a6e22e">puppet</span> <span style="color:#a6e22e">nnoremap</span> &lt;<span style="color:#a6e22e">c</span>-]&gt; :<span style="color:#a6e22e">exe</span> <span style="color:#e6db74">&#34;tag &#34;</span> . <span style="color:#a6e22e">substitute</span>(<span style="color:#a6e22e">expand</span>(<span style="color:#e6db74">&#34;&lt;cword&gt;&#34;</span>), <span style="color:#e6db74">&#34;^::&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)&lt;<span style="color:#a6e22e">CR</span>&gt;  <span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">au</span> <span style="color:#a6e22e">FileType</span> <span style="color:#a6e22e">puppet</span> <span style="color:#a6e22e">nnoremap</span> &lt;<span style="color:#a6e22e">c</span>-<span style="color:#a6e22e">w</span>&gt;&lt;<span style="color:#a6e22e">c</span>-]&gt; :<span style="color:#a6e22e">tab</span> <span style="color:#a6e22e">split</span>&lt;<span style="color:#a6e22e">CR</span>&gt;:<span style="color:#a6e22e">exe</span> <span style="color:#e6db74">&#34;tag &#34;</span> . <span style="color:#a6e22e">substitute</span>(<span style="color:#a6e22e">expand</span>(<span style="color:#e6db74">&#34;&lt;cword&gt;&#34;</span>), <span style="color:#e6db74">&#34;^::&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)&lt;<span style="color:#a6e22e">CR</span>&gt;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">syntastic_mode_map</span> = { <span style="color:#e6db74">&#39;passive_filetypes&#39;</span>: [<span style="color:#e6db74">&#39;puppet&#39;</span>]  }<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">tagbar_type_puppet</span> = {<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#e6db74">&#39;ctagstype&#39;</span>: <span style="color:#e6db74">&#39;puppet&#39;</span>,<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#e6db74">&#39;kinds&#39;</span>: [<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>        \<span style="color:#e6db74">&#39;c:class&#39;</span>,<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>        \<span style="color:#e6db74">&#39;s:site&#39;</span>,<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>        \<span style="color:#e6db74">&#39;n:node&#39;</span>,<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>        \<span style="color:#e6db74">&#39;d:definition&#39;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>      \]<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    \}<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>Line 2 uses <a href="https://github.com/VundleVim/Vundle.vim">Vundle</a> to load
+<a href="https://github.com/rodjek/vim-puppet">rodjek/vim-puppet</a>, a plugin to provide some conveniences when editing Puppet
+code. In this case, some nice syntax highlighting and automatic formatting, and automatic alignment of hash rockets
+among other things.</p>
+<p>Lines 5 through 8 set some local defaults for editing: enabling Puppet syntax, making tabs two spaces wide and using
+hard tabs. Yup, hard tabs.  Don&rsquo;t ask.</p>
+<p>Line 9 makes sure that the &lsquo;:&rsquo; colon character is treated as a keyword separator for Puppet files. This is useful
+because of the way Puppet uses &lsquo;::&rsquo; as a namespace separator, e.g. <code>foo::bar::baz</code> refers to a class <code>baz</code>, defined
+within a class <code>bar</code>, defined within a class <code>foo</code>. I can use Vim movements to move between the different segments of
+that identifier etc.</p>
+<p>To remove ambiguity when scoping identifiers in Puppet, <em>top-scoping</em> can be used. Top-scoping involves preceding an
+identifier with a pair of colon characters, e.g. <code>::foo::bar::baz</code>. This syntax ensures the Puppet parser does not try
+to locate <code>foo::bar::baz</code> relative to the scope in which its defined, rather to locate it from the top level of its
+symbol table.</p>
+<p>I use <em><a href="https://en.wikipedia.org/wiki/Ctags">ctags</a></em> extensively in Vim to let me move around source code quickly. Ctags
+is used to build a map of identifiers in code, and the files where those identifiers are defined. With a proper tags
+file, I can use <code>Ctrl+]</code> on an identifier, and Vim will open up the current buffer with the file and location where that
+identifier is defined. The problem is, for top-scoped puppet identifiers, the identifier doesn&rsquo;t map to a file location
+directly, because of the leading &lsquo;::&rsquo;. The key binding defined on lines 10 and 11 (courtesy of Marius Gedminas,
+<a href="https://twitter.com/mgedmin">@mgedmin</a>) remaps the default tag movement key, to first strip any leading &lsquo;::&rsquo; from the
+identifier under my cursor, before trying to locate and move to the corresponding definition. Line 10 follows the tag in
+the current buffer, and line 11 opens the tag in a new tab.</p>
+<p>Line 12 disables active <a href="https://github.com/scrooloose/syntastic">Syntastic</a> syntax checking. Puppet syntax checking can
+be done by shelling out to the Puppet parser, but that&rsquo;s quite an expensive operation. I prefer to just do an explicit
+syntax check before I commit changes to Git.  If anybody knows of a non-expensive way to leave active syntax checking
+turned on without causing Vim to run like a snail, let me know!</p>
+<p>Line 13 onwards makes sure that when <a href="https://majutsushi.github.io/tagbar/">Tagbar</a> is toggled, I can see, and navigate
+using any tags available for the Puppet file I&rsquo;m editing.</p>
+
+</div>
+
+<h2>Comments</h2>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "maxmanders" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </main>
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1652642-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    
+  </body>
+</html>

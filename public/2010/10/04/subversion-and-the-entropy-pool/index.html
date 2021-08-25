@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.87.0" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Subversion And The Entropy Pool &middot; Max Manders</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://maxmanders.co.ukcss/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://maxmanders.co.uk"><h1>Max Manders</h1></a>
+      <p class="lead">
+       a bit of dev / a bit of ops 
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://maxmanders.co.uk">Home</a> </li>
+        <li><a href="https://github.com/maxmanders/"> Github </a></li><li><a href="https://www.linkedin.com/in/maxmanders/"> LinkedIn </a></li><li><a href="https://www.twitter.com/maxmanders"> Twitter </a></li>
+      </ul>
+    </nav>
+
+    <p>&copy; 2021. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>Subversion And The Entropy Pool</h1>
+  <time datetime=2010-10-04T00:00:00Z class="post-date">October 4, 2010</time>
+  <p>I ran into an interesting little subversion problem earlier. I was trying to commit a change, and the commit just seemed
+to hang indefinitely. I couldn&rsquo;t sent an interrupt, and eventually resorted to killing the process. I tried all sorts of
+command line options in case there was an authentication problem - with no luck. I then thought I had made a mistake
+when switching my working copy to a different branch. I checked the logs on the server to find nothing pertinent; it
+seemed as though svn didn&rsquo;t get as far as taking to the server. At a loss, I thought there was nothing for it but to run
+the command with strace. Bingo!</p>
+<p><code>strace</code> showed that subversion reads from <code>/dev/random</code> as part of the commit, and that&rsquo;s where the problem seemed to be
+happening. After doing some research, I discovered that <code>/dev/random</code> generates random numbers using the so-called
+<em>entropy pool</em>. This <em>entropy pool</em> is just random bits of noise generated from things such as mouse movements, time
+between keystrokes and so on. For whatever reason, on the client server, this <em>entropy pool</em> was empty!  Using
+<code>/dev/random</code> is cryptographically <em>more random</em> than using <code>/dev/urandom</code>; and <code>/dev/random</code> blocks when the <em>entropy
+pool</em> is empty, whereas <code>/dev/urandom</code> is non-blocking. Moving <code>/dev/random</code> to <code>/dev/random.old</code> and linking
+<code>/dev/urandom</code> to <code>/dev/random</code> solved the problem. There may be a better solution to this, and depending on your
+cryptographic requirements it might be better to find an alternative, but this did the trick for me. One svn commit
+later and all was well.</p>
+
+</div>
+
+<h2>Comments</h2>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "maxmanders" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </main>
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1652642-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    
+  </body>
+</html>
